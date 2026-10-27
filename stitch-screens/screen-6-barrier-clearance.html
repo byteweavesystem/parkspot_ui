@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SmartPark Driver - Ingress Navigation & Barrier Clearance</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Plus+Jakarta+Sans:wght@100..900&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary": "#006947",
+            "on-primary-fixed": "#00201d",
+            "on-error-container": "#93000a",
+            "on-error": "#ffffff",
+            "surface-container-high": "#dce9ff",
+            "background": "#f8f9ff",
+            "on-tertiary-fixed-variant": "#005236",
+            "tertiary-fixed-dim": "#4edea3",
+            "surface-container": "#e5eeff",
+            "on-primary": "#ffffff",
+            "surface": "#f8f9ff",
+            "on-secondary-container": "#5c647a",
+            "on-surface": "#0b1c30",
+            "on-background": "#0b1c30",
+            "inverse-primary": "#6bd8cb",
+            "secondary-fixed": "#dae2fd",
+            "primary": "#00685f",
+            "on-secondary": "#ffffff",
+            "primary-fixed": "#89f5e7",
+            "on-secondary-fixed-variant": "#3f465c",
+            "on-secondary-fixed": "#131b2e",
+            "secondary": "#565e74",
+            "primary-container": "#008378",
+            "surface-tint": "#006a61",
+            "surface-bright": "#f8f9ff",
+            "on-tertiary-fixed": "#002113",
+            "tertiary-container": "#00855b",
+            "surface-container-highest": "#d3e4fe",
+            "inverse-surface": "#213145",
+            "tertiary-fixed": "#6ffbbe",
+            "outline": "#6d7a77",
+            "primary-fixed-dim": "#6bd8cb",
+            "outline-variant": "#bcc9c6",
+            "on-tertiary": "#ffffff",
+            "inverse-on-surface": "#eaf1ff",
+            "error-container": "#ffdad6",
+            "secondary-container": "#dae2fd",
+            "surface-variant": "#d3e4fe",
+            "secondary-fixed-dim": "#bec6e0",
+            "on-primary-fixed-variant": "#005049",
+            "on-tertiary-container": "#f5fff6",
+            "surface-container-low": "#eff4ff",
+            "error": "#ba1a1a",
+            "surface-container-lowest": "#ffffff",
+            "on-surface-variant": "#3d4947",
+            "surface-dim": "#cbdbf5",
+            "on-primary-container": "#f4fffc"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "margin-desktop": "2.5rem",
+            "space-sm": "0.5rem",
+            "margin-tablet": "1.5rem",
+            "gutter": "1rem",
+            "margin": "1rem",
+            "space-lg": "1.5rem",
+            "space-xl": "2rem",
+            "gutter-desktop": "1.5rem",
+            "space-md": "1rem",
+            "space-xs": "0.25rem"
+          },
+          "fontFamily": {
+            "numeric-mono": ["Inter"],
+            "body-lg": ["Inter"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "display-lg": ["Plus Jakarta Sans"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "body-md": ["Inter"],
+            "display-lg-mobile": ["Plus Jakarta Sans"],
+            "headline-sm": ["Plus Jakarta Sans"],
+            "body-sm": ["Inter"],
+            "label-md": ["Inter"],
+            "label-lg": ["Inter"],
+            "label-sm": ["Inter"]
+          },
+          "fontSize": {
+            "numeric-mono": ["16px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline-md": ["22px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "display-lg": ["36px", { "lineHeight": "44px", "fontWeight": "700" }],
+            "headline-lg": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "display-lg-mobile": ["30px", { "lineHeight": "38px", "fontWeight": "700" }],
+            "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+            "label-lg": ["14px", { "lineHeight": "18px", "fontWeight": "600" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "fontWeight": "500" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    @keyframes pulseChevron {
+      0%, 100% { opacity: 0.35; transform: translateY(-3px); }
+      50% { opacity: 1; transform: translateY(3px); }
+    }
+    .chevron-flow {
+      animation: pulseChevron 1.6s ease-in-out infinite;
+    }
+    @keyframes radarPing {
+      0% { transform: scale(0.95); opacity: 0.9; }
+      100% { transform: scale(1.6); opacity: 0; }
+    }
+    .radar-pulse {
+      animation: radarPing 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+    }
+    /* Hide scrollbar for neat mobile HUD feel */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface antialiased flex justify-center items-start min-h-screen py-0 md:py-8 font-body-md text-body-md select-none">
+<!-- Mobile Viewport Container (Simulating iPhone 390x844 Frame) -->
+<main class="w-full max-w-[390px] min-h-screen md:min-h-[844px] md:max-h-[844px] bg-surface flex flex-col relative overflow-hidden md:rounded-[44px] md:shadow-2xl md:ring-1 md:ring-outline-variant/30">
+<!-- 1. Native iOS Status Bar -->
+<header class="w-full pt-3 pb-1 px-6 flex justify-between items-center z-50 bg-inverse-surface text-inverse-on-surface">
+<span class="font-numeric-mono text-body-sm font-semibold tracking-tight text-white">9:41</span>
+<div class="flex items-center space-x-1.5 text-white">
+<span class="material-symbols-outlined text-[15px]" data-icon="signal_cellular_alt">signal_cellular_alt</span>
+<span class="material-symbols-outlined text-[15px]" data-icon="wifi">wifi</span>
+<span class="material-symbols-outlined text-[18px]" data-icon="battery_full">battery_full</span>
+</div>
+</header>
+<!-- 2. Top Navigation Bar (High contrast transit header) -->
+<section class="bg-inverse-surface px-4 py-2.5 flex items-center justify-between z-40 text-inverse-on-surface">
+<div class="flex items-center space-x-2">
+<button aria-label="Minimize navigation" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 active:scale-95 transition-transform duration-150" type="button">
+<span class="material-symbols-outlined text-[20px] text-white" data-icon="expand_more">expand_more</span>
+</button>
+<div>
+<div class="flex items-center space-x-1">
+<span class="w-2 h-2 rounded-full bg-tertiary-fixed-dim animate-pulse"></span>
+<span class="font-headline-sm text-body-sm font-semibold tracking-tight text-white">Indiranagar Metro MLCP</span>
+</div>
+<p class="font-label-sm text-label-sm text-white/70">Ingress Gate 2 • CMH Road Ramp</p>
+</div>
+</div>
+<div class="flex items-center space-x-1.5">
+<button aria-label="Audio Intercom" class="w-8 h-8 rounded-full bg-primary/30 border border-primary-fixed/40 flex items-center justify-center text-primary-fixed hover:bg-primary/50 active:scale-95 transition-transform duration-150" type="button">
+<span class="material-symbols-outlined text-[18px]" data-icon="headset_mic">headset_mic</span>
+</button>
+<button aria-label="SOS Alert" class="w-8 h-8 rounded-full bg-error/20 border border-error/40 flex items-center justify-center text-error-container hover:bg-error/30 active:scale-95 transition-transform duration-150" type="button">
+<span class="material-symbols-outlined text-[18px] text-error" data-icon="e911_emergency">e911_emergency</span>
+</button>
+</div>
+</section>
+<!-- Scrollable Screen Content Canvas -->
+<div class="flex-1 overflow-y-auto no-scrollbar pb-28">
+<!-- 3. Live Ingress HUD Banner (Turn-by-Turn GPS) -->
+<section class="bg-inverse-surface px-4 pb-4 pt-1 text-white relative">
+<div class="bg-white/5 border border-white/10 rounded-xl p-3 backdrop-blur-md">
+<div class="flex items-start justify-between">
+<div class="flex items-center space-x-3">
+<div class="w-12 h-12 rounded-lg bg-primary flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-[32px] text-on-primary" data-icon="turn_right" style="font-variation-settings: 'FILL' 1;">turn_right</span>
+</div>
+<div>
+<div class="flex items-baseline space-x-1">
+<span class="font-headline-lg-mobile text-display-lg-mobile font-bold tracking-tight text-white leading-none">80</span>
+<span class="font-headline-sm text-headline-sm text-primary-fixed font-semibold">m</span>
+</div>
+<h1 class="font-headline-sm text-body-md font-semibold text-white tracking-tight">Turn Right into Ramp B2</h1>
+</div>
+</div>
+<!-- Live GPS Speedometer & Telemetry Lock Pill -->
+<div class="flex flex-col items-end space-y-1">
+<div class="bg-white/10 px-2.5 py-1 rounded-full flex items-center space-x-1.5 border border-white/15">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+<span class="font-numeric-mono text-body-sm font-semibold tracking-wide text-white">18 km/h</span>
+</div>
+<div class="flex items-center space-x-1 text-white/60">
+<span class="material-symbols-outlined text-[12px] text-emerald-400" data-icon="satellite_alt">satellite_alt</span>
+<span class="font-label-sm text-[10px] uppercase tracking-wider font-semibold">RTK Locked</span>
+</div>
+</div>
+</div>
+<div class="mt-2.5 pt-2 border-t border-white/10 flex items-center justify-between text-white/80 font-body-sm text-body-sm">
+<div class="flex items-center space-x-1.5">
+<span class="material-symbols-outlined text-[16px] text-tertiary-fixed-dim" data-icon="near_me">near_me</span>
+<span>Approaching Ingress Gate 2 • CMH Entry</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary-fixed font-medium">Lane 02 Clear</span>
+</div>
+</div>
+</section>
+<!-- 4. Dynamic 3D/Isometric Ramp & Barrier Wayfinding Viewport -->
+<section class="relative bg-slate-950 px-4 py-4 text-white overflow-hidden shadow-inner">
+<!-- Visual Grid Overlay representing subterranean bay -->
+<div class="absolute inset-0 opacity-15 bg-[linear-gradient(to_right,#00685f_1px,transparent_1px),linear-gradient(to_bottom,#00685f_1px,transparent_1px)] bg-[size:18px_18px]"></div>
+<div class="relative z-10 flex flex-col items-center">
+<!-- Overhead Gantry Sign with LED Matrix -->
+<div class="w-full bg-black/80 border-2 border-slate-700 rounded-lg p-2 shadow-lg backdrop-blur flex flex-col items-center">
+<div class="flex items-center justify-between w-full px-2 border-b border-white/10 pb-1">
+<span class="font-numeric-mono text-label-sm text-amber-400 tracking-wider">GATE 02 • AUTO-INGRESS</span>
+<div class="flex items-center space-x-1">
+<span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+<span class="font-label-sm text-label-sm text-emerald-400 font-bold uppercase">FASTag ACTIVE</span>
+</div>
+</div>
+<!-- LED Lane Matrix Display -->
+<div class="mt-1.5 flex items-center justify-between w-full px-3 py-1 bg-slate-900 rounded border border-white/5">
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-[20px] text-primary-fixed" data-icon="toll">toll</span>
+<span class="font-headline-sm text-body-md font-bold text-white tracking-wide">LANE 02: FASTag / PASS</span>
+</div>
+<div class="w-6 h-6 rounded bg-emerald-950/80 border border-emerald-500/50 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px] text-emerald-400 animate-pulse" data-icon="arrow_downward">arrow_downward</span>
+</div>
+</div>
+<!-- Yellow Striped Clearance Limiter -->
+<div class="mt-1.5 w-full bg-amber-400 text-slate-950 rounded px-2 py-0.5 flex items-center justify-between font-bold font-numeric-mono text-label-sm">
+<div class="flex items-center space-x-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="height">height</span>
+<span>2.1m MAX CLEARANCE</span>
+</div>
+<div class="flex items-center space-x-1 text-slate-900 bg-white/70 px-1.5 rounded text-[10px]">
+<span class="material-symbols-outlined text-[12px] text-emerald-700" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span>VEHICLE PASS</span>
+</div>
+</div>
+</div>
+<!-- Ramp Isometric Ingress Simulation Graphic -->
+<div class="w-full mt-3 h-36 relative bg-gradient-to-b from-slate-900/90 via-slate-800/60 to-slate-950 rounded-xl border border-white/10 flex flex-col justify-between p-3 overflow-hidden">
+<!-- Simulated Barrier Arm -->
+<div class="flex items-center justify-between z-10">
+<div class="flex items-center space-x-2">
+<div class="w-3.5 h-10 bg-slate-700 rounded-sm border border-slate-500 flex flex-col justify-end p-0.5">
+<div class="w-full h-2 bg-emerald-500 rounded-sm"></div>
+</div>
+<!-- Boom arm pivoted up 90 deg -->
+<div class="flex flex-col">
+<div class="flex items-center space-x-1 text-emerald-400">
+<span class="material-symbols-outlined text-[18px]" data-icon="lock_open">lock_open</span>
+<span class="font-label-md text-label-md font-bold uppercase tracking-wide">Boom Barrier Open (90°)</span>
+</div>
+<span class="font-body-sm text-[11px] text-white/70">Automatic optical clearance granted</span>
+</div>
+</div>
+<!-- Live Optical ANPR Camera State -->
+<div class="bg-black/60 border border-white/10 rounded px-2 py-1 text-right">
+<div class="flex items-center space-x-1 text-white/70 text-[10px] font-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+<span>ANPR CAM 02</span>
+</div>
+<span class="text-white font-numeric-mono text-body-sm font-semibold">99.4% Match</span>
+</div>
+</div>
+<!-- Directional Subterranean Glowing Chevrons -->
+<div class="w-full flex flex-col items-center justify-center my-auto space-y-0.5 opacity-90">
+<span class="material-symbols-outlined text-primary-fixed text-[26px] leading-none chevron-flow" data-icon="keyboard_double_arrow_down">keyboard_double_arrow_down</span>
+<div class="bg-primary-container/80 text-on-primary-container border border-primary-fixed/30 rounded-full px-3 py-0.5 font-label-sm text-[11px] font-semibold tracking-wider uppercase">
+                Basement B2 Ingress Flow
+              </div>
+</div>
+<!-- Ground Floor Line Indicator -->
+<div class="flex justify-between items-center text-white/60 font-body-sm text-[11px] border-t border-dashed border-white/20 pt-1.5">
+<span>Slope Gradient: -7.5%</span>
+<span class="text-tertiary-fixed-dim font-medium">Keep Left for Stall B2-19</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. FASTag / RFID Live Telemetry & Handshake Card -->
+<section class="p-4 space-y-3">
+<div class="bg-surface-container-lowest rounded-xl p-4 border border-outline-variant/40 shadow-sm relative overflow-hidden">
+<!-- Decorative subtle gradient badge -->
+<div class="flex items-center justify-between pb-3 border-b border-surface-container">
+<div class="flex items-center space-x-2">
+<div class="relative flex items-center justify-center">
+<span class="w-3 h-3 rounded-full bg-primary inline-block"></span>
+<span class="w-5 h-5 rounded-full bg-primary/40 absolute radar-pulse"></span>
+</div>
+<span class="font-headline-sm text-body-md font-bold text-on-surface">FASTag Telemetry Handshake</span>
+</div>
+<span class="bg-primary/10 text-primary font-numeric-mono text-label-sm font-semibold px-2 py-0.5 rounded-full border border-primary/20">
+              EPC Gen2 RFID
+            </span>
+</div>
+<!-- Vehicle HSRP Plate Representation -->
+<div class="mt-3 flex items-center justify-between bg-surface-container-low p-2.5 rounded-lg border border-outline-variant/30">
+<div class="flex items-center space-x-2.5">
+<!-- Indian HSRP Styled Plate Badge -->
+<div class="bg-white border-2 border-slate-800 rounded px-2 py-1 flex items-center space-x-1.5 shadow-xs">
+<div class="flex flex-col items-center leading-none pr-1 border-r border-slate-300">
+<span class="text-[7px] font-black text-blue-900">IND</span>
+<span class="text-[7px] text-amber-500 font-black">●</span>
+</div>
+<span class="font-numeric-mono text-body-md font-extrabold tracking-wider text-slate-900">KA 01 MJ 8821</span>
+</div>
+<div>
+<p class="font-headline-sm text-body-sm font-bold text-on-surface">Hyundai Creta SX</p>
+<p class="font-body-sm text-[11px] text-on-surface-variant">Class 4 LMV • Tag Linked</p>
+</div>
+</div>
+<div class="w-7 h-7 rounded-full bg-tertiary-container text-on-tertiary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px]" data-icon="check" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+</div>
+<!-- Status Clearance Pill -->
+<div class="mt-3 bg-tertiary-container/15 border border-tertiary/20 rounded-lg p-2.5 flex items-center space-x-2.5">
+<span class="material-symbols-outlined text-[22px] text-tertiary" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-label-lg font-bold text-tertiary tracking-tight">ACCESS GRANTED • BOOM OPEN</span>
+<span class="font-numeric-mono text-label-sm text-on-surface-variant">0 ms Ping</span>
+</div>
+<p class="font-body-sm text-[11px] text-on-surface-variant">Optical ANPR verified + FASTag balance synced with NETC</p>
+</div>
+</div>
+<!-- Cryptographic Nonce Proof -->
+<div class="mt-2.5 pt-2 border-t border-surface-container flex items-center justify-between text-on-surface-variant font-numeric-mono text-[11px]">
+<span>Nonce: <strong class="text-on-surface font-semibold">#N-8821-B2-OK</strong></span>
+<span class="text-primary font-semibold">Auto-Divert: Floor B2</span>
+</div>
+</div>
+<!-- 6. Post-Barrier Stall Guidance Route (Next Maneuver Steps) -->
+<div class="bg-surface-container-lowest rounded-xl p-4 border border-outline-variant/40 shadow-sm">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center space-x-1.5">
+<span class="material-symbols-outlined text-primary text-[20px]" data-icon="alt_route">alt_route</span>
+<h2 class="font-headline-sm text-body-md font-bold text-on-surface">Post-Barrier Stall Guidance</h2>
+</div>
+<span class="font-label-sm text-[11px] bg-surface-container px-2 py-0.5 rounded text-on-surface-variant font-medium">120m Remaining</span>
+</div>
+<!-- Step Progression Timeline -->
+<div class="space-y-3 relative before:absolute before:top-2 before:bottom-2 before:left-[15px] before:w-0.5 before:bg-outline-variant/40">
+<!-- Step 1 -->
+<div class="flex items-start space-x-3 relative">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center shrink-0 z-10 shadow-xs">
+<span class="material-symbols-outlined text-[18px]" data-icon="turn_slight_right">turn_slight_right</span>
+</div>
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<p class="font-headline-sm text-body-sm font-bold text-on-surface">Spiral Ramp B1 to B2</p>
+<span class="font-numeric-mono text-[11px] text-on-surface-variant">50m</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Descend to Floor B2 • Max Ramp Speed: 10 km/h</p>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="flex items-start space-x-3 relative">
+<div class="w-8 h-8 rounded-full bg-surface-container-high text-on-surface flex items-center justify-center shrink-0 z-10">
+<span class="material-symbols-outlined text-[18px] text-primary" data-icon="straight">straight</span>
+</div>
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<p class="font-headline-sm text-body-sm font-semibold text-on-surface">Aisle Way 5.5m Clearance</p>
+<span class="font-numeric-mono text-[11px] text-on-surface-variant">45m</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Follow Yellow Guiding Line to Sector 2B</p>
+</div>
+</div>
+<!-- Step 3 (Target Destination Stall) -->
+<div class="flex items-start space-x-3 relative">
+<div class="w-8 h-8 rounded-full bg-tertiary text-on-tertiary flex items-center justify-center shrink-0 z-10 shadow-xs">
+<span class="material-symbols-outlined text-[18px]" data-icon="local_parking" style="font-variation-settings: 'FILL' 1;">local_parking</span>
+</div>
+<div class="flex-1 bg-surface-container-low p-2 rounded-lg border border-outline-variant/30">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-1.5">
+<span class="font-headline-sm text-body-sm font-bold text-primary">Stall B2-19</span>
+<span class="bg-primary/10 text-primary text-[10px] font-bold px-1.5 py-0.2 rounded">RESERVED</span>
+</div>
+<span class="font-numeric-mono text-[11px] text-tertiary font-bold">In 25m</span>
+</div>
+<p class="font-body-sm text-[12px] text-on-surface-variant mt-0.5">Stall on Right • Direct Access to Lift Core B (Metro Concourse)</p>
+</div>
+</div>
+</div>
+</div>
+<!-- 7. Quick Driver Actions Bar -->
+<div class="grid grid-cols-2 gap-2 pt-1">
+<button class="w-full flex items-center justify-center space-x-1.5 py-2.5 px-3 rounded-xl bg-surface-container-lowest border border-outline-variant/50 text-on-surface hover:bg-surface-container active:scale-95 transition-all text-label-md font-semibold shadow-xs" type="button">
+<span class="material-symbols-outlined text-[18px] text-primary" data-icon="support_agent">support_agent</span>
+<span>Attendant Call</span>
+</button>
+<button class="w-full flex items-center justify-center space-x-1.5 py-2.5 px-3 rounded-xl bg-surface-container-lowest border border-outline-variant/50 text-on-surface hover:bg-surface-container active:scale-95 transition-all text-label-md font-semibold shadow-xs" type="button">
+<span class="material-symbols-outlined text-[18px] text-tertiary" data-icon="volume_up">volume_up</span>
+<span>Audio Guide On</span>
+</button>
+</div>
+</section>
+</div>
+<!-- 8. Docked Bottom Sheet / Ingress Verified Sticky Footer -->
+<footer class="absolute bottom-0 left-0 w-full bg-surface-container-lowest/95 backdrop-blur-md border-t border-outline-variant/20 px-4 pt-3 pb-6 z-50 shadow-lg">
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center space-x-1.5">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<span class="font-label-sm text-[11px] text-on-surface-variant font-medium">Ingress at 14:32 IST</span>
+</div>
+<div class="flex items-center space-x-1 font-numeric-mono text-label-sm font-semibold text-primary">
+<span class="material-symbols-outlined text-[14px]" data-icon="timer">timer</span>
+<span>Clock: 00:00:15</span>
+</div>
+</div>
+<!-- Primary Action CTA Button -->
+<button class="w-full h-12 bg-primary hover:bg-primary-container text-on-primary rounded-xl font-headline-sm text-body-md font-bold flex items-center justify-between px-4 shadow-md active:scale-[0.98] transition-transform" type="button">
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-[20px]" data-icon="qr_code_2">qr_code_2</span>
+<span>View Active Ingress Pass</span>
+</div>
+<div class="flex items-center space-x-1">
+<span class="font-numeric-mono text-label-sm text-primary-fixed">₹30/hr</span>
+<span class="material-symbols-outlined text-[18px]" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</button>
+<!-- Microcopy Note -->
+<p class="text-center font-body-sm text-[10px] text-on-surface-variant/80 mt-1.5">
+        Auto-debit pre-authorized on FASTag NETC • Ground sensor synced
+      </p>
+</footer>
+</main>
+</body></html>

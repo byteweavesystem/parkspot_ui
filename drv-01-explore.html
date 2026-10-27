@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DRV-01 Explore — ParkSpot</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .search-hud {
+      position: absolute; top: 58px; left: 16px; right: 16px; z-index: 15;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .search {
+      height: 52px; background: rgba(255,255,255,.92); backdrop-filter: blur(12px);
+      border: 1px solid var(--border); border-radius: 16px; display: flex; align-items: center;
+      padding: 0 14px; gap: 10px; box-shadow: 0 8px 24px rgba(15,23,42,.08);
+    }
+    .search input {
+      border: none; outline: none; background: transparent; flex: 1;
+      font: 600 15px/1 var(--font); color: var(--navy);
+    }
+    .classes { display: flex; gap: 8px; overflow: hidden; }
+    .veh {
+      flex: 0 0 auto; height: 40px; padding: 0 12px; border-radius: 12px;
+      background: rgba(255,255,255,.92); border: 1.5px solid var(--border);
+      font-size: 12px; font-weight: 700; color: var(--text-2); display: flex; align-items: center; gap: 6px;
+    }
+    .veh.on { border-color: var(--teal); color: #0F766E; background: #fff; box-shadow: 0 4px 12px rgba(15,23,42,.08); }
+    .facility {
+      display: flex; gap: 12px; padding: 12px; border-radius: 16px; border: 1px solid var(--border); margin-bottom: 10px;
+    }
+    .facility.sel { border-color: var(--teal); box-shadow: 0 4px 12px rgba(15,23,42,.08); }
+    .thumb {
+      width: 72px; height: 72px; border-radius: 12px;
+      background: linear-gradient(145deg, #1E293B, #0D9488 140%);
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <div class="phone" data-screen="DRV-01">
+      <div class="status-bar dark" style="position:absolute;inset:0 0 auto;height:54px;">
+        <span>9:41</span><span>●●● 5G ▮▮▮</span>
+      </div>
+
+      <div class="map-bg" style="position:absolute;inset:0;bottom:84px;"></div>
+      <div class="road" style="top:180px;left:0;right:0;height:18px;"></div>
+      <div class="road" style="top:320px;left:40px;width:18px;bottom:220px;"></div>
+      <div class="road" style="top:260px;left:40px;right:60px;height:14px;"></div>
+
+      <div class="pin ok" style="position:absolute;top:210px;left:70px;"><span>12</span></div>
+      <div class="pin warn" style="position:absolute;top:290px;left:180px;"><span>3</span></div>
+      <div class="pin selected" style="position:absolute;top:240px;left:250px;"><span>✓</span></div>
+      <div class="pin stale" style="position:absolute;top:360px;left:120px;"><span>?</span></div>
+
+      <div class="search-hud">
+        <div class="search">
+          <span style="color:var(--teal);font-weight:800;">◎</span>
+          <input value="Indiranagar Metro, Bengaluru" readonly />
+          <span style="width:32px;height:32px;border-radius:10px;background:var(--muted);display:grid;place-items:center;font-size:13px;">⌖</span>
+        </div>
+        <div class="classes">
+          <div class="veh">Cycle</div>
+          <div class="veh">2W</div>
+          <div class="veh on">● Car</div>
+          <div class="veh">Auto</div>
+          <div class="veh">SUV</div>
+          <div class="veh">Truck</div>
+        </div>
+      </div>
+
+      <div class="dock" style="bottom:84px; max-height: 290px;">
+        <div class="handle"></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+          <div>
+            <div class="h3">Nearby parking</div>
+            <div class="meta">4 facilities · Car compatible</div>
+          </div>
+          <span class="pill teal">Filters</span>
+        </div>
+
+        <div class="facility sel">
+          <div class="thumb"></div>
+          <div style="flex:1;min-width:0;">
+            <div style="display:flex;justify-content:space-between;gap:8px;">
+              <div class="h3" style="font-size:15px;">Indiranagar Metro MLCP</div>
+              <div class="currency" style="font-weight:800;color:var(--navy);">₹30<span style="font-size:11px;font-weight:600;color:var(--text-2);">/hr</span></div>
+            </div>
+            <div class="meta" style="margin:4px 0 8px;">0.4 km · Covered · 2.1m clearance</div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;">
+              <span class="pill ok">● 166 free · Ledger · 2m</span>
+              <span class="pill navy">T1</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="facility">
+          <div class="thumb" style="background:linear-gradient(145deg,#334155,#64748B);"></div>
+          <div style="flex:1;">
+            <div style="display:flex;justify-content:space-between;">
+              <div class="h3" style="font-size:15px;">100 Feet Rd Surface Lot</div>
+              <div class="currency" style="font-weight:800;">₹20<span style="font-size:11px;font-weight:600;color:var(--text-2);">/hr</span></div>
+            </div>
+            <div class="meta" style="margin:4px 0 8px;">0.7 km · Open surface</div>
+            <span class="pill stale">Updated 42m ago · Operator</span>
+          </div>
+        </div>
+      </div>
+
+      <nav class="tabbar">
+        <div class="tab active"><div class="ico">◉</div>Explore</div>
+        <div class="tab"><div class="ico">☰</div>Bookings</div>
+        <div class="tab"><div class="ico">▣</div>Passes</div>
+        <div class="tab"><div class="ico">☺</div>Profile</div>
+      </nav>
+      <div class="home-indicator"></div>
+    </div>
+  </div>
+</body>
+</html>

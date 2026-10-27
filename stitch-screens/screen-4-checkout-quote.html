@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+
+<html class="h-full bg-slate-100" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>SmartPark India - Driver Checkout &amp; Statutory Payable Quote</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@500;600;700;800&amp;family=Share+Tech+Mono&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-error-container": "#93000a",
+            "surface-variant": "#d3e4fe",
+            "tertiary": "#006947",
+            "on-tertiary-fixed": "#002113",
+            "error-container": "#ffdad6",
+            "primary-fixed": "#89f5e7",
+            "on-tertiary-fixed-variant": "#005236",
+            "secondary-container": "#dae2fd",
+            "on-primary-fixed": "#00201d",
+            "surface-container-lowest": "#ffffff",
+            "on-secondary-container": "#5c647a",
+            "outline": "#6d7a77",
+            "background": "#f8f9ff",
+            "surface-tint": "#006a61",
+            "surface-container": "#e5eeff",
+            "on-surface-variant": "#3d4947",
+            "on-primary-fixed-variant": "#005049",
+            "primary-fixed-dim": "#6bd8cb",
+            "secondary-fixed": "#dae2fd",
+            "inverse-on-surface": "#eaf1ff",
+            "on-secondary-fixed": "#131b2e",
+            "on-primary-container": "#f4fffc",
+            "surface-container-high": "#dce9ff",
+            "tertiary-fixed-dim": "#4edea3",
+            "surface-container-low": "#eff4ff",
+            "inverse-primary": "#6bd8cb",
+            "secondary-fixed-dim": "#bec6e0",
+            "error": "#ba1a1a",
+            "on-tertiary-container": "#f5fff6",
+            "primary": "#00685f",
+            "surface": "#f8f9ff",
+            "on-surface": "#0b1c30",
+            "inverse-surface": "#213145",
+            "primary-container": "#008378",
+            "on-secondary-fixed-variant": "#3f465c",
+            "on-secondary": "#ffffff",
+            "secondary": "#565e74",
+            "surface-bright": "#f8f9ff",
+            "on-tertiary": "#ffffff",
+            "tertiary-container": "#00855b",
+            "on-error": "#ffffff",
+            "tertiary-fixed": "#6ffbbe",
+            "surface-dim": "#cbdbf5",
+            "surface-container-highest": "#d3e4fe",
+            "outline-variant": "#bcc9c6",
+            "on-background": "#0b1c30",
+            "on-primary": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-sm": "0.5rem",
+            "margin-desktop": "2.5rem",
+            "gutter": "1rem",
+            "space-xl": "2rem",
+            "space-md": "1rem",
+            "margin": "1rem",
+            "margin-tablet": "1.5rem",
+            "space-xs": "0.25rem",
+            "gutter-desktop": "1.5rem",
+            "space-lg": "1.5rem"
+          },
+          "fontFamily": {
+            "body-lg": ["Inter", "sans-serif"],
+            "body-sm": ["Inter", "sans-serif"],
+            "label-md": ["Inter", "sans-serif"],
+            "headline-lg": ["Plus Jakarta Sans", "sans-serif"],
+            "label-sm": ["Inter", "sans-serif"],
+            "headline-sm": ["Plus Jakarta Sans", "sans-serif"],
+            "numeric-mono": ["Share Tech Mono", "monospace"],
+            "headline-md": ["Plus Jakarta Sans", "sans-serif"],
+            "display-lg": ["Plus Jakarta Sans", "sans-serif"],
+            "display-lg-mobile": ["Plus Jakarta Sans", "sans-serif"],
+            "label-lg": ["Inter", "sans-serif"],
+            "body-md": ["Inter", "sans-serif"]
+          },
+          "fontSize": {
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+            "headline-lg": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "fontWeight": "500" }],
+            "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "numeric-mono": ["16px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "headline-md": ["22px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "display-lg": ["36px", { "lineHeight": "44px", "fontWeight": "700" }],
+            "display-lg-mobile": ["30px", { "lineHeight": "38px", "fontWeight": "700" }],
+            "label-lg": ["14px", { "lineHeight": "18px", "fontWeight": "600" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    
+    /* Indian HSRP License Plate Font Style */
+    .hsrp-font {
+      font-family: 'Share Tech Mono', monospace, 'Courier New', Courier;
+      letter-spacing: 0.12em;
+    }
+
+    /* Dashed border receipt separation */
+    .dashed-receipt-edge {
+      background-image: linear-gradient(to right, #bcc9c6 50%, rgba(255,255,255,0) 0%);
+      background-position: bottom;
+      background-size: 8px 1px;
+      background-repeat: repeat-x;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-slate-900 flex justify-center items-center min-h-screen p-0 sm:p-4 text-on-surface antialiased font-body-md select-none">
+<!-- Mobile Viewport Container: 390x844 (iPhone 13/14 Pro Canvas standard) -->
+<main class="w-[390px] h-[844px] max-w-full bg-background relative overflow-hidden flex flex-col shadow-2xl rounded-[44px] border-[6px] border-slate-800">
+<!-- 1. Native iOS Status Bar -->
+<header class="w-full h-11 pt-3 px-7 flex justify-between items-center z-50 text-on-surface select-none shrink-0">
+<span class="font-headline-sm text-[15px] font-bold tracking-tight text-on-surface">9:41</span>
+<div class="flex items-center space-x-1.5 text-on-surface">
+<span class="material-symbols-outlined text-[17px]" data-icon="signal_cellular_alt">signal_cellular_alt</span>
+<span class="material-symbols-outlined text-[17px]" data-icon="wifi">wifi</span>
+<span class="material-symbols-outlined text-[20px]" data-icon="battery_full">battery_full</span>
+</div>
+</header>
+<!-- 2. Top Header Navigation (Task-Focused screen: global BottomNavBar is suppressed per Semantic Shell Mandate) -->
+<nav aria-label="Order navigation" class="w-full px-4 py-2 flex items-center justify-between z-40 bg-surface/85 backdrop-blur-md shrink-0">
+<button aria-label="Go back" class="w-10 h-10 rounded-full bg-surface-container-lowest shadow-sm flex items-center justify-center text-on-surface active:scale-95 transition-transform hover:bg-surface-container" type="button">
+<span class="material-symbols-outlined text-[20px]" data-icon="arrow_back">arrow_back</span>
+</button>
+<div class="flex flex-col items-center text-center">
+<h1 class="font-headline-sm text-headline-sm text-on-surface tracking-tight leading-snug">Payable Quote</h1>
+<p class="font-label-sm text-label-sm text-secondary tracking-normal flex items-center gap-1">
+<span>Order #ORD-99214</span>
+<span class="inline-block w-1 h-1 rounded-full bg-outline-variant"></span>
+<span>SmartPark Metro</span>
+</p>
+</div>
+<button aria-label="Order Information &amp; Tariff FAQ" class="w-10 h-10 rounded-full bg-surface-container-lowest shadow-sm flex items-center justify-center text-secondary active:scale-95 transition-transform hover:bg-surface-container" type="button">
+<span class="material-symbols-outlined text-[20px]" data-icon="help_outline">help_outline</span>
+</button>
+</nav>
+<!-- Scrollable Content Canvas -->
+<div class="flex-1 overflow-y-auto px-4 pb-36 pt-1 space-y-3.5 no-scrollbar">
+<!-- 3. Live Slot Reservation Hold Banner -->
+<section aria-label="Slot Hold Status" class="bg-amber-50 border border-amber-200/90 rounded-xl p-3 flex items-start gap-2.5 shadow-sm">
+<div class="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-amber-700 text-[18px] animate-pulse" data-icon="timer">timer</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between gap-1">
+<span class="font-label-md text-label-md text-amber-900 font-bold tracking-tight">Slot Hold Active</span>
+<span class="font-numeric-mono text-label-md font-bold text-amber-800 bg-amber-200/70 px-2 py-0.5 rounded-full border border-amber-300">09:42 left</span>
+</div>
+<p class="font-body-sm text-body-sm text-amber-800/90 mt-0.5 leading-tight">
+            Bay <strong class="font-semibold text-amber-950">B2-19</strong> is reserved exclusively. Upon timer expiry, it will automatically release to waitlisted metro commuters.
+          </p>
+</div>
+</section>
+<!-- 4. Facility & Slot Confirmation Card -->
+<section aria-label="Facility &amp; Reserved Bay" class="bg-surface-container-lowest rounded-xl p-4 shadow-sm border border-slate-200/80 space-y-3.5">
+<!-- Facility Title & Metro Icon Tag -->
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-primary shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[24px]" data-icon="subway">subway</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-1.5 flex-wrap">
+<h2 class="font-headline-sm text-[16px] text-on-surface font-bold leading-tight truncate">
+                Indiranagar Metro Multi-Level Car Park
+              </h2>
+</div>
+<p class="font-body-sm text-body-sm text-secondary flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[14px] text-primary" data-icon="pin_drop">pin_drop</span>
+<span>Gate 2 Ingress • CMH Road, Bengaluru</span>
+</p>
+</div>
+</div>
+<!-- Dedicated Bay & Location Spec Chips -->
+<div class="bg-surface-container-low rounded-lg p-3 border border-slate-200/60 flex items-center justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-wider block">Assigned Bay</span>
+<span class="font-headline-md text-headline-md text-primary font-bold tracking-tight">BAY B2-19</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-[11px] mt-0.5">Floor B2 • Sector 2B • Core B</p>
+</div>
+<div class="flex flex-col items-end gap-1.5">
+<span class="inline-flex items-center gap-1 bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-[11px] px-2.5 py-1 rounded-full font-semibold">
+<span class="material-symbols-outlined text-[14px]" data-icon="directions_walk">directions_walk</span>
+              30s to Lift
+            </span>
+<span class="font-label-sm text-[11px] text-secondary">Basement -2 Clearance 2.1m</span>
+</div>
+</div>
+<!-- Parking Session Duration -->
+<div class="pt-1 flex items-center justify-between text-body-sm border-t border-slate-100">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px]" data-icon="schedule">schedule</span>
+<div>
+<span class="font-label-md text-label-md text-on-surface block">Duration: 2.0 Hours</span>
+<span class="text-secondary text-[11px]">Today, 14:30 – 16:30 IST</span>
+</div>
+</div>
+<span class="bg-surface-container px-2 py-1 rounded-md text-[11px] font-label-md text-primary font-medium">
+            +15m Grace Incl.
+          </span>
+</div>
+</section>
+<!-- 5. Vehicle & FASTag Details Card -->
+<section aria-label="Vehicle and FASTag Details" class="bg-surface-container-lowest rounded-xl p-4 shadow-sm border border-slate-200/80 space-y-3">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-semibold">Registered Vehicle</span>
+<span class="font-label-sm text-label-sm text-primary font-semibold flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[14px]" data-icon="directions_car">directions_car</span>
+            SUV / 4x4
+          </span>
+</div>
+<div class="flex items-center justify-between gap-3 bg-surface-container-low p-2.5 rounded-lg border border-slate-200/60">
+<!-- Authentic Indian HSRP Number Plate replica -->
+<div class="bg-white border-2 border-black rounded px-2.5 py-1 flex items-center space-x-2 shadow-sm">
+<div class="flex flex-col items-center justify-center leading-none pr-1 border-r border-slate-300">
+<div class="w-2.5 h-2.5 rounded-full border border-blue-800 flex items-center justify-center mb-0.5">
+<span class="block w-1.5 h-1.5 rounded-full bg-blue-700"></span>
+</div>
+<span class="text-[8px] font-bold text-blue-900 tracking-tighter">IND</span>
+</div>
+<span class="hsrp-font text-[15px] font-bold text-black tracking-widest whitespace-nowrap">
+              KA 01 MJ 8821
+            </span>
+</div>
+<div class="text-right">
+<p class="font-label-md text-label-md text-on-surface font-semibold truncate">Hyundai Creta</p>
+<p class="font-body-sm text-[11px] text-secondary">Polar White</p>
+</div>
+</div>
+<!-- FASTag Auto-Debit Integration Pill -->
+<div class="flex items-center justify-between bg-primary-fixed/25 border border-primary/20 rounded-lg p-2.5">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-md bg-primary-container text-on-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[15px]" data-icon="toll">toll</span>
+</div>
+<div>
+<p class="font-label-sm text-label-sm font-semibold text-primary">FASTag Auto-Debit Enabled</p>
+<p class="font-label-sm text-[10px] text-secondary font-numeric-mono">NETC ID #6592-8812</p>
+</div>
+</div>
+<span class="inline-flex items-center gap-1 font-label-sm text-[11px] text-tertiary font-bold bg-white/80 px-2 py-0.5 rounded-full shadow-xs">
+<span class="material-symbols-outlined text-[12px] text-tertiary" data-icon="check_circle">check_circle</span>
+            Linked
+          </span>
+</div>
+</section>
+<!-- 6. Statutory Tax & Tariff Breakdown (Master Spec v3.0 Compliance) -->
+<section aria-label="Statutory Tax Breakdown" class="bg-surface-container-lowest rounded-xl p-4 shadow-sm border border-slate-200/80 space-y-3">
+<div class="flex items-center justify-between pb-1 border-b border-slate-100">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-[18px]" data-icon="receipt_long">receipt_long</span>
+<span class="font-label-md text-label-md text-on-surface font-bold tracking-tight">Statutory Tariff &amp; Tax Quote</span>
+</div>
+<span class="font-label-sm text-[10px] uppercase font-bold text-secondary bg-surface-container px-2 py-0.5 rounded">
+            SAC 999113
+          </span>
+</div>
+<div class="space-y-2 text-body-sm">
+<div class="flex justify-between items-center text-on-surface">
+<span class="text-secondary text-[13px]">Base Parking Tariff <span class="text-[11px] text-secondary/80">(2.0 hrs @ ₹30/hr)</span></span>
+<span class="font-numeric-mono text-[13px] font-semibold">₹60.00</span>
+</div>
+<div class="flex justify-between items-center text-on-surface">
+<span class="text-secondary text-[13px] flex items-center gap-1">
+<span>Platform Convenience Fee</span>
+<span class="material-symbols-outlined text-[13px] text-secondary/70" data-icon="info">info</span>
+</span>
+<span class="font-numeric-mono text-[13px] font-semibold">₹5.00</span>
+</div>
+<div class="flex justify-between items-center text-on-surface">
+<span class="text-secondary text-[13px]">CGST @ 9.0% <span class="text-[10px] text-secondary/80">(SAC 999113)</span></span>
+<span class="font-numeric-mono text-[13px] font-semibold">₹5.85</span>
+</div>
+<div class="flex justify-between items-center text-on-surface">
+<span class="text-secondary text-[13px]">SGST @ 9.0% <span class="text-[10px] text-secondary/80">(SAC 999113)</span></span>
+<span class="font-numeric-mono text-[13px] font-semibold">₹5.85</span>
+</div>
+</div>
+<!-- Receipt separation effect -->
+<div class="w-full h-[1px] dashed-receipt-edge my-2"></div>
+<!-- Total Payable Row -->
+<div class="flex items-baseline justify-between pt-1">
+<div>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold block">Total Payable</span>
+<span class="font-label-sm text-[10px] text-secondary">Incl. of all statutory taxes &amp; municipal cess</span>
+</div>
+<div class="text-right">
+<span class="font-headline-lg text-[26px] font-bold text-primary font-numeric-mono tracking-tight">₹76.70</span>
+</div>
+</div>
+<div class="pt-2 flex items-center justify-between text-[11px] text-primary border-t border-slate-100 font-label-md">
+<button class="inline-flex items-center gap-1 hover:underline" type="button">
+<span class="material-symbols-outlined text-[13px]" data-icon="description">description</span>
+            View Tax Computation Worksheet
+          </button>
+<span class="text-secondary text-[10px]">GSTIN: 29AABCS1429B1Z0</span>
+</div>
+</section>
+<!-- 7. 1-Tap UPI Payment Selector -->
+<section aria-label="UPI Payment Selection" class="bg-surface-container-lowest rounded-xl p-4 shadow-sm border border-slate-200/80 space-y-3">
+<div class="flex items-center justify-between">
+<h3 class="font-label-md text-label-md text-on-surface font-bold">Select UPI Payment App</h3>
+<span class="bg-primary/10 text-primary font-label-sm text-[10px] px-2 py-0.5 rounded-full font-semibold">
+            Recommended
+          </span>
+</div>
+<fieldset class="space-y-2">
+<legend class="sr-only">Payment App Method</legend>
+<!-- Option 1: Google Pay (Selected) -->
+<label class="flex items-center justify-between p-3 rounded-lg border-2 border-primary bg-primary-fixed/10 cursor-pointer transition-all">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-white border border-slate-200 flex items-center justify-center shadow-xs">
+<span class="font-headline-sm font-bold text-slate-700 text-[14px]">G<span class="text-amber-500">P</span><span class="text-blue-500">a</span><span class="text-green-600">y</span></span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface font-bold">Google Pay</p>
+<p class="font-body-sm text-[11px] text-secondary">Instant biometric authorization</p>
+</div>
+</div>
+<div class="w-5 h-5 rounded-full bg-primary flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[14px]" data-icon="check">check</span>
+</div>
+</label>
+<!-- Option 2: PhonePe -->
+<label class="flex items-center justify-between p-3 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 cursor-pointer transition-all">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-[#5f259f] text-white flex items-center justify-center font-bold text-[14px] shadow-xs">
+                पे
+              </div>
+<div>
+<p class="font-label-md text-label-md text-on-surface font-semibold">PhonePe</p>
+<p class="font-body-sm text-[11px] text-secondary">UPI direct bank gateway</p>
+</div>
+</div>
+<div class="w-5 h-5 rounded-full border border-slate-300"></div>
+</label>
+<!-- Option 3: Paytm -->
+<label class="flex items-center justify-between p-3 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 cursor-pointer transition-all">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-[#002e6e] text-white flex items-center justify-center font-bold text-[11px] shadow-xs tracking-tighter">
+                Paytm
+              </div>
+<div>
+<p class="font-label-md text-label-md text-on-surface font-semibold">Paytm UPI</p>
+<p class="font-body-sm text-[11px] text-secondary">UPI Wallet &amp; Linked Accounts</p>
+</div>
+</div>
+<div class="w-5 h-5 rounded-full border border-slate-300"></div>
+</label>
+<!-- Option 4: CRED UPI -->
+<label class="flex items-center justify-between p-3 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 cursor-pointer transition-all">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-black text-white flex items-center justify-center font-bold text-[12px] shadow-xs">
+                CRED
+              </div>
+<div>
+<p class="font-label-md text-label-md text-on-surface font-semibold">CRED UPI</p>
+<p class="font-body-sm text-[11px] text-secondary">Claim park rewards &amp; cashback</p>
+</div>
+</div>
+<div class="w-5 h-5 rounded-full border border-slate-300"></div>
+</label>
+</fieldset>
+<div class="pt-1 text-center">
+<button class="text-primary font-label-sm text-label-sm font-semibold hover:underline flex items-center justify-center gap-1 mx-auto" type="button">
+<span class="material-symbols-outlined text-[15px]" data-icon="add_link">add_link</span>
+            Enter Custom UPI VPA / ID (e.g. driver@oksbi)
+          </button>
+</div>
+</section>
+</div>
+<!-- 8. Primary Sticky / Fixed Bottom Action Area -->
+<footer class="absolute bottom-0 left-0 w-full bg-white/95 backdrop-blur-lg border-t border-slate-200/80 px-4 pt-3 pb-2 z-50 shadow-[0_-8px_24px_-4px_rgba(15,23,42,0.12)]">
+<!-- Primary Action CTA Button in Mobility Teal -->
+<button class="w-full h-[52px] bg-[#0d9488] hover:bg-[#0f766e] active:scale-[0.98] transition-all rounded-xl text-white font-headline-sm text-[15px] font-bold flex items-center justify-center gap-2 shadow-md shadow-teal-900/10" type="button">
+<span>Pay ₹76.70 via UPI &amp; Generate Pass</span>
+<span class="material-symbols-outlined text-[18px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<!-- Security & Municipal Compliance Trust Micro-copy -->
+<div class="mt-2 text-center space-y-0.5">
+<p class="text-[10px] text-secondary flex items-center justify-center gap-1 font-label-sm">
+<span class="material-symbols-outlined text-[13px] text-tertiary" data-icon="verified_user">verified_user</span>
+<span>Zero Payment Failure Guarantee • Instant QR Ingress Pass</span>
+</p>
+<p class="text-[9px] text-slate-400">
+          Statutory GST Invoice generated instantly upon gate entry • NPCI &amp; RBI Authorized
+        </p>
+</div>
+<!-- Native iOS Home Indicator Bar -->
+<div class="w-full flex justify-center pt-2 pb-1">
+<div class="w-32 h-1 bg-slate-900/30 rounded-full"></div>
+</div>
+</footer>
+</main>
+</body></html>

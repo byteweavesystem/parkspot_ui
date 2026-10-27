@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iteration E · HSRP National Elite — ParkSpot Driver</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500;600;700;800&family=IBM+Plex+Mono:wght@600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{--fd:'IBM Plex Sans',sans-serif;--fb:'IBM Plex Sans',sans-serif;--fm:'IBM Plex Mono',monospace;--canvas:#F8FAFC;--navy:#0A192F;--green:#059669;--saffron:#EA580C;--text:#0F172A;--text-sec:#475569;--surface:#FFFFFF;--border:#CBD5E1;}
+
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--fb);background:#070B14;color:var(--text);-webkit-font-smoothing:antialiased}
+.page{padding:48px 32px 90px;max-width:1820px;margin:0 auto}
+.page-head{margin-bottom:36px;color:#E2E8F0}
+.page-head .id{color:#5EEAD4;font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+.page-head h1{font-family:var(--fd);font-size:40px;font-weight:800;letter-spacing:-.03em;margin:8px 0 12px;color:#fff}
+.page-head p{color:#94A3B8;max-width:780px;line-height:1.6;font-size:16px}
+.page-head .layout-note{margin-top:16px;padding:14px 18px;border-radius:14px;background:#0F172A;border:1px solid #1E293B;color:#CBD5E1;font-size:13.5px;line-height:1.55}
+.page-head a{color:#5EEAD4;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-size:14px}
+.page-head a:hover{text-decoration:underline}
+.rail{display:flex;gap:40px;overflow-x:auto;padding:12px 10px 52px;align-items:flex-start;scroll-snap-type:x mandatory}
+.shot{flex:0 0 auto;width:390px;scroll-snap-align:start}
+.shot .label{color:#94A3B8;font-size:11.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.shot .label span{color:#5EEAD4;font-family:var(--fm);background:rgba(94,234,212,.12);padding:2px 8px;border-radius:6px}
+
+/* iPhone 16 Pro Premium Dribbble Frame */
+.phone{width:390px;height:844px;border-radius:52px;overflow:hidden;position:relative;background:var(--canvas);box-shadow:0 0 0 11px #1E2433,0 0 0 13px #2D374D,0 45px 110px rgba(0,0,0,.8);isolation:isolate}
+.glass-reflection{position:absolute;top:0;left:0;right:0;height:240px;background:linear-gradient(135deg,rgba(255,255,255,.07) 0%,transparent 65%);pointer-events:none;z-index:70}
+.island{position:absolute;top:11px;left:50%;transform:translateX(-50%);height:35px;border-radius:24px;z-index:60;background:#000;display:flex;align-items:center;justify-content:space-between;padding:0 12px;color:#fff;font-size:11px;font-weight:700;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12);pointer-events:none}
+.island.compact{width:124px}
+.island.live{width:230px;padding:0 14px;background:#070C16;border:1px solid rgba(20,184,166,.4);box-shadow:0 4px 16px rgba(13,148,136,.25)}
+.island .dot{width:7px;height:7px;border-radius:50%;background:#14B8A6;box-shadow:0 0 8px #14B8A6;animation:dotPulse 1.8s infinite}
+@keyframes dotPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
+.phone-body{position:absolute;inset:0;display:flex;flex-direction:column;overflow:hidden;z-index:1}
+.home-bar{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:138px;height:5px;border-radius:99px;background:var(--text);opacity:.25;z-index:50;pointer-events:none}
+.status{height:54px;display:flex;align-items:flex-end;justify-content:space-between;padding:0 26px 10px;font-size:13px;font-weight:700;z-index:30;flex-shrink:0}
+.status .icons{display:flex;align-items:center;gap:6px}
+.screen{flex:1;display:flex;flex-direction:column;position:relative;min-height:0;overflow:hidden}
+.tabular{font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+
+
+.e-wrap{flex:1;background:var(--canvas);color:var(--text);display:flex;flex-direction:column}
+.e-gov-bar{background:var(--navy);color:#fff;padding:8px 20px;font-size:11px;font-weight:700;display:flex;justify-content:space-between;letter-spacing:.05em}
+.e-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:12px;box-shadow:0 4px 16px rgba(0,0,0,.04)}
+.e-btn{height:52px;border-radius:12px;background:var(--navy);color:#fff;border:0;font-weight:750;font-size:15px;font-family:var(--fb);display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer}
+
+</style></head><body>
+<div class="page">
+  <div class="page-head">
+    <div class="id">Iteration E · hsrp-national-elite</div>
+    <h1>HSRP National Elite</h1>
+    <p><strong style="color:#F8FAFC">Dribbble GovTech #1 · Bharat Mobility Standard · VAHAN Verified</strong><br/>High-trust institutional design: official VAHAN vehicle registry, regulated municipal parking tariff directory, and high-trust Ed25519 cryptographic tokens with HSRP plate security branding.</p>
+    <div class="layout-note"><strong style="color:#5EEAD4">Dribbble UX Architecture:</strong> National Mobility top header bar · official registration form layouts · municipal sensor registry · cryptographic permit pass with security hologram branding</div>
+    <a href="index.html">← Compare All 5 Dribbble Iterations</a>
+  </div>
+  <div class="rail"><div class="shot"><div class="label"><span>E</span> 01 · Bharat Gateway</div><div class="phone"><div class="glass-reflection"></div><div class="island compact"><span>9:41</span></div><div class="phone-body">
+      <div class="e-wrap">
+        <div class="e-gov-bar"><span>BHARAT MOBILITY // REGISTRY</span><span>GOVT ACCREDITED</span></div>
+        <div class="status" style="color:#0F172A">
+      <span class="tabular">9:41</span>
+      <div class="icons">
+        <svg width="15" height="11" viewBox="0 0 16 12" fill="currentColor"><rect x="0" y="8" width="2.5" height="4" rx="0.5"/><rect x="4" y="5.5" width="2.5" height="6.5" rx="0.5"/><rect x="8" y="3" width="2.5" height="9" rx="0.5"/><rect x="12" y="0" width="2.5" height="12" rx="0.5"/></svg>
+        <svg width="14" height="11" viewBox="0 0 16 12" fill="currentColor"><path d="M8 2.5C10.5 2.5 12.8 3.5 14.5 5.2L15.9 3.8C13.8 1.7 11 0.5 8 0.5C5 0.5 2.2 1.7 0.1 3.8L1.5 5.2C3.2 3.5 5.5 2.5 8 2.5ZM8 6.5C9.7 6.5 11.2 7.2 12.3 8.3L13.7 6.9C12.2 5.4 10.2 4.5 8 4.5C5.8 4.5 3.8 5.4 2.3 6.9L3.7 8.3C4.8 7.2 6.3 6.5 8 6.5ZM8 10.5C8.8 10.5 9.5 11.2 9.5 12H6.5C6.5 11.2 7.2 10.5 8 10.5Z"/></svg>
+        <svg width="22" height="11" viewBox="0 0 24 12" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="19" height="10" rx="3"/><rect x="2.5" y="2.5" width="13" height="7" rx="1.5" fill="currentColor"/><path d="M21 4.5V7.5" stroke-linecap="round"/></svg>
+      </div>
+    </div>
+        <div style="flex:1;padding:24px 20px;display:flex;flex-direction:column;justify-content:center">
+          <div style="font-size:11px;font-weight:800;color:var(--green);letter-spacing:.08em;text-transform:uppercase">ParkSpot National Network</div>
+          <h1 style="font-size:32px;font-weight:800;line-height:1.2;margin:10px 0 14px">Unified Parking Interface</h1>
+          <p style="color:var(--text-sec);font-size:14px;line-height:1.55;margin-bottom:28px">Official digital parking marketplace connecting municipal MLCPs and commercial plazas across India.</p>
+          <button class="e-btn">Authenticate with Aadhaar / Mobile <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+        </div>
+      </div>
+    </div><div class="home-bar"></div></div></div><div class="shot"><div class="label"><span>E</span> 02 · VAHAN Registry</div><div class="phone"><div class="glass-reflection"></div><div class="island compact"><span>9:41</span></div><div class="phone-body">
+      <div class="e-wrap">
+        <div class="e-gov-bar"><span>VAHAN 4.0 INTEGRATION</span><span>VERIFIED</span></div>
+        <div class="status" style="color:#0F172A">
+      <span class="tabular">9:41</span>
+      <div class="icons">
+        <svg width="15" height="11" viewBox="0 0 16 12" fill="currentColor"><rect x="0" y="8" width="2.5" height="4" rx="0.5"/><rect x="4" y="5.5" width="2.5" height="6.5" rx="0.5"/><rect x="8" y="3" width="2.5" height="9" rx="0.5"/><rect x="12" y="0" width="2.5" height="12" rx="0.5"/></svg>
+        <svg width="14" height="11" viewBox="0 0 16 12" fill="currentColor"><path d="M8 2.5C10.5 2.5 12.8 3.5 14.5 5.2L15.9 3.8C13.8 1.7 11 0.5 8 0.5C5 0.5 2.2 1.7 0.1 3.8L1.5 5.2C3.2 3.5 5.5 2.5 8 2.5ZM8 6.5C9.7 6.5 11.2 7.2 12.3 8.3L13.7 6.9C12.2 5.4 10.2 4.5 8 4.5C5.8 4.5 3.8 5.4 2.3 6.9L3.7 8.3C4.8 7.2 6.3 6.5 8 6.5ZM8 10.5C8.8 10.5 9.5 11.2 9.5 12H6.5C6.5 11.2 7.2 10.5 8 10.5Z"/></svg>
+        <svg width="22" height="11" viewBox="0 0 24 12" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="19" height="10" rx="3"/><rect x="2.5" y="2.5" width="13" height="7" rx="1.5" fill="currentColor"/><path d="M21 4.5V7.5" stroke-linecap="round"/></svg>
+      </div>
+    </div>
+        <div style="padding:12px 20px 8px"><h2 style="font-size:20px;font-weight:800">Vehicle Verification</h2></div>
+        <div style="flex:1;padding:10px 20px 24px;overflow-y:auto">
+          <div class="e-card">
+            <div style="display:flex;justify-content:space-between;border-bottom:1px solid #E2E8F0;padding-bottom:8px">
+              <span style="font-family:var(--fm);font-size:16px;font-weight:700">KA 01 MJ 8821</span>
+              <span style="color:var(--green);font-size:11px;font-weight:700">✓ VAHAN VALID</span>
+            </div>
+            <div style="font-size:12px;color:var(--text-sec);margin-top:8px">Petrol SUV · Fitness Active · FASTag Bank: SBI</div>
+          </div>
+          <button class="e-btn" style="width:100%;margin-top:auto">Confirm &amp; Proceed <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+        </div>
+      </div>
+    </div><div class="home-bar"></div></div></div><div class="shot"><div class="label"><span>E</span> 03 · Municipal Explore</div><div class="phone"><div class="glass-reflection"></div><div class="island compact"><span>9:41</span></div><div class="phone-body">
+      <div class="e-wrap">
+        <div class="e-gov-bar"><span>MUNICIPAL DIRECTORY</span><span>BLR EAST</span></div>
+        <div class="status" style="color:#0F172A">
+      <span class="tabular">9:41</span>
+      <div class="icons">
+        <svg width="15" height="11" viewBox="0 0 16 12" fill="currentColor"><rect x="0" y="8" width="2.5" height="4" rx="0.5"/><rect x="4" y="5.5" width="2.5" height="6.5" rx="0.5"/><rect x="8" y="3" width="2.5" height="9" rx="0.5"/><rect x="12" y="0" width="2.5" height="12" rx="0.5"/></svg>
+        <svg width="14" height="11" viewBox="0 0 16 12" fill="currentColor"><path d="M8 2.5C10.5 2.5 12.8 3.5 14.5 5.2L15.9 3.8C13.8 1.7 11 0.5 8 0.5C5 0.5 2.2 1.7 0.1 3.8L1.5 5.2C3.2 3.5 5.5 2.5 8 2.5ZM8 6.5C9.7 6.5 11.2 7.2 12.3 8.3L13.7 6.9C12.2 5.4 10.2 4.5 8 4.5C5.8 4.5 3.8 5.4 2.3 6.9L3.7 8.3C4.8 7.2 6.3 6.5 8 6.5ZM8 10.5C8.8 10.5 9.5 11.2 9.5 12H6.5C6.5 11.2 7.2 10.5 8 10.5Z"/></svg>
+        <svg width="22" height="11" viewBox="0 0 24 12" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="19" height="10" rx="3"/><rect x="2.5" y="2.5" width="13" height="7" rx="1.5" fill="currentColor"/><path d="M21 4.5V7.5" stroke-linecap="round"/></svg>
+      </div>
+    </div>
+        <div style="padding:12px 20px 8px"><h2 style="font-size:20px;font-weight:800">Regulated Lots</h2></div>
+        <div style="flex:1;padding:10px 20px 24px;overflow-y:auto">
+          <div class="e-card">
+            <div style="display:flex;justify-content:space-between">
+              <b>BBMP Metro MLCP</b>
+              <span style="font-family:var(--fm);color:var(--green);font-weight:700">₹30/hr</span>
+            </div>
+            <div style="font-size:12px;color:var(--text-sec);margin-top:4px">Reg ID: BLR-PKG-082 · 12 live sensors verified</div>
+          </div>
+          <button class="e-btn" style="width:100%;margin-top:auto">Select Municipal Lot <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+        </div>
+      </div>
+    </div><div class="home-bar"></div></div></div><div class="shot"><div class="label"><span>E</span> 04 · Certified Bay</div><div class="phone"><div class="glass-reflection"></div><div class="island compact"><span>9:41</span></div><div class="phone-body">
+      <div class="e-wrap">
+        <div class="e-gov-bar"><span>SLOT ALLOCATION</span><span>HOLD 10M</span></div>
+        <div class="status" style="color:#0F172A">
+      <span class="tabular">9:41</span>
+      <div class="icons">
+        <svg width="15" height="11" viewBox="0 0 16 12" fill="currentColor"><rect x="0" y="8" width="2.5" height="4" rx="0.5"/><rect x="4" y="5.5" width="2.5" height="6.5" rx="0.5"/><rect x="8" y="3" width="2.5" height="9" rx="0.5"/><rect x="12" y="0" width="2.5" height="12" rx="0.5"/></svg>
+        <svg width="14" height="11" viewBox="0 0 16 12" fill="currentColor"><path d="M8 2.5C10.5 2.5 12.8 3.5 14.5 5.2L15.9 3.8C13.8 1.7 11 0.5 8 0.5C5 0.5 2.2 1.7 0.1 3.8L1.5 5.2C3.2 3.5 5.5 2.5 8 2.5ZM8 6.5C9.7 6.5 11.2 7.2 12.3 8.3L13.7 6.9C12.2 5.4 10.2 4.5 8 4.5C5.8 4.5 3.8 5.4 2.3 6.9L3.7 8.3C4.8 7.2 6.3 6.5 8 6.5ZM8 10.5C8.8 10.5 9.5 11.2 9.5 12H6.5C6.5 11.2 7.2 10.5 8 10.5Z"/></svg>
+        <svg width="22" height="11" viewBox="0 0 24 12" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="19" height="10" rx="3"/><rect x="2.5" y="2.5" width="13" height="7" rx="1.5" fill="currentColor"/><path d="M21 4.5V7.5" stroke-linecap="round"/></svg>
+      </div>
+    </div>
+        <div style="padding:12px 20px 8px"><h2 style="font-size:20px;font-weight:800">Certified Bay</h2></div>
+        <div style="flex:1;padding:10px 20px 24px;overflow-y:auto">
+          <div class="e-card">
+            <div style="font-family:var(--fm);font-size:22px;font-weight:700">BAY B2-19</div>
+            <div style="font-size:12px;color:var(--text-sec);margin-top:4px">Municipal structural clearance certified · 2.1m height</div>
+          </div>
+          <button class="e-btn" style="width:100%;margin-top:auto">Proceed to GST Invoice <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+        </div>
+      </div>
+    </div><div class="home-bar"></div></div></div><div class="shot"><div class="label"><span>E</span> 05 · Statutory Quote</div><div class="phone"><div class="glass-reflection"></div><div class="island compact"><span>9:41</span></div><div class="phone-body">
+      <div class="e-wrap">
+        <div class="e-gov-bar"><span>TAX COMPLIANCE</span><span>SAC 996729</span></div>
+        <div class="status" style="color:#0F172A">
+      <span class="tabular">9:41</span>
+      <div class="icons">
+        <svg width="15" height="11" viewBox="0 0 16 12" fill="currentColor"><rect x="0" y="8" width="2.5" height="4" rx="0.5"/><rect x="4" y="5.5" width="2.5" height="6.5" rx="0.5"/><rect x="8" y="3" width="2.5" height="9" rx="0.5"/><rect x="12" y="0" width="2.5" height="12" rx="0.5"/></svg>
+        <svg width="14" height="11" viewBox="0 0 16 12" fill="currentColor"><path d="M8 2.5C10.5 2.5 12.8 3.5 14.5 5.2L15.9 3.8C13.8 1.7 11 0.5 8 0.5C5 0.5 2.2 1.7 0.1 3.8L1.5 5.2C3.2 3.5 5.5 2.5 8 2.5ZM8 6.5C9.7 6.5 11.2 7.2 12.3 8.3L13.7 6.9C12.2 5.4 10.2 4.5 8 4.5C5.8 4.5 3.8 5.4 2.3 6.9L3.7 8.3C4.8 7.2 6.3 6.5 8 6.5ZM8 10.5C8.8 10.5 9.5 11.2 9.5 12H6.5C6.5 11.2 7.2 10.5 8 10.5Z"/></svg>
+        <svg width="22" height="11" viewBox="0 0 24 12" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="19" height="10" rx="3"/><rect x="2.5" y="2.5" width="13" height="7" rx="1.5" fill="currentColor"/><path d="M21 4.5V7.5" stroke-linecap="round"/></svg>
+      </div>
+    </div>
+        <div style="padding:12px 20px 8px"><h2 style="font-size:20px;font-weight:800">Statutory Invoice</h2></div>
+        <div style="flex:1;padding:10px 20px 24px;overflow-y:auto">
+          <div class="e-card">
+            <div style="display:flex;justify-content:space-between;padding:4px 0;font-size:13px"><span>Base (2h)</span><b>₹60.00</b></div>
+            <div style="display:flex;justify-content:space-between;padding:4px 0;font-size:13px"><span>Service Fee</span><b>₹5.00</b></div>
+            <div style="display:flex;justify-content:space-between;padding:4px 0;font-size:12px;color:var(--text-sec)"><span>CGST (9%)</span><span>₹5.85</span></div>
+            <div style="display:flex;justify-content:space-between;padding:4px 0;font-size:12px;color:var(--text-sec)"><span>SGST (9%)</span><span>₹5.85</span></div>
+            <div style="display:flex;justify-content:space-between;padding:10px 0 0;border-top:1px solid #E2E8F0;font-size:17px;font-weight:800"><span>Total</span><span>₹76.70</span></div>
+          </div>
+          <button class="e-btn" style="width:100%;margin-top:auto">Pay via NPCI UPI <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+        </div>
+      </div>
+    </div><div class="home-bar"></div></div></div><div class="shot"><div class="label"><span>E</span> 06 · Cryptographic Pass</div><div class="phone"><div class="glass-reflection"></div><div class="island compact"><span>9:41</span></div><div class="phone-body">
+      <div class="e-wrap">
+        <div class="e-gov-bar"><span>DIGITAL TRANSIT PERMIT</span><span>OFFLINE ED25519</span></div>
+        <div class="status" style="color:#0F172A">
+      <span class="tabular">9:41</span>
+      <div class="icons">
+        <svg width="15" height="11" viewBox="0 0 16 12" fill="currentColor"><rect x="0" y="8" width="2.5" height="4" rx="0.5"/><rect x="4" y="5.5" width="2.5" height="6.5" rx="0.5"/><rect x="8" y="3" width="2.5" height="9" rx="0.5"/><rect x="12" y="0" width="2.5" height="12" rx="0.5"/></svg>
+        <svg width="14" height="11" viewBox="0 0 16 12" fill="currentColor"><path d="M8 2.5C10.5 2.5 12.8 3.5 14.5 5.2L15.9 3.8C13.8 1.7 11 0.5 8 0.5C5 0.5 2.2 1.7 0.1 3.8L1.5 5.2C3.2 3.5 5.5 2.5 8 2.5ZM8 6.5C9.7 6.5 11.2 7.2 12.3 8.3L13.7 6.9C12.2 5.4 10.2 4.5 8 4.5C5.8 4.5 3.8 5.4 2.3 6.9L3.7 8.3C4.8 7.2 6.3 6.5 8 6.5ZM8 10.5C8.8 10.5 9.5 11.2 9.5 12H6.5C6.5 11.2 7.2 10.5 8 10.5Z"/></svg>
+        <svg width="22" height="11" viewBox="0 0 24 12" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="19" height="10" rx="3"/><rect x="2.5" y="2.5" width="13" height="7" rx="1.5" fill="currentColor"/><path d="M21 4.5V7.5" stroke-linecap="round"/></svg>
+      </div>
+    </div>
+        <div style="flex:1;padding:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center">
+          <div class="e-card" style="width:100%">
+            <span style="font-size:10px;font-weight:800;color:var(--green);letter-spacing:.1em">BHARAT MOBILITY VERIFIED</span>
+            <div style="font-size:24px;font-weight:800;margin:6px 0">Bay B2-19</div>
+            <div style="margin:14px 0"><img src="../assets/qr-pass.png" width="150" height="150"/></div>
+            <div style="font-family:var(--fm);font-size:11px;color:var(--text-sec)">KA 01 MJ 8821 · NONCE #SP-99214</div>
+          </div>
+          <button class="e-btn" style="width:100%;margin-top:16px">Present at Barrier Scanner</button>
+        </div>
+      </div>
+    </div><div class="home-bar"></div></div></div></div>
+</div>
+</body></html>

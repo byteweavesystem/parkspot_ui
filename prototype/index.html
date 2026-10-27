@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-slate-950 text-slate-100">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartPark India — Unified Interactive UI Prototype & Design Suite</title>
+  <!-- Google Fonts: Plus Jakarta Sans, Inter, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              teal: '#0D9488',
+              'teal-dark': '#0F766E',
+              'teal-light': '#F0FDFA',
+              navy: '#0F172A',
+              slate: '#1E293B',
+              emerald: '#10B981',
+              amber: '#F59E0B',
+              rose: '#EF4444',
+              violet: '#6366F1'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Plus Jakarta Sans', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #0f172a; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+    /* Scanner Laser Animation */
+    @keyframes laserSweep {
+      0% { top: 5%; opacity: 0.8; }
+      50% { top: 90%; opacity: 1; }
+      100% { top: 5%; opacity: 0.8; }
+    }
+    .scanner-laser {
+      animation: laserSweep 2.2s ease-in-out infinite;
+    }
+
+    /* Pulse Glow */
+    @keyframes subtlePulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.08); opacity: 0.85; }
+    }
+    .pulse-glow {
+      animation: subtlePulse 2s infinite ease-in-out;
+    }
+
+    /* Ticket Perforations */
+    .ticket-cutout-left {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #f8fafc;
+      position: absolute;
+      left: -10px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .ticket-cutout-right {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #f8fafc;
+      position: absolute;
+      right: -10px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    /* Architectural Bay Grid */
+    .bay-slot {
+      transition: all 0.15s ease-in-out;
+    }
+    .bay-slot:hover {
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body class="h-full flex flex-col font-sans antialiased overflow-hidden select-none">
+
+  <!-- TOP APP TOOLBAR & PERSONA CONTROLLER -->
+  <header class="h-16 bg-slate-900 border-b border-slate-800 flex items-center justify-between px-6 z-50 shrink-0">
+    <div class="flex items-center gap-4">
+      <div class="flex items-center gap-2.5">
+        <div class="w-9 h-9 rounded-xl bg-brand-teal flex items-center justify-center shadow-lg shadow-teal-500/20 font-display font-bold text-white text-lg">
+          P
+        </div>
+        <div>
+          <div class="font-display font-bold text-base text-white tracking-tight flex items-center gap-2">
+            SmartPark India
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-teal-500/10 text-teal-400 border border-teal-500/30 font-semibold tracking-wider uppercase">Pro UI Suite</span>
+          </div>
+          <p class="text-xs text-slate-400 font-medium">Urban Mobility & Smart Transit Architecture</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PERSONA SWITCHER TABS -->
+    <div class="flex items-center gap-1.5 bg-slate-950 p-1.5 rounded-xl border border-slate-800 text-xs font-medium">
+      <button onclick="switchScreen('drv-explore')" id="tab-drv-explore" class="persona-tab px-3.5 py-1.5 rounded-lg text-white bg-slate-800 shadow-sm transition-all flex items-center gap-2 font-semibold">
+        <svg class="w-3.5 h-3.5 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
+        Driver: Explore Map
+      </button>
+      <button onclick="switchScreen('drv-bay')" id="tab-drv-bay" class="persona-tab px-3.5 py-1.5 rounded-lg text-slate-400 hover:text-white transition-all flex items-center gap-2">
+        <svg class="w-3.5 h-3.5 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+        Driver: Floor B2 Bays
+      </button>
+      <button onclick="switchScreen('drv-pass')" id="tab-drv-pass" class="persona-tab px-3.5 py-1.5 rounded-lg text-slate-400 hover:text-white transition-all flex items-center gap-2">
+        <svg class="w-3.5 h-3.5 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/></svg>
+        Driver: Dynamic QR Pass
+      </button>
+      <button onclick="switchScreen('att-scanner')" id="tab-att-scanner" class="persona-tab px-3.5 py-1.5 rounded-lg text-slate-400 hover:text-white transition-all flex items-center gap-2">
+        <svg class="w-3.5 h-3.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+        Attendant: Rugged POS
+      </button>
+      <button onclick="switchScreen('opr-dashboard')" id="tab-opr-dashboard" class="persona-tab px-3.5 py-1.5 rounded-lg text-slate-400 hover:text-white transition-all flex items-center gap-2">
+        <svg class="w-3.5 h-3.5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+        Operator: MLCP Desk
+      </button>
+      <button onclick="switchScreen('adm-dashboard')" id="tab-adm-dashboard" class="persona-tab px-3.5 py-1.5 rounded-lg text-slate-400 hover:text-white transition-all flex items-center gap-2">
+        <svg class="w-3.5 h-3.5 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+        Admin: PostGIS Watchdog
+      </button>
+    </div>
+
+    <!-- EXTERNAL STITCH LINK & METRICS -->
+    <div class="flex items-center gap-3">
+      <a href="https://stitch.withgoogle.com/projects/15000274080821385749" target="_blank" class="px-3.5 py-1.5 rounded-xl bg-teal-500/10 hover:bg-teal-500/20 text-teal-300 border border-teal-500/30 text-xs font-semibold flex items-center gap-2 transition-all">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        Open in Stitch
+      </a>
+      <div class="h-6 w-px bg-slate-800"></div>
+      <div class="flex items-center gap-2 text-xs font-mono text-slate-400">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span id="live-clock">14:48:22 IST</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN STAGE -->
+  <main class="flex-1 overflow-auto bg-slate-950 flex items-center justify-center p-6 relative">
+
+    <!-- ========================================== -->
+    <!-- 1. DRIVER: MAP-FIRST EXPLORE SCREEN        -->
+    <!-- ========================================== -->
+    <div id="screen-drv-explore" class="screen-view w-full max-w-[400px] h-[820px] bg-slate-900 rounded-[48px] p-3 shadow-2xl border-4 border-slate-800 relative flex flex-col overflow-hidden">
+      <!-- Phone Bezel & Dynamic Island -->
+      <div class="w-32 h-6 bg-slate-950 rounded-full mx-auto mb-2 flex items-center justify-between px-3 z-30 shrink-0">
+        <span class="text-[10px] font-mono text-white font-semibold">9:41</span>
+        <div class="w-16 h-3 bg-black rounded-full flex items-center justify-center">
+          <div class="w-2 h-2 rounded-full bg-teal-500/50"></div>
+        </div>
+        <div class="flex items-center gap-1">
+          <div class="w-2.5 h-2.5 rounded-sm bg-white/80"></div>
+        </div>
+      </div>
+
+      <!-- App Canvas (Light Daylight Mode) -->
+      <div class="flex-1 bg-slate-50 rounded-[38px] overflow-hidden flex flex-col relative text-slate-900 border border-slate-200">
+        <!-- Floating Header Search HUD -->
+        <div class="p-4 z-20 space-y-3 bg-white/90 backdrop-blur-md border-b border-slate-200/80">
+          <div class="flex items-center gap-3">
+            <div class="flex-1 flex items-center gap-2.5 bg-slate-100 px-3.5 py-2.5 rounded-2xl border border-slate-200">
+              <svg class="w-4 h-4 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+              <input type="text" value="Indiranagar Metro Station" class="bg-transparent text-xs font-semibold text-slate-800 outline-none w-full" readonly>
+            </div>
+            <button class="w-9 h-9 rounded-2xl bg-slate-900 text-white flex items-center justify-center shadow-sm">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
+            </button>
+          </div>
+
+          <!-- Vehicle Category Horizontal Chips -->
+          <div class="flex items-center gap-2 overflow-x-auto pb-1 text-[11px] font-semibold">
+            <button class="px-3 py-1.5 rounded-xl bg-slate-900 text-white shadow-sm flex items-center gap-1.5 whitespace-nowrap">
+              <span>🚗</span> SUV (Creta)
+            </button>
+            <button class="px-3 py-1.5 rounded-xl bg-white border border-slate-300 text-slate-700 hover:bg-slate-100 flex items-center gap-1.5 whitespace-nowrap">
+              <span>⚡</span> EV Charging
+            </button>
+            <button class="px-3 py-1.5 rounded-xl bg-white border border-slate-300 text-slate-700 hover:bg-slate-100 flex items-center gap-1.5 whitespace-nowrap">
+              <span>🛵</span> 2-Wheeler
+            </button>
+            <button class="px-3 py-1.5 rounded-xl bg-white border border-slate-300 text-slate-700 hover:bg-slate-100 flex items-center gap-1.5 whitespace-nowrap">
+              <span>🏷️</span> FASTag Only
+            </button>
+          </div>
+        </div>
+
+        <!-- Simulated Vector Map Background -->
+        <div class="flex-1 bg-slate-100 relative overflow-hidden flex items-center justify-center">
+          <!-- Road Grid Visuals -->
+          <svg class="absolute inset-0 w-full h-full opacity-60" xmlns="http://www.w3.org/2000/svg">
+            <line x1="0" y1="120" x2="400" y2="120" stroke="#cbd5e1" stroke-width="24"/>
+            <line x1="0" y1="260" x2="400" y2="260" stroke="#cbd5e1" stroke-width="32"/>
+            <line x1="160" y1="0" x2="160" y2="500" stroke="#cbd5e1" stroke-width="28"/>
+            <line x1="280" y1="0" x2="280" y2="500" stroke="#e2e8f0" stroke-width="16"/>
+            <!-- Metro Viaduct Line (Purple Line) -->
+            <line x1="0" y1="250" x2="400" y2="250" stroke="#8b5cf6" stroke-width="6" stroke-dasharray="10 6"/>
+          </svg>
+
+          <!-- Nearby Parking Facility Pins -->
+          <div class="absolute top-28 left-12 bg-white px-2.5 py-1 rounded-full shadow-md border border-slate-200 flex items-center gap-1.5 text-[10px] font-bold text-slate-700">
+            <span class="w-2 h-2 rounded-full bg-slate-400"></span>
+            100 Ft Rd (Full)
+          </div>
+
+          <div class="absolute top-44 right-10 bg-white px-2.5 py-1 rounded-full shadow-md border border-slate-200 flex items-center gap-1.5 text-[10px] font-bold text-amber-600">
+            <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+            CMH Arcade (8 Left)
+          </div>
+
+          <!-- Active Pinned Facility Marker -->
+          <div class="absolute top-52 left-28 flex flex-col items-center cursor-pointer group">
+            <div class="px-3 py-1.5 bg-slate-900 text-white rounded-xl shadow-xl flex items-center gap-2 border border-teal-500">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+              <span class="text-xs font-bold font-display">Indiranagar MLCP</span>
+              <span class="text-[10px] bg-teal-500/20 text-teal-300 px-1.5 py-0.5 rounded font-mono font-bold">₹30/h</span>
+            </div>
+            <div class="w-3 h-3 bg-slate-900 rotate-45 -mt-1.5 border-r border-b border-teal-500"></div>
+          </div>
+        </div>
+
+        <!-- Floating Bottom Facility Peek Card -->
+        <div class="bg-white p-5 rounded-t-3xl shadow-2xl border-t border-slate-200 z-20 space-y-4">
+          <div class="w-10 h-1 bg-slate-300 rounded-full mx-auto -mt-2"></div>
+          <div class="flex items-start justify-between">
+            <div>
+              <div class="flex items-center gap-2">
+                <h3 class="font-display font-bold text-base text-slate-900">Indiranagar Metro MLCP</h3>
+                <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-bold font-mono">166 Free</span>
+              </div>
+              <p class="text-xs text-slate-500 mt-0.5">CMH Road • Gate 2 Ingress • Max Clearance 2.1m</p>
+            </div>
+            <div class="text-right">
+              <div class="text-sm font-bold font-mono text-teal-700">₹30<span class="text-xs font-normal text-slate-500">/hr</span></div>
+              <span class="text-[10px] text-slate-400">FASTag Enabled</span>
+            </div>
+          </div>
+
+          <!-- Quick Metrics Bar -->
+          <div class="grid grid-cols-3 gap-2 py-2 border-y border-slate-100 text-center">
+            <div class="bg-slate-50 p-2 rounded-xl">
+              <span class="text-[10px] text-slate-500 block">Distance</span>
+              <span class="text-xs font-bold text-slate-800">1.2 km (4m)</span>
+            </div>
+            <div class="bg-slate-50 p-2 rounded-xl">
+              <span class="text-[10px] text-slate-500 block">Floor Availability</span>
+              <span class="text-xs font-bold text-emerald-600">B1, B2, B3</span>
+            </div>
+            <div class="bg-slate-50 p-2 rounded-xl">
+              <span class="text-[10px] text-slate-500 block">EV Chargers</span>
+              <span class="text-xs font-bold text-teal-600">12 Fast 60kW</span>
+            </div>
+          </div>
+
+          <!-- Primary Route / Book Button -->
+          <button onclick="switchScreen('drv-bay')" class="w-full py-3.5 bg-brand-teal hover:bg-brand-teal-dark active:scale-[0.98] transition-all text-white font-semibold rounded-2xl shadow-lg shadow-teal-500/20 flex items-center justify-center gap-2 text-sm font-display">
+            Select Bay & Book Spot
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- 2. DRIVER: DECK BAY SELECTOR (FLOOR B2)    -->
+    <!-- ========================================== -->
+    <div id="screen-drv-bay" class="screen-view hidden w-full max-w-[400px] h-[820px] bg-slate-900 rounded-[48px] p-3 shadow-2xl border-4 border-slate-800 relative flex flex-col overflow-hidden">
+      <!-- Phone Bezel & Dynamic Island -->
+      <div class="w-32 h-6 bg-slate-950 rounded-full mx-auto mb-2 flex items-center justify-between px-3 z-30 shrink-0">
+        <span class="text-[10px] font-mono text-white font-semibold">9:41</span>
+        <div class="w-16 h-3 bg-black rounded-full flex items-center justify-center">
+          <div class="w-2 h-2 rounded-full bg-teal-500/50"></div>
+        </div>
+        <div class="flex items-center gap-1"><div class="w-2.5 h-2.5 rounded-sm bg-white/80"></div></div>
+      </div>
+
+      <!-- App Canvas -->
+      <div class="flex-1 bg-slate-50 rounded-[38px] overflow-hidden flex flex-col relative text-slate-900 border border-slate-200">
+        <!-- Top Nav -->
+        <div class="p-4 bg-white border-b border-slate-200 flex items-center justify-between shrink-0">
+          <button onclick="switchScreen('drv-explore')" class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-700">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+          </button>
+          <div class="text-center">
+            <h3 class="font-display font-bold text-sm text-slate-900">Deck Bay Selector</h3>
+            <p class="text-[10px] text-slate-500">Indiranagar MLCP • Clearance 2.1m</p>
+          </div>
+          <div class="w-8"></div>
+        </div>
+
+        <!-- Floor Switcher Pills -->
+        <div class="px-4 py-2.5 bg-slate-100 border-b border-slate-200 flex items-center justify-between gap-1 text-xs font-semibold">
+          <button class="flex-1 py-1.5 rounded-xl text-slate-500 hover:text-slate-800 text-center">B1 (98% Full)</button>
+          <button class="flex-1 py-1.5 rounded-xl bg-slate-900 text-white shadow-sm text-center">B2 (78 Free)</button>
+          <button class="flex-1 py-1.5 rounded-xl text-slate-500 hover:text-slate-800 text-center">B3 (120 Free)</button>
+          <button class="flex-1 py-1.5 rounded-xl text-slate-500 hover:text-slate-800 text-center">Terrace</button>
+        </div>
+
+        <!-- 2D Architectural Floor Plan Grid -->
+        <div class="flex-1 p-4 overflow-y-auto space-y-4">
+          <!-- Landmark Orientation Bar -->
+          <div class="flex items-center justify-between text-[11px] font-mono text-slate-500 bg-white p-2.5 rounded-xl border border-slate-200 shadow-sm">
+            <div class="flex items-center gap-1.5 text-teal-700 font-semibold">
+              <span>🚪</span> Gate 2 Ingress
+            </div>
+            <div class="flex items-center gap-1.5 text-blue-700 font-semibold">
+              <span>🛗</span> Lift Core A (Near B2-19)
+            </div>
+            <div class="flex items-center gap-1.5 text-rose-700 font-semibold">
+              <span>🚨</span> Fire Exit
+            </div>
+          </div>
+
+          <!-- Bay Slots Grid Layout -->
+          <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-slate-800 font-display">Row A • Near Lift Core A</span>
+              <span class="text-[10px] font-mono text-slate-400">Pillars P-08 to P-10</span>
+            </div>
+
+            <div class="grid grid-cols-4 gap-2.5">
+              <!-- Slot B2-17 Occupied -->
+              <div class="p-2.5 rounded-xl bg-slate-100 border border-slate-200 text-center opacity-60">
+                <span class="text-[10px] font-mono text-slate-400 block">B2-17</span>
+                <span class="text-[10px] font-bold text-rose-500">FULL</span>
+              </div>
+              <!-- Slot B2-18 Available -->
+              <div onclick="selectBay('B2-18', 30)" class="bay-slot p-2.5 rounded-xl bg-emerald-50 border border-emerald-300 text-center cursor-pointer hover:border-emerald-500">
+                <span class="text-[10px] font-mono text-emerald-800 block">B2-18</span>
+                <span class="text-[10px] font-bold text-emerald-600">FREE</span>
+              </div>
+              <!-- Slot B2-19 SELECTED -->
+              <div onclick="selectBay('B2-19', 40)" class="bay-slot p-2.5 rounded-xl bg-brand-teal text-white border-2 border-slate-900 text-center cursor-pointer shadow-md transform scale-105">
+                <span class="text-[10px] font-mono font-bold block">B2-19</span>
+                <span class="text-[9px] font-bold bg-white/20 px-1.5 py-0.5 rounded">SELECTED</span>
+              </div>
+              <!-- Slot B2-20 EV Reserved -->
+              <div class="p-2.5 rounded-xl bg-violet-50 border border-violet-200 text-center">
+                <span class="text-[10px] font-mono text-violet-800 block">B2-20</span>
+                <span class="text-[9px] font-bold text-violet-600">⚡ 60kW</span>
+              </div>
+            </div>
+
+            <!-- Driveway Transit Arrow -->
+            <div class="py-1.5 bg-slate-100 rounded-lg flex items-center justify-center gap-2 text-[10px] font-mono text-slate-500">
+              <span>▲ ONE-WAY AISLE DRIVEWAY (5.5m CLEAR) ▲</span>
+            </div>
+
+            <!-- Row B -->
+            <div class="flex items-center justify-between pt-1">
+              <span class="text-xs font-bold text-slate-800 font-display">Row B • Standard Bays</span>
+              <span class="text-[10px] font-mono text-slate-400">Pillars P-11 to P-13</span>
+            </div>
+
+            <div class="grid grid-cols-4 gap-2.5">
+              <div onclick="selectBay('B2-21', 30)" class="bay-slot p-2.5 rounded-xl bg-emerald-50 border border-emerald-300 text-center cursor-pointer">
+                <span class="text-[10px] font-mono text-emerald-800 block">B2-21</span>
+                <span class="text-[10px] font-bold text-emerald-600">FREE</span>
+              </div>
+              <div class="p-2.5 rounded-xl bg-slate-100 border border-slate-200 text-center opacity-60">
+                <span class="text-[10px] font-mono text-slate-400 block">B2-22</span>
+                <span class="text-[10px] font-bold text-rose-500">FULL</span>
+              </div>
+              <div onclick="selectBay('B2-23', 30)" class="bay-slot p-2.5 rounded-xl bg-emerald-50 border border-emerald-300 text-center cursor-pointer">
+                <span class="text-[10px] font-mono text-emerald-800 block">B2-23</span>
+                <span class="text-[10px] font-bold text-emerald-600">FREE</span>
+              </div>
+              <div class="p-2.5 rounded-xl bg-slate-100 border border-slate-200 text-center opacity-60">
+                <span class="text-[10px] font-mono text-slate-400 block">B2-24</span>
+                <span class="text-[10px] font-bold text-rose-500">FULL</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 10-Minute Hold Escrow Banner -->
+          <div class="bg-amber-50 border border-amber-200 p-3 rounded-2xl flex items-center gap-3">
+            <div class="w-8 h-8 rounded-xl bg-amber-500/20 text-amber-700 flex items-center justify-center font-bold text-sm shrink-0">
+              ⏱
+            </div>
+            <div class="text-xs">
+              <div class="font-bold text-amber-900 flex items-center gap-1.5">
+                Bay Reserved for <span id="hold-countdown" class="font-mono text-amber-700">09:48</span>
+              </div>
+              <p class="text-[11px] text-amber-700 mt-0.5">UPI escrow hold of ₹80 pre-authorized. Auto-cancels if unconfirmed.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sticky Reservation Footer -->
+        <div class="p-4 bg-white border-t border-slate-200 shrink-0 space-y-3">
+          <div class="flex items-center justify-between text-xs">
+            <div>
+              <span class="text-slate-500 block text-[11px]">Selected Parking Spot</span>
+              <span class="font-bold text-slate-900 font-display text-sm">BAY B2-19 (Floor B2, Pillar P-09)</span>
+            </div>
+            <div class="text-right">
+              <span class="text-slate-500 block text-[11px]">Tariff (2 Hours)</span>
+              <span class="font-bold text-teal-700 font-mono text-sm">₹80.00 <span class="text-[10px] text-slate-400 font-normal">incl. GST</span></span>
+            </div>
+          </div>
+
+          <button onclick="switchScreen('drv-pass')" class="w-full py-3.5 bg-slate-900 hover:bg-slate-800 active:scale-[0.98] transition-all text-white font-semibold rounded-2xl shadow-lg flex items-center justify-center gap-2 text-sm font-display">
+            Confirm & Pre-Authorize UPI Pass
+            <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- 3. DRIVER: DYNAMIC RS256 QR PASS (DRV-05)  -->
+    <!-- ========================================== -->
+    <div id="screen-drv-pass" class="screen-view hidden w-full max-w-[400px] h-[820px] bg-slate-900 rounded-[48px] p-3 shadow-2xl border-4 border-slate-800 relative flex flex-col overflow-hidden">
+      <!-- Phone Bezel & Dynamic Island -->
+      <div class="w-32 h-6 bg-slate-950 rounded-full mx-auto mb-2 flex items-center justify-between px-3 z-30 shrink-0">
+        <span class="text-[10px] font-mono text-white font-semibold">9:41</span>
+        <div class="w-16 h-3 bg-black rounded-full flex items-center justify-center">
+          <div class="w-2 h-2 rounded-full bg-teal-500/50"></div>
+        </div>
+        <div class="flex items-center gap-1"><div class="w-2.5 h-2.5 rounded-sm bg-white/80"></div></div>
+      </div>
+
+      <!-- App Canvas -->
+      <div class="flex-1 bg-slate-100 rounded-[38px] overflow-hidden flex flex-col relative text-slate-900 border border-slate-200">
+        <!-- Top App Bar -->
+        <div class="p-4 bg-white border-b border-slate-200 flex items-center justify-between shrink-0">
+          <button onclick="switchScreen('drv-bay')" class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-700">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+          </button>
+          <div class="text-center">
+            <h3 class="font-display font-bold text-sm text-slate-900">Digital Parking Pass</h3>
+            <span class="text-[10px] font-mono text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full font-semibold border border-emerald-200">ACTIVE IN-DECK SESSION</span>
+          </div>
+          <button onclick="toggleBrightness()" id="btn-brightness" class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-700 title='Toggle 100% Brightness'">
+            ☀️
+          </button>
+        </div>
+
+        <!-- Boarding-Pass Style Ticket Card -->
+        <div class="flex-1 p-4 overflow-y-auto space-y-3">
+          <div class="bg-white rounded-3xl border border-slate-200 shadow-xl relative overflow-hidden">
+            <!-- Cutout notches on sides -->
+            <div class="ticket-cutout-left"></div>
+            <div class="ticket-cutout-right"></div>
+
+            <!-- Ticket Top Section -->
+            <div class="p-5 pb-4 border-b border-dashed border-slate-200 space-y-3">
+              <div class="flex items-start justify-between">
+                <div>
+                  <h4 class="font-display font-bold text-sm text-slate-900">Indiranagar Metro MLCP</h4>
+                  <p class="text-[11px] text-slate-500">Gate 02 Ingress • CMH Road, Bangalore</p>
+                </div>
+                <span class="px-2.5 py-1 rounded-xl bg-teal-50 text-brand-teal border border-teal-200 text-xs font-mono font-bold">
+                  BAY B2-19
+                </span>
+              </div>
+
+              <!-- HSRP License Plate Pill -->
+              <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="text-[10px] font-bold font-mono px-1.5 py-0.5 bg-blue-700 text-white rounded">IND</span>
+                  <span class="font-mono font-bold text-sm text-slate-900 tracking-wider">KA 01 MJ 8821</span>
+                </div>
+                <span class="text-[11px] text-slate-500 font-medium">Hyundai Creta (SUV)</span>
+              </div>
+            </div>
+
+            <!-- Dynamic QR Code Segment -->
+            <div class="p-5 text-center space-y-3 bg-slate-50/50">
+              <div class="relative w-44 h-44 mx-auto bg-white p-3 rounded-2xl border-2 border-slate-900 shadow-sm flex items-center justify-center">
+                <!-- SVG High-Density Vector QR -->
+                <svg class="w-full h-full text-slate-900" viewBox="0 0 100 100" fill="currentColor">
+                  <!-- QR Finder Pattern Top-Left -->
+                  <rect x="5" y="5" width="26" height="26" fill="#0f172a" rx="4"/>
+                  <rect x="9" y="9" width="18" height="18" fill="white" rx="2"/>
+                  <rect x="13" y="13" width="10" height="10" fill="#0d9488" rx="2"/>
+
+                  <!-- QR Finder Pattern Top-Right -->
+                  <rect x="69" y="5" width="26" height="26" fill="#0f172a" rx="4"/>
+                  <rect x="73" y="9" width="18" height="18" fill="white" rx="2"/>
+                  <rect x="77" y="13" width="10" height="10" fill="#0d9488" rx="2"/>
+
+                  <!-- QR Finder Pattern Bottom-Left -->
+                  <rect x="5" y="69" width="26" height="26" fill="#0f172a" rx="4"/>
+                  <rect x="9" y="73" width="18" height="18" fill="white" rx="2"/>
+                  <rect x="13" y="77" width="10" height="10" fill="#0d9488" rx="2"/>
+
+                  <!-- Data modules & Hash matrix -->
+                  <rect x="36" y="8" width="8" height="8" fill="#0f172a"/>
+                  <rect x="48" y="12" width="14" height="6" fill="#0f172a"/>
+                  <rect x="36" y="22" width="6" height="10" fill="#0f172a"/>
+                  <rect x="46" y="24" width="16" height="6" fill="#0f172a"/>
+                  <rect x="10" y="36" width="12" height="6" fill="#0f172a"/>
+                  <rect x="26" y="38" width="6" height="18" fill="#0f172a"/>
+                  <rect x="36" y="36" width="28" height="28" fill="#0f172a" rx="4"/>
+                  <!-- Center Car Glyph in QR -->
+                  <rect x="44" y="44" width="12" height="12" fill="white" rx="2"/>
+                  <circle cx="50" cy="50" r="3" fill="#0d9488"/>
+                  <rect x="70" y="36" width="22" height="8" fill="#0f172a"/>
+                  <rect x="78" y="48" width="14" height="14" fill="#0f172a"/>
+                  <rect x="36" y="70" width="10" height="12" fill="#0f172a"/>
+                  <rect x="52" y="72" width="16" height="8" fill="#0f172a"/>
+                  <rect x="72" y="70" width="8" height="22" fill="#0f172a"/>
+                  <rect x="84" y="74" width="10" height="14" fill="#0f172a"/>
+                </svg>
+
+                <!-- Anti-Screenshot Dynamic Security Watermark -->
+                <div class="absolute inset-0 bg-teal-500/5 pointer-events-none rounded-2xl flex items-center justify-center">
+                  <span id="qr-watermark" class="text-[9px] font-mono text-teal-800/80 font-bold -rotate-12 bg-white/80 px-2 py-0.5 rounded shadow-sm">
+                    LIVE • 14:48:22 IST
+                  </span>
+                </div>
+              </div>
+
+              <!-- Rolling Security Token Counter -->
+              <div class="flex items-center justify-center gap-2 text-[11px] font-mono text-slate-500">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span>RS256 TOKEN REFRESH IN <strong id="qr-timer" class="text-teal-700">28s</strong></span>
+              </div>
+              <p class="text-[10px] text-slate-400">Offline verifiable at Gate 2 boom barrier optical sensor</p>
+            </div>
+
+            <!-- Session Telemetry Breakdown -->
+            <div class="p-5 border-t border-slate-100 bg-white space-y-3">
+              <div class="grid grid-cols-2 gap-3 text-xs">
+                <div>
+                  <span class="text-[10px] text-slate-400 block">Entry Time</span>
+                  <span class="font-bold text-slate-800">14:30 Today</span>
+                </div>
+                <div>
+                  <span class="text-[10px] text-slate-400 block">Valid Until (2h)</span>
+                  <span class="font-bold text-slate-800">16:30 Today</span>
+                </div>
+              </div>
+
+              <!-- Live In-Deck Countdown Bar -->
+              <div class="space-y-1">
+                <div class="flex items-center justify-between text-xs">
+                  <span class="text-slate-500 font-medium">Remaining Duration</span>
+                  <span class="font-mono font-bold text-emerald-600">01 hr 41 min</span>
+                </div>
+                <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+                  <div class="h-full bg-emerald-500 rounded-full" style="width: 58%"></div>
+                </div>
+              </div>
+
+              <!-- Escrow Pre-Auth Notice -->
+              <div class="flex items-center justify-between text-[11px] text-slate-500 pt-1">
+                <span>Pre-Auth: <strong>₹80.00</strong> (UPI Hold)</span>
+                <span>Overstay: <strong>₹30/hr</strong></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Driver Utilities -->
+          <div class="grid grid-cols-2 gap-2">
+            <button class="py-2.5 px-3 rounded-xl bg-white border border-slate-200 text-xs font-semibold text-slate-700 hover:bg-slate-50 flex items-center justify-center gap-2 shadow-sm">
+              <span>📍</span> Save Car Pin
+            </button>
+            <button class="py-2.5 px-3 rounded-xl bg-white border border-slate-200 text-xs font-semibold text-slate-700 hover:bg-slate-50 flex items-center justify-center gap-2 shadow-sm">
+              <span>⏰</span> Extend +1 Hour
+            </button>
+          </div>
+        </div>
+
+        <!-- Bottom Wayfinding CTA -->
+        <div class="p-4 bg-white border-t border-slate-200 shrink-0">
+          <button class="w-full py-3.5 bg-brand-teal hover:bg-brand-teal-dark active:scale-[0.98] transition-all text-white font-semibold rounded-2xl shadow-lg shadow-teal-500/20 flex items-center justify-center gap-2 text-sm font-display">
+            <span>🧭</span> Turn-by-Turn Wayfinding to Gate 2
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- 4. ATTENDANT: RUGGED OPTICAL POS TERMINAL  -->
+    <!-- ========================================== -->
+    <div id="screen-att-scanner" class="screen-view hidden w-full max-w-[420px] h-[820px] bg-slate-950 rounded-[48px] p-3 shadow-2xl border-4 border-slate-700 relative flex flex-col overflow-hidden text-slate-100">
+      <!-- POS Top Telemetry Bar -->
+      <div class="p-4 bg-slate-900 border-b border-slate-800 shrink-0 space-y-2">
+        <div class="flex items-center justify-between text-xs">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+            <span class="font-mono font-bold text-slate-200">POS-04 • Gate 02 Ingress</span>
+          </div>
+          <div class="flex items-center gap-2 font-mono text-[11px] text-slate-400">
+            <span>🔋 88%</span>
+            <span>🖨 Ready</span>
+          </div>
+        </div>
+        <div class="flex items-center justify-between text-[11px]">
+          <span class="text-slate-400">Attendant: <strong class="text-white font-medium">Ramesh K. (#B409)</strong></span>
+          <span class="px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 font-mono font-bold border border-emerald-500/30">
+            OFFLINE RS256 SYNC
+          </span>
+        </div>
+      </div>
+
+      <!-- Main Scanner Viewfinder Canvas -->
+      <div class="flex-1 p-4 space-y-4 overflow-y-auto">
+        <!-- Optical Viewfinder Box -->
+        <div class="relative h-60 bg-slate-900 rounded-3xl border-2 border-slate-700 overflow-hidden flex items-center justify-center shadow-inner">
+          <!-- Scanning Laser Sweep -->
+          <div class="scanner-laser absolute w-full h-1 bg-emerald-400 shadow-[0_0_15px_#10B981]"></div>
+
+          <!-- Neon Target Corner Reticles -->
+          <div class="w-40 h-40 border-2 border-dashed border-emerald-400/60 rounded-2xl relative flex items-center justify-center">
+            <div class="absolute -top-1 -left-1 w-4 h-4 border-t-2 border-l-2 border-emerald-400"></div>
+            <div class="absolute -top-1 -right-1 w-4 h-4 border-t-2 border-r-2 border-emerald-400"></div>
+            <div class="absolute -bottom-1 -left-1 w-4 h-4 border-b-2 border-l-2 border-emerald-400"></div>
+            <div class="absolute -bottom-1 -right-1 w-4 h-4 border-b-2 border-r-2 border-emerald-400"></div>
+            <span class="text-[10px] font-mono text-emerald-400/80 font-bold uppercase tracking-wider text-center">
+              Align Driver QR<br>or FASTag RFID
+            </span>
+          </div>
+
+          <!-- Viewfinder Quick Controls Overlay -->
+          <div class="absolute bottom-3 inset-x-3 flex items-center justify-between">
+            <button class="px-3 py-1.5 rounded-xl bg-slate-800/90 text-[11px] font-mono text-amber-300 border border-slate-700 flex items-center gap-1.5 shadow-sm">
+              🔦 Torch ON
+            </button>
+            <button onclick="triggerSimulatedScan()" class="px-3.5 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-[11px] font-semibold text-white shadow-lg shadow-emerald-600/30">
+              ⚡ Test Scan Pass
+            </button>
+          </div>
+        </div>
+
+        <!-- Verified Ingress Result Box -->
+        <div id="att-verified-box" class="bg-slate-900 border-2 border-emerald-500/60 p-4 rounded-3xl space-y-3 shadow-lg">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
+              <span class="font-display font-bold text-emerald-400 text-sm tracking-wide">PASS VERIFIED • BARRIER OPENING</span>
+            </div>
+            <span class="text-[10px] font-mono text-slate-400">140ms HMAC</span>
+          </div>
+
+          <div class="bg-slate-950 p-3 rounded-2xl border border-slate-800 flex items-center justify-between">
+            <div>
+              <div class="font-mono font-bold text-base text-white tracking-widest flex items-center gap-2">
+                KA 01 MJ 8821
+                <span class="text-[10px] bg-blue-600 text-white px-1.5 py-0.5 rounded font-sans font-bold">SUV</span>
+              </div>
+              <p class="text-[11px] text-slate-400 mt-0.5">Pre-Authorized App Booking • ₹80 Hold</p>
+            </div>
+            <div class="text-right">
+              <span class="text-[10px] text-slate-400 block">Assigned Slot</span>
+              <span class="font-display font-bold text-base text-teal-400">BAY B2-19</span>
+            </div>
+          </div>
+
+          <!-- Gate Barrier Solenoid Impulse Action -->
+          <div class="grid grid-cols-2 gap-2 pt-1">
+            <button onclick="triggerBarrierOpen()" id="btn-barrier" class="py-3 px-3 rounded-xl bg-brand-teal hover:bg-teal-600 font-bold text-xs text-white flex items-center justify-center gap-1.5 shadow-md">
+              <span>🚧</span> Manual Relay Open
+            </button>
+            <button class="py-3 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 font-bold text-xs text-rose-400 flex items-center justify-center gap-1.5 border border-slate-700">
+              <span>⚠️</span> Flag Mismatch
+            </button>
+          </div>
+        </div>
+
+        <!-- Attendant Shift Cash Tally Strip -->
+        <div class="bg-slate-900/60 p-3.5 rounded-2xl border border-slate-800 text-xs flex items-center justify-between">
+          <div>
+            <span class="text-[10px] text-slate-400 block font-mono">SHIFT CASH TALLY</span>
+            <span class="font-mono font-bold text-white text-sm">₹3,420 Cash • ₹8,160 UPI</span>
+          </div>
+          <button class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-[11px] font-semibold text-slate-200 border border-slate-700">
+            Print Shift Close
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- 5. OPERATOR: MULTI-LEVEL MLCP DESK (OPR-01)-->
+    <!-- ========================================== -->
+    <div id="screen-opr-dashboard" class="screen-view hidden w-full max-w-5xl h-[820px] bg-slate-900 rounded-3xl p-6 shadow-2xl border border-slate-800 flex flex-col overflow-hidden text-slate-100">
+      <!-- Header -->
+      <div class="flex items-center justify-between pb-5 border-b border-slate-800 shrink-0">
+        <div>
+          <div class="flex items-center gap-3">
+            <h2 class="font-display font-bold text-xl text-white">Indiranagar Metro Multi-Level Car Park</h2>
+            <span class="px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-xs font-mono font-bold">ALL 4 GATES ACTIVE</span>
+          </div>
+          <p class="text-xs text-slate-400 mt-1">BMRCL Municipal Terminal Facility • Station Manager: Suresh Menon (Shift B)</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <button class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 border border-slate-700 flex items-center gap-2">
+            <span>📊</span> Export GSTR-1 CSV
+          </button>
+          <button class="px-3.5 py-2 rounded-xl bg-brand-teal hover:bg-teal-600 text-xs font-semibold text-white shadow-md">
+            + Spot Walk-in Rate Override
+          </button>
+        </div>
+      </div>
+
+      <!-- Facility Capacity KPI Cards -->
+      <div class="grid grid-cols-4 gap-4 py-5 shrink-0">
+        <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800">
+          <span class="text-xs text-slate-400 block font-medium">Total Facility Bays</span>
+          <div class="font-display font-bold text-2xl text-white mt-1">850 Bays</div>
+          <span class="text-[11px] text-slate-500">Across 4 Decks (B1..Terrace)</span>
+        </div>
+        <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800">
+          <span class="text-xs text-slate-400 block font-medium">Currently Occupied</span>
+          <div class="font-display font-bold text-2xl text-amber-400 mt-1">684 <span class="text-sm font-normal text-slate-400">(80.5%)</span></div>
+          <div class="w-full h-1.5 bg-slate-800 rounded-full mt-2 overflow-hidden">
+            <div class="h-full bg-amber-400 rounded-full" style="width: 80.5%"></div>
+          </div>
+        </div>
+        <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800">
+          <span class="text-xs text-slate-400 block font-medium">Live Available Slots</span>
+          <div class="font-display font-bold text-2xl text-emerald-400 mt-1">166 Bays</div>
+          <span class="text-[11px] text-emerald-500 font-mono font-medium">12 EV Fast Chargers Free</span>
+        </div>
+        <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800">
+          <span class="text-xs text-slate-400 block font-medium">Today's Gross Collection</span>
+          <div class="font-display font-bold text-2xl text-teal-400 font-mono mt-1">₹78,640</div>
+          <span class="text-[11px] text-slate-400">Net: ₹66.6K • GST 18%: ₹11.9K</span>
+        </div>
+      </div>
+
+      <!-- Main Deck Floor Table & Gate Solenoid Monitor -->
+      <div class="flex-1 grid grid-cols-3 gap-6 overflow-hidden">
+        <!-- Floor Breakdown (2 cols) -->
+        <div class="col-span-2 bg-slate-950 rounded-2xl border border-slate-800 p-4 flex flex-col overflow-hidden">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+            <h3 class="font-display font-bold text-sm text-slate-200">Deck-Level Real-Time Telemetry</h3>
+            <span class="text-xs text-slate-400">Ultrasonic Sensor Sync: 100% Online</span>
+          </div>
+
+          <div class="flex-1 overflow-y-auto space-y-3 pt-3">
+            <!-- Floor B1 -->
+            <div class="p-3.5 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="font-bold text-sm text-white">Floor B1</span>
+                  <span class="text-[10px] px-2 py-0.5 rounded bg-amber-500/20 text-amber-400 font-bold">98.7% CRITICAL</span>
+                </div>
+                <p class="text-xs text-slate-400 mt-0.5">Premium & 12 EV Chargers • Clearance 2.6m</p>
+              </div>
+              <div class="text-right flex items-center gap-4">
+                <div>
+                  <span class="text-xs font-bold text-white block">148 / 150 Bays</span>
+                  <span class="text-[11px] text-emerald-400 font-mono">2 Free</span>
+                </div>
+                <button class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 border border-slate-700">
+                  Lock Deck
+                </button>
+              </div>
+            </div>
+
+            <!-- Floor B2 -->
+            <div class="p-3.5 rounded-xl bg-slate-900 border border-teal-500/30 flex items-center justify-between">
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="font-bold text-sm text-white">Floor B2</span>
+                  <span class="text-[10px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-bold">74.0% OPTIMAL</span>
+                </div>
+                <p class="text-xs text-slate-400 mt-0.5">Standard Mid-Deck • Bay B2-19 Active</p>
+              </div>
+              <div class="text-right flex items-center gap-4">
+                <div>
+                  <span class="text-xs font-bold text-white block">222 / 300 Bays</span>
+                  <span class="text-[11px] text-emerald-400 font-mono">78 Free</span>
+                </div>
+                <button onclick="switchScreen('drv-bay')" class="px-3 py-1.5 rounded-lg bg-brand-teal text-xs font-semibold text-white">
+                  View 2D Grid
+                </button>
+              </div>
+            </div>
+
+            <!-- Floor B3 -->
+            <div class="p-3.5 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="font-bold text-sm text-white">Floor B3</span>
+                  <span class="text-[10px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-bold">75.0% STABLE</span>
+                </div>
+                <p class="text-xs text-slate-400 mt-0.5">Economy & 2-Wheeler Hub (60 free bike bays)</p>
+              </div>
+              <div class="text-right flex items-center gap-4">
+                <div>
+                  <span class="text-xs font-bold text-white block">240 / 320 Bays</span>
+                  <span class="text-[11px] text-emerald-400 font-mono">80 Free</span>
+                </div>
+                <button class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 border border-slate-700">
+                  Settings
+                </button>
+              </div>
+            </div>
+
+            <!-- Terrace -->
+            <div class="p-3.5 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="font-bold text-sm text-white">Terrace Deck</span>
+                  <span class="text-[10px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-bold">92.5% HIGH</span>
+                </div>
+                <p class="text-xs text-slate-400 mt-0.5">Shade Netting • 68 Season Pass Reserved</p>
+              </div>
+              <div class="text-right flex items-center gap-4">
+                <div>
+                  <span class="text-xs font-bold text-white block">74 / 80 Bays</span>
+                  <span class="text-[11px] text-emerald-400 font-mono">6 Free</span>
+                </div>
+                <button class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 border border-slate-700">
+                  Settings
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Gate Solenoid Monitor (1 col) -->
+        <div class="bg-slate-950 rounded-2xl border border-slate-800 p-4 flex flex-col overflow-hidden">
+          <h3 class="font-display font-bold text-sm text-slate-200 pb-3 border-b border-slate-800">Boom Barrier Telemetry</h3>
+          <div class="flex-1 overflow-y-auto space-y-3 pt-3 text-xs">
+            <!-- Gate 1 -->
+            <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 space-y-1.5">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-white">Gate 01 (CMH Road Entry)</span>
+                <span class="text-[10px] text-emerald-400 font-mono font-bold">OPEN (140ms)</span>
+              </div>
+              <p class="text-[11px] text-slate-400 font-mono">FASTag ANPR: DL-04-C-9912 passed</p>
+            </div>
+
+            <!-- Gate 2 -->
+            <div class="p-3 rounded-xl bg-slate-900 border border-teal-500/30 space-y-1.5">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-white">Gate 02 (Handheld POS)</span>
+                <span class="text-[10px] text-teal-400 font-mono font-bold">POS-04 SYNC</span>
+              </div>
+              <p class="text-[11px] text-slate-400 font-mono">Attendant Ramesh: KA-01-MJ-8821 verified</p>
+            </div>
+
+            <!-- Gate 3 -->
+            <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 space-y-1.5">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-white">Gate 03 (Metro Turnstile)</span>
+                <span class="text-[10px] text-emerald-400 font-mono font-bold">4/4 ACTIVE</span>
+              </div>
+              <p class="text-[11px] text-slate-400 font-mono">Pedestrian dynamic QR access stream</p>
+            </div>
+
+            <!-- Dynamic Tariff Rule -->
+            <div class="p-3 rounded-xl bg-teal-500/10 border border-teal-500/30 space-y-1">
+              <span class="text-[10px] text-teal-300 font-mono font-bold uppercase">Dynamic Surge Rule Active</span>
+              <p class="text-xs font-semibold text-white">Evening Peak (1.2x) • ₹36/hr</p>
+              <p class="text-[10px] text-slate-400">Scheduled 17:00 - 21:00 IST</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- 6. SUPER ADMIN: POSTGIS WATCHDOG (ADM-01)  -->
+    <!-- ========================================== -->
+    <div id="screen-adm-dashboard" class="screen-view hidden w-full max-w-6xl h-[820px] bg-slate-900 rounded-3xl p-6 shadow-2xl border border-slate-800 flex flex-col overflow-hidden text-slate-100">
+      <!-- Admin Top Telemetry Header -->
+      <div class="flex items-center justify-between pb-4 border-b border-slate-800 shrink-0">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-violet-600 flex items-center justify-center font-bold text-white text-sm">
+            🛡
+          </div>
+          <div>
+            <h2 class="font-display font-bold text-lg text-white flex items-center gap-2">
+              National Operations & PostGIS Watchdog
+              <span class="text-xs font-mono px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">SYSTEMS NORMAL • 4 CITIES SYNCED</span>
+            </h2>
+            <p class="text-xs text-slate-400">Authority: Dr. K. S. Rao (Chief Operations • MoHUA Municipal Command)</p>
+          </div>
+        </div>
+
+        <!-- City Switcher -->
+        <div class="flex items-center gap-1.5 bg-slate-950 p-1 rounded-xl border border-slate-800 text-xs font-semibold">
+          <button class="px-3 py-1.5 rounded-lg bg-slate-800 text-white">All India</button>
+          <button class="px-3 py-1.5 rounded-lg text-slate-400 hover:text-white">Delhi NCR</button>
+          <button class="px-3 py-1.5 rounded-lg text-slate-400 hover:text-white">Bengaluru</button>
+          <button class="px-3 py-1.5 rounded-lg text-slate-400 hover:text-white">Mumbai</button>
+        </div>
+      </div>
+
+      <!-- KPI Metrics Strip -->
+      <div class="grid grid-cols-4 gap-4 py-4 shrink-0">
+        <div class="bg-slate-950 p-3.5 rounded-2xl border border-slate-800">
+          <span class="text-xs text-slate-400 block font-medium">National Network Occupancy</span>
+          <div class="font-display font-bold text-xl text-white mt-0.5">16,125 / 18,450 <span class="text-xs font-normal text-slate-400">(87.4%)</span></div>
+        </div>
+        <div class="bg-slate-950 p-3.5 rounded-2xl border border-slate-800">
+          <span class="text-xs text-slate-400 block font-medium">Real-Time Revenue (Today)</span>
+          <div class="font-display font-bold text-xl text-emerald-400 font-mono mt-0.5">₹14,82,450</div>
+        </div>
+        <div class="bg-slate-950 p-3.5 rounded-2xl border border-slate-800">
+          <span class="text-xs text-slate-400 block font-medium">Active In-Deck Sessions</span>
+          <div class="font-display font-bold text-xl text-teal-400 font-mono mt-0.5">12,410 Vehicles</div>
+        </div>
+        <div class="bg-slate-950 p-3.5 rounded-2xl border border-slate-800">
+          <span class="text-xs text-slate-400 block font-medium">Hardware & Barrier Health</span>
+          <div class="font-display font-bold text-xl text-violet-400 font-mono mt-0.5">99.94% Uptime</div>
+        </div>
+      </div>
+
+      <!-- Main Stage Split (65% Map / 35% Live Event Stream) -->
+      <div class="flex-1 grid grid-cols-12 gap-5 overflow-hidden">
+        <!-- PostGIS Map Simulation (8 cols) -->
+        <div class="col-span-8 bg-slate-950 rounded-2xl border border-slate-800 p-4 relative overflow-hidden flex flex-col">
+          <div class="flex items-center justify-between pb-3 z-10">
+            <span class="font-display font-bold text-xs text-slate-300">PostGIS Spatial Density & Corridors (Delhi NCR / Bengaluru)</span>
+            <div class="flex items-center gap-1.5 text-[11px] font-mono">
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-teal-400">Heatmap ON</span>
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-emerald-400">FASTag Lanes</span>
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-amber-400">Surge Zones</span>
+            </div>
+          </div>
+
+          <!-- Vector GIS Simulation Canvas -->
+          <div class="flex-1 bg-slate-900/60 rounded-xl relative overflow-hidden flex items-center justify-center border border-slate-800">
+            <svg class="absolute inset-0 w-full h-full opacity-40" xmlns="http://www.w3.org/2000/svg">
+              <path d="M 50,300 Q 250,50 450,280 T 800,200" fill="none" stroke="#6366f1" stroke-width="4"/>
+              <path d="M 100,50 Q 300,200 600,100" fill="none" stroke="#0d9488" stroke-width="3"/>
+              <!-- Heatmap Density Blobs -->
+              <circle cx="280" cy="180" r="80" fill="#f59e0b" opacity="0.25"/>
+              <circle cx="280" cy="180" r="45" fill="#ef4444" opacity="0.35"/>
+              <circle cx="520" cy="120" r="60" fill="#10b981" opacity="0.25"/>
+            </svg>
+
+            <!-- Pinned Cyber City Hub Garage Card -->
+            <div class="absolute top-16 left-36 bg-slate-900/95 backdrop-blur-md p-3.5 rounded-2xl border border-teal-500 shadow-2xl text-xs space-y-2 max-w-[280px]">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-white font-display">Cyber Hub MLCP (Gurugram)</span>
+                <span class="px-2 py-0.5 rounded bg-rose-500/20 text-rose-400 font-mono font-bold text-[10px]">92% FULL</span>
+              </div>
+              <p class="text-[11px] text-slate-400">1,420 Bays • Dynamic Rate: ₹60/hr (+1.5x Surge)</p>
+              <div class="flex items-center justify-between pt-1 text-[10px] font-mono">
+                <span class="text-teal-400">Gate Latency: 140ms</span>
+                <button class="px-2.5 py-1 rounded bg-teal-600 text-white font-bold">Override Cap</button>
+              </div>
+            </div>
+
+            <!-- Pinned Indiranagar Metro Card -->
+            <div class="absolute bottom-12 right-28 bg-slate-900/95 backdrop-blur-md p-3.5 rounded-2xl border border-emerald-500 shadow-2xl text-xs space-y-1.5 max-w-[260px]">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-white font-display">Indiranagar MLCP (BLR)</span>
+                <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-mono font-bold text-[10px]">166 FREE</span>
+              </div>
+              <p class="text-[11px] text-slate-400">850 Bays • Standard Rate: ₹30/hr • 12 EV Free</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Watchdog Anomaly Stream (4 cols) -->
+        <div class="col-span-4 bg-slate-950 rounded-2xl border border-slate-800 p-4 flex flex-col overflow-hidden">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+            <h3 class="font-display font-bold text-xs text-slate-300">Live Security Anomaly Stream</h3>
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+          </div>
+
+          <div class="flex-1 overflow-y-auto space-y-2.5 pt-3 text-xs">
+            <!-- Alert 1 -->
+            <div class="p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 space-y-1">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-rose-400">ANPR Mismatch Alert</span>
+                <span class="text-[10px] font-mono text-slate-400">14:48:10</span>
+              </div>
+              <p class="text-[11px] text-slate-300">Noida Sec 18 Gate 3: Camera read KA-01-MJ vs pass DL-3C-AB registered.</p>
+            </div>
+
+            <!-- Alert 2 -->
+            <div class="p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 space-y-1">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-amber-400">Overstay Escrow Debit</span>
+                <span class="text-[10px] font-mono text-slate-400">14:47:55</span>
+              </div>
+              <p class="text-[11px] text-slate-300">Indiranagar B1-04: Overstay >120m. UPI AutoPay penalty ₹60 debited.</p>
+            </div>
+
+            <!-- Ingress 3 -->
+            <div class="p-3 rounded-xl bg-teal-500/10 border border-teal-500/30 space-y-1">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-teal-300">FASTag Ingress Approved</span>
+                <span class="text-[10px] font-mono text-slate-400">14:46:12</span>
+              </div>
+              <p class="text-[11px] text-slate-300">Cyber City G-01: NETC pre-auth ₹80 debited in 140ms. Bay B2-19 locked.</p>
+            </div>
+
+            <!-- Audit 4 -->
+            <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 space-y-1">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-slate-300">Operator Audit Log</span>
+                <span class="text-[10px] font-mono text-slate-400">14:44:02</span>
+              </div>
+              <p class="text-[11px] text-slate-400">Indiranagar Station Manager Suresh M. adjusted B1 capacity +10 bays.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- JAVASCRIPT CONTROLLERS & SIMULATION LOGIC -->
+  <script>
+    // Screen switcher
+    function switchScreen(screenKey) {
+      document.querySelectorAll('.screen-view').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.persona-tab').forEach(el => {
+        el.classList.remove('bg-slate-800', 'text-white', 'shadow-sm');
+        el.classList.add('text-slate-400');
+      });
+
+      const target = document.getElementById('screen-' + screenKey);
+      if (target) {
+        target.classList.remove('hidden');
+      }
+
+      const activeTab = document.getElementById('tab-' + screenKey);
+      if (activeTab) {
+        activeTab.classList.add('bg-slate-800', 'text-white', 'shadow-sm');
+        activeTab.classList.remove('text-slate-400');
+      }
+    }
+
+    // Live Clock Updater
+    function updateClock() {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+      const clockEl = document.getElementById('live-clock');
+      if (clockEl) {
+        clockEl.innerText = `${hours}:${minutes}:${seconds} IST`;
+      }
+      const qrWatermark = document.getElementById('qr-watermark');
+      if (qrWatermark) {
+        qrWatermark.innerText = `LIVE • ${hours}:${minutes}:${seconds} IST`;
+      }
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // 10-Minute Bay Hold Countdown
+    let holdSeconds = 588; // 9m 48s
+    setInterval(() => {
+      if (holdSeconds > 0) {
+        holdSeconds--;
+        const m = String(Math.floor(holdSeconds / 60)).padStart(2, '0');
+        const s = String(holdSeconds % 60).padStart(2, '0');
+        const holdEl = document.getElementById('hold-countdown');
+        if (holdEl) holdEl.innerText = `${m}:${s}`;
+      }
+    }, 1000);
+
+    // 30-Second RS256 QR Refresh Timer
+    let qrRefreshSeconds = 28;
+    setInterval(() => {
+      qrRefreshSeconds--;
+      if (qrRefreshSeconds <= 0) qrRefreshSeconds = 30;
+      const qrTimerEl = document.getElementById('qr-timer');
+      if (qrTimerEl) qrTimerEl.innerText = `${qrRefreshSeconds}s`;
+    }, 1000);
+
+    // Select Bay Interaction
+    function selectBay(bayName, price) {
+      alert(`Selected ${bayName} on Floor B2! Escrow rate calculated for 2h session.`);
+    }
+
+    // Toggle 100% Brightness for Scanner
+    let isMaxBrightness = false;
+    function toggleBrightness() {
+      isMaxBrightness = !isMaxBrightness;
+      const card = document.getElementById('screen-drv-pass');
+      const btn = document.getElementById('btn-brightness');
+      if (isMaxBrightness) {
+        card.style.filter = "brightness(1.15) contrast(1.1)";
+        btn.innerText = "🌟";
+        alert("Screen brightness set to 100% for physical barrier optical scanner.");
+      } else {
+        card.style.filter = "none";
+        btn.innerText = "☀️";
+      }
+    }
+
+    // Attendant Test Scan Simulation
+    function triggerSimulatedScan() {
+      const box = document.getElementById('att-verified-box');
+      box.classList.add('bg-emerald-950/60', 'scale-[1.02]');
+      setTimeout(() => {
+        box.classList.remove('scale-[1.02]');
+      }, 300);
+      alert("✅ Optical Barcode Read: Sub-300ms RS256 cryptographic HMAC verified offline. Barrier Gate 02 relay triggered!");
+    }
+
+    // Manual Barrier Open Trigger
+    function triggerBarrierOpen() {
+      const btn = document.getElementById('btn-barrier');
+      btn.innerHTML = "<span>✅</span> 24V Solenoid Triggered!";
+      btn.classList.add('bg-emerald-600');
+      setTimeout(() => {
+        btn.innerHTML = "<span>🚧</span> Manual Relay Open";
+        btn.classList.remove('bg-emerald-600');
+      }, 3000);
+    }
+  </script>
+</body>
+</html>

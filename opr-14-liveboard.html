@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>OPR-14 Live Board — ParkSpot</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .shell { display:grid; grid-template-columns: 240px 1fr; height:100%; }
+    .nav { background: var(--navy); color:#fff; padding: 20px 16px; display:flex; flex-direction:column; gap:6px; }
+    .logo { font-weight:800; font-size:18px; margin-bottom:18px; letter-spacing:-.02em; }
+    .logo span { color:#5EEAD4; }
+    .nav a {
+      display:block; padding:10px 12px; border-radius:10px; color:#94A3B8; font-size:13px; font-weight:600; text-decoration:none;
+    }
+    .nav a.on { background: rgba(13,148,136,.2); color:#5EEAD4; }
+    .main { display:flex; flex-direction:column; min-width:0; }
+    .top {
+      height:64px; background:#fff; border-bottom:1px solid var(--border);
+      display:flex; align-items:center; justify-content:space-between; padding:0 24px;
+    }
+    .kpis { display:grid; grid-template-columns: repeat(4, 1fr); gap:16px; padding:20px 24px 0; }
+    .kpi { padding:16px; }
+    .zones { display:grid; grid-template-columns: 1.4fr 1fr; gap:16px; padding:16px 24px 24px; }
+    .bar { height:10px; border-radius:999px; background:#E2E8F0; overflow:hidden; margin-top:8px; }
+    .bar > i { display:block; height:100%; border-radius:999px; }
+    .row { display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid var(--border); }
+    .gate { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .gate .card { padding:12px; }
+  </style>
+</head>
+<body>
+  <div class="stage" style="padding:24px;">
+    <div class="desktop">
+      <div class="shell">
+        <aside class="nav">
+          <div class="logo">Park<span>Spot</span> Ops</div>
+          <a class="on" href="#">Overview</a>
+          <a href="#">Live board</a>
+          <a href="#">Zones & slots</a>
+          <a href="#">Tariffs</a>
+          <a href="#">Bookings</a>
+          <a href="#">Staff & shifts</a>
+          <a href="#">Reports</a>
+          <a href="#">Payouts</a>
+          <a href="#">Disputes</a>
+          <a href="#">Settings</a>
+        </aside>
+        <section class="main">
+          <header class="top">
+            <div>
+              <div class="h3">Indiranagar Metro MLCP</div>
+              <div class="meta">850 bays · Tier 1 · Bengaluru · Asia/Kolkata</div>
+            </div>
+            <div style="display:flex;gap:8px;align-items:center;">
+              <span class="pill ok">● Live · Ledger+Loops</span>
+              <span class="pill navy">Shift open · 3 attendants</span>
+            </div>
+          </header>
+
+          <div class="kpis">
+            <div class="card kpi">
+              <div class="label">OCCUPANCY</div>
+              <div class="h1 currency" style="font-size:28px;margin-top:4px;">84.6%</div>
+              <div class="meta">719 / 850 · Updated 12s ago</div>
+            </div>
+            <div class="card kpi">
+              <div class="label">ARRIVALS · 30 MIN</div>
+              <div class="h1" style="font-size:28px;margin-top:4px;">38</div>
+              <div class="meta">12 floating · 26 reserved</div>
+            </div>
+            <div class="card kpi">
+              <div class="label">OVERSTAYS</div>
+              <div class="h1" style="font-size:28px;margin-top:4px;color:var(--warn);">7</div>
+              <div class="meta">₹4,280 dues accruing</div>
+            </div>
+            <div class="card kpi">
+              <div class="label">TODAY COLLECTIONS</div>
+              <div class="h1 currency" style="font-size:28px;margin-top:4px;">₹78,640</div>
+              <div class="meta">UPI 82% · Cash 18% · CGST/SGST ready</div>
+            </div>
+          </div>
+
+          <div class="zones">
+            <div class="card" style="padding:18px;">
+              <div class="h3" style="margin-bottom:12px;">Occupancy by zone</div>
+              <div class="row">
+                <div><div class="h3" style="font-size:14px;">B1 Basement</div><div class="meta">Ledger · 8s</div></div>
+                <div style="width:180px;text-align:right;"><span class="pill danger">98.7% critical</span>
+                  <div class="bar"><i style="width:98.7%;background:var(--danger);"></i></div></div>
+              </div>
+              <div class="row">
+                <div><div class="h3" style="font-size:14px;">B2 Basement</div><div class="meta">Loop count · 8s</div></div>
+                <div style="width:180px;text-align:right;"><span class="pill ok">74% optimal</span>
+                  <div class="bar"><i style="width:74%;background:var(--teal);"></i></div></div>
+              </div>
+              <div class="row">
+                <div><div class="h3" style="font-size:14px;">B3 Basement</div><div class="meta">Ledger · 8s</div></div>
+                <div style="width:180px;text-align:right;"><span class="pill ok">75%</span>
+                  <div class="bar"><i style="width:75%;background:var(--teal);"></i></div></div>
+              </div>
+              <div class="row" style="border:0;">
+                <div><div class="h3" style="font-size:14px;">Terrace</div><div class="meta">Operator declared · 6m</div></div>
+                <div style="width:180px;text-align:right;"><span class="pill warn">92.5% filling</span>
+                  <div class="bar"><i style="width:92.5%;background:var(--warn);"></i></div></div>
+              </div>
+            </div>
+
+            <div style="display:flex;flex-direction:column;gap:16px;">
+              <div class="card" style="padding:18px;">
+                <div class="h3" style="margin-bottom:12px;">Gate / lane status</div>
+                <div class="gate">
+                  <div class="card"><div class="label">GATE 1</div><div class="h3" style="font-size:14px;">FASTag Mode A</div><div class="pill ok" style="margin-top:8px;">Online</div></div>
+                  <div class="card"><div class="label">GATE 2</div><div class="h3" style="font-size:14px;">Ingress POS-04</div><div class="pill ok" style="margin-top:8px;">Online</div></div>
+                  <div class="card"><div class="label">GATE 3</div><div class="h3" style="font-size:14px;">Pedestrian</div><div class="pill info" style="margin-top:8px;">Idle</div></div>
+                  <div class="card"><div class="label">GATE 4</div><div class="h3" style="font-size:14px;">Exit · Loop B</div><div class="pill warn" style="margin-top:8px;">Queue 3</div></div>
+                </div>
+              </div>
+              <div class="card" style="padding:18px;">
+                <div class="h3">Evening peak tariff</div>
+                <div class="meta" style="margin-top:6px;">1.2× · Car ₹36/hr · effective 17:00–21:00</div>
+                <div style="margin-top:12px;display:flex;gap:8px;">
+                  <span class="pill teal">Preview calculator</span>
+                  <span class="pill stale">Maintenance lock off</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

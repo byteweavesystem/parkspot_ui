@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Attendant POS · complete flow — ParkSpot Complete Mockups</title>
+<link rel="stylesheet" href="styles.css"/>
+<style>
+.flow-page { padding: 48px 32px 80px; }
+.flow-page h1 { color:#fff; font-size:32px; font-weight:800; margin-bottom:8px; }
+.flow-page .sub { color:#94A3B8; margin-bottom:28px; max-width:640px; }
+.row { display:flex; gap:32px; overflow-x:auto; padding-bottom:24px; align-items:flex-start; }
+.shot { flex:0 0 auto; }
+.shot .sid { color:#5EEAD4; font-size:12px; font-weight:700; letter-spacing:.04em; margin-bottom:8px; }
+.shot .stitle { color:#E2E8F0; font-size:14px; font-weight:600; margin-bottom:12px; }
+.phone-inner { position:absolute; inset:0; display:flex; flex-direction:column; }
+.pad { padding:16px; }
+.pad-x { padding-left:16px; padding-right:16px; }
+.grow { flex:1; overflow:auto; }
+.sticky-bottom { margin-top:auto; padding:16px; padding-bottom:28px; background:#fff; border-top:1px solid var(--border); }
+.nav-top { display:flex; align-items:center; gap:12px; padding:8px 16px 12px; background:#fff; }
+.back { width:36px; height:36px; border-radius:12px; background:var(--muted); display:grid; place-items:center; font-weight:800; flex-shrink:0; }
+.row-between { display:flex; justify-content:space-between; align-items:center; gap:8px; }
+.list-item { padding:14px 0; border-bottom:1px solid var(--border); }
+.input { height:52px; border-radius:14px; border:1.5px solid var(--border); background:#fff; padding:0 14px; display:flex; align-items:center; font-weight:600; font-size:15px; width:100%; }
+.otp-row { display:flex; gap:8px; justify-content:center; margin:20px 0; }
+.otp-box { width:48px; height:56px; border-radius:12px; border:1.5px solid var(--border); background:#fff; display:grid; place-items:center; font-size:22px; font-weight:800; }
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; }
+.class-tile { height:72px; border-radius:14px; border:1.5px solid var(--border); background:#fff; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; font-size:12px; font-weight:700; color:var(--text-2); }
+.class-tile.on { border-color:var(--teal); background:var(--teal-container); color:#0F766E; }
+.desk-shell { display:grid; grid-template-columns:220px 1fr; height:100%; }
+.desk-nav { background:var(--navy); color:#fff; padding:20px 14px; }
+.desk-nav .logo { font-weight:800; font-size:17px; margin-bottom:16px; }
+.desk-nav a { display:block; padding:9px 12px; border-radius:10px; color:#94A3B8; font-size:12px; font-weight:600; text-decoration:none; margin-bottom:2px; }
+.desk-nav a.on { background:rgba(13,148,136,.22); color:#5EEAD4; }
+.desk-main { display:flex; flex-direction:column; min-width:0; background:var(--canvas); }
+.desk-top { height:56px; background:#fff; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; padding:0 20px; }
+.desk-body { padding:16px 20px; overflow:auto; flex:1; }
+.table { width:100%; border-collapse:collapse; font-size:12px; }
+.table th { text-align:left; padding:10px 8px; color:var(--text-2); border-bottom:1px solid var(--border); font-weight:600; }
+.table td { padding:12px 8px; border-bottom:1px solid var(--border); font-weight:600; }
+.progress { height:8px; border-radius:999px; background:var(--border); overflow:hidden; }
+.progress > i { display:block; height:100%; background:var(--teal); }
+.stepper { display:flex; gap:6px; margin-bottom:16px; }
+.stepper span { flex:1; height:4px; border-radius:4px; background:var(--border); }
+.stepper span.on { background:var(--teal); }
+.ring-big { width:140px; height:140px; border-radius:50%; border:10px solid var(--teal-container); border-top-color:var(--teal); display:grid; place-items:center; margin:12px auto; }
+.settings-row { display:flex; align-items:center; gap:12px; padding:14px 0; border-bottom:1px solid var(--border); }
+.settings-row .ico-tile { width:40px; height:40px; border-radius:12px; background:var(--muted); display:grid; place-items:center; font-size:16px; flex-shrink:0; }
+.settings-row .grow-col { flex:1; min-width:0; }
+.settings-row .chev { color:var(--text-2); font-weight:800; }
+.toggle { width:48px; height:28px; border-radius:999px; background:var(--border); position:relative; flex-shrink:0; }
+.toggle.on { background:var(--teal); }
+.toggle::after { content:""; position:absolute; top:3px; left:3px; width:22px; height:22px; border-radius:50%; background:#fff; box-shadow:0 2px 6px rgba(15,23,42,.2); }
+.toggle.on::after { left:23px; }
+.legal-body { font-size:13px; line-height:1.55; color:var(--text-2); }
+.legal-body h4 { color:var(--navy); font-size:14px; font-weight:750; margin:14px 0 6px; }
+.check-row { display:flex; gap:12px; align-items:flex-start; padding:12px; border:1.5px solid var(--border); border-radius:14px; background:#fff; margin-bottom:10px; }
+.check-row.on { border-color:var(--teal); background:var(--teal-container); }
+.check { width:22px; height:22px; border-radius:7px; border:2px solid var(--border); background:#fff; flex-shrink:0; display:grid; place-items:center; font-size:12px; font-weight:800; color:transparent; }
+.check-row.on .check { background:var(--teal); border-color:var(--teal); color:#fff; }
+.empty-hero { text-align:center; padding:40px 20px; }
+.empty-hero .glyph { width:72px; height:72px; border-radius:24px; background:var(--teal-container); color:var(--teal-deep); display:grid; place-items:center; font-size:28px; font-weight:800; margin:0 auto 16px; }
+</style>
+</head>
+<body>
+<div class="flow-page">
+  <div class="label" style="color:#64748B;margin-bottom:8px;">PARKSPOT · COMPLETE UI/UX FLOW · DESIGN.MD V4</div>
+  <h1>Attendant POS · complete flow</h1>
+  <p class="sub">Full shift: login → float → scan → entry/reject → plate lookup → override → walk-in/capacity → exit/UPI → handover → offline → close → incident → lane.</p>
+  <p style="margin-bottom:24px;"><a href="index.html" style="color:#5EEAD4;font-weight:600;">← All flows</a></p>
+  <div class="row">
+<div class="shot">
+  <div class="sid">ATT-01</div>
+  <div class="stitle">Shift login</div>
+  <div class="phone" style="background:var(--canvas)">
+    <div class="phone-inner">
+      <div class="status-bar" style="color:var(--navy);flex-shrink:0;"><span>9:41</span><span>5G ▮▮▮</span></div>
+      <div class="pad grow" style="display:flex;flex-direction:column;justify-content:center;">
+        <div class="h2">Attendant login</div>
+        <div class="meta" style="margin:8px 0 20px;">POS-04 · Indiranagar Gate 2 · Lane 02</div>
+        <div class="input" style="margin-bottom:10px;letter-spacing:.3em;justify-content:center;">••••</div>
+        <div class="meta" style="text-align:center;">PIN or biometric · device-bound</div>
+      </div>
+      <div class="sticky-bottom"><button class="btn primary xl" style="width:100%;">Unlock shift</button></div>
+    </div>
+    <div class="home-indicator"></div>
+  </div>
+</div>
+<div class="shot">
+  <div class="sid">ATT-02</div>
+  <div class="stitle">Open shift / float</div>
+  <div class="phone" style="background:var(--canvas)">
+    <div class="phone-inner">
+      <div class="status-bar" style="color:var(--navy);flex-shrink:0;"><span>9:41</span><span>5G ▮▮▮</span></div>
+      <div class="nav-top">
+  <div class="back">←</div>
+  <div><div class="h3" style="font-size:16px;">Open shift</div>
+  <div class="meta">Count opening float</div></div>
+</div>
+      <div class="pad grow">
+        <div class="grid-2">
+          <div class="card" style="padding:12px;text-align:center;"><div class="meta">₹500</div><div class="h3">× 4</div></div>
+          <div class="card" style="padding:12px;text-align:center;"><div class="meta">₹200</div><div class="h3">× 5</div></div>
+          <div class="card" style="padding:12px;text-align:center;"><div class="meta">₹100</div><div class="h3">× 10</div></div>
+          <div class="card" style="padding:12px;text-align:center;"><div class="meta">₹50</div><div class="h3">× 6</div></div>
+        </div>
+        <div class="card" style="padding:14px;margin-top:12px;">
+          <div class="row-between"><span>Opening float</span><strong class="currency">₹4,300</strong></div>
+        </div>
+        <span class="pill ok" style="margin-top:12px;">Keys valid · Manifest 11h 40m</span>
+      </div>
+      <div class="sticky-bottom"><button class="btn primary xl" style="width:100%;">Start shift</button></div>
+    </div>
+    <div class="home-indicator"></div>
+  </div>
+</div>
+<div class="shot">
+  <div class="sid">ATT-10</div>
+  <div class="stitle">QR scanner</div>
+  <div class="phone" style="background:var(--navy)">
+    <div class="phone-inner">
+      <div class="status-bar" style="color:#fff;flex-shrink:0;"><span>9:41</span><span>5G ▮▮▮</span></div>
+      <div style="flex:1;position:relative;overflow:hidden;">
+        <img class="img-cover" src="assets/parkspot-garage-b2.jpg" alt="" style="filter:brightness(.5);"/>
+        <div style="position:absolute;top:12px;left:12px;right:12px;display:flex;flex-wrap:wrap;gap:6px;">
+          <span class="chip" style="background:rgba(15,23,42,.75);color:#E2E8F0;border-radius:8px;padding:6px 8px;font-size:10px;font-weight:700;">POS-04</span>
+          <span style="background:rgba(180,83,9,.9);color:#FEF3C7;border-radius:8px;padding:6px 8px;font-size:10px;font-weight:700;">OFFLINE · Ed25519</span>
+        </div>
+        <div style="position:absolute;left:50%;top:42%;transform:translate(-50%,-50%);width:200px;height:200px;border:2px solid #34D399;border-radius:24px;box-shadow:0 0 0 9999px rgba(15,23,42,.4);"></div>
+      </div>
+      <div style="background:#fff;border-radius:24px 24px 0 0;padding:16px 16px 80px;">
+        <span class="pill ok">PASS VERIFIED · 180ms</span>
+        <div class="h3 plate" style="margin-top:10px;">KA 01 MJ 8821</div>
+        <div class="meta">Car · B2-19 · 18:00–20:00</div>
+        <button class="btn primary xl" style="width:100%;">Confirm & open barrier</button>
+      </div>
+      
+    <div style="position:absolute;bottom:0;left:0;right:0;height:72px;background:#fff;border-top:1px solid var(--border);display:grid;grid-template-columns:repeat(4,1fr);padding:8px 4px 18px;font-size:11px;font-weight:700;color:#94A3B8;">
+      <div style="text-align:center;color:var(--teal);">Scan</div><div style="text-align:center;color:#94A3B8;">Walk-in</div><div style="text-align:center;color:#94A3B8;">Exit</div><div style="text-align:center;color:#94A3B8;">Shift</div>
+    </div>
+    </div>
+    <div class="home-indicator"></div>
+  </div>
+</div>
+<div class="shot">
+  <div class="sid">ATT-11</div>
+  <div class="stitle">Entry confirm</div>
+  <div class="phone" style="background:var(--canvas)">
+    <div class="phone-inner">
+      <div class="status-bar" style="color:var(--navy);flex-shrink:0;"><span>9:41</span><span>5G ▮▮▮</span></div>
+      <div class="nav-top">
+  <div class="back">←</div>
+  <div><div class="h3" style="font-size:16px;">Confirm entry</div>
+  </div>
+</div>
+      <div class="pad grow">
+        <div class="card" style="padding:16px;">
+          <div class="plate" style="font-size:20px;font-weight:800;">KA 01 MJ 8821</div>
+          <div class="meta" style="margin-top:8px;">Car · Booking #SP-99214</div>
+          <div class="h3" style="margin-top:12px;">Bay B2-19</div>
+          <div class="meta">Window 18:00–20:00 · plate match ✓</div>
+        </div>
+      </div>
+      <div class="sticky-bottom" style="display:grid;grid-template-columns:1.3fr .8fr;gap:10px;">
+        <button class="btn primary xl" style="width:100%;">Confirm & open</button><button class="btn secondary xl" style="width:100%;">Override…</button>
+      </div>
+    </div>
+    <div class="home-indicator"></div>
+  </div>
+</div>
+<div class="shot">
+  <div class="sid">ATT-10R</div>
+  <div class="stitle">Pass rejected</div>
+  <div class="phone" style="background:var(--canvas)">
+    <div class="phone-inner">
+      <div class="status-bar" style="color:var(--navy);flex-shrink:0;"><span>9:41</span><span>5G ▮▮▮</span></div>
+      <div class="nav-top">
+  <div class="back">←</div>
+  <div><div class="h3" style="font-size:16px;">Verification failed</div>
+  </div>
+</div>
+      <div class="pad grow">
+        <div class="card" style="padding:16px;background:var(--danger-bg);border-color:#FECACA;">
+          <div class="h3" style="color:var(--danger);">REJECTED</div>
+          <div class="meta" style="margin-top:6px;">Do not open barrier</div>
+        </div>
+        <div class="card" style="padding:14px;margin-top:12px;">
+          <div class="label">REASON</div>
+          <div class="h3" style="margin-top:6px;">Nonce revoked / already used</div>
+          <div class="meta" style="margin-top:8px;">Also common: expired window · plate mismatch · wrong facility · signature invalid</div>
+        </div>
+        <div class="grid-2" style="margin-top:12px;">
+          <div class="class-tile">Plate lookup</div><div class="class-tile">Walk-in</div>
+        </div>
+      </div>
+      <div class="sticky-bottom"><button class="btn primary xl" style="width:100%;">Scan next</button></div>
+    </div>
+    <div class="home-indicator"></div>
+  </div>
+</div>
+<div class="shot">
+  <div class="sid">ATT-03</div>
+  <div class="stitle">Plate lookup</div>
+  <div class="phone" style="background:var(--canvas)">
+    <div class="phone-inner">
+      <div class="status-bar" style="color:var(--navy);flex-shrink:0;"><span>9:41</span><span>5G ▮▮▮</span></div>
+      <div class="nav-top">
+  <div class="back">←</div>
+  <div><div class="h3" style="font-size:16px;">Find booking</div>
+  <div class="meta">Today's manifest</div></div>
+</div>
+      <div class="pad grow">
+        <div class="input plate" style="letter-spacing:.08em;">KA 01 MJ 8821</div>
+        <div class="card" style="padding:14px;margin-top:12px;border-color:var(--teal);">
+          <div class="row-between"><strong>#SP-99214</strong><span class="pill ok">CONFIRMED</span></div>
+          <div class="meta" style="margin-top:6px;">Bay B2-19 · 18:00–20:00 · Car</div>
+          <div class="meta">Photo capture optional for audit</div>
+        </div>
+        <div class="card" style="padding:14px;margin-top:10px;">
+          <div class="row-between"><strong>#SP-99001</strong><span class="pill stale">NO SHOW</span></div>
+          <div class="meta" style="margin-top:6px;">Same plate · morning window</div>
+        </div>
+      </div>
+      <div class="sticky-bottom" style="display:grid;grid-template-columns:1fr 1.2fr;gap:10px;">
+        <button class="btn secondary xl" style="width:100%;">Capture photo</button><button class="btn primary xl" style="width:100%;">Confirm entry</button>
+      </div>
+    </div>
+    <div class="home-indicator"></div>
+  </div>
+</div>
+<div class="shot">
+  <div class="sid">ATT-08O</div>
+  <div class="stitle">Override + PIN</div>
+  <div class="phone" style="background:var(--canvas)">
+    <div class="phone-inner">
+      <div class="status-bar" style="color:var(--navy);flex-shrink:0;"><span>9:41</span><span>5G ▮▮▮</span></div>
+      <div class="nav-top">
+  <div class="back">←</div>
+  <div><div class="h3" style="font-size:16px;">Manual override</div>
+  <div class="meta">Reason mandatory</div></div>
+</div>
+      <div class="pad grow">
+        <div class="label">REASON CODE</div>
+        <div class="grid-2" style="margin-top:8px;">
+          <div class="class-tile on">Scanner fault</div><div class="class-tile">VIP admit</div>
+          <div class="class-tile">Ambulance</div><div class="class-tile">Other</div>
+        </div>
+        <div class="label" style="margin-top:14px;">FREE TEXT</div>
+        <div class="input" style="margin-top:8px;color:var(--text-2);">Camera fogged · basement</div>
+        <div class="card" style="padding:14px;margin-top:12px;background:var(--warn-bg);border-color:#FCD34D;">
+          <div class="h3" style="font-size:14px;color:var(--warn);">Supervisor PIN required</div>
+          <div class="meta">3rd override this shift</div>
+          <div class="input" style="margin-top:10px;letter-spacing:.35em;justify-content:center;">••••</div>
+        </div>
+      </div>
+      <div class="sticky-bottom"><button class="btn navy xl" style="width:100%;">Authorize override</button></div>
+    </div>
+    <div class="home-indicator"></div>
+  </div>
+</div>
+<div class="shot">
+  <div class="sid">ATT-16</div>
+  <div class="stitle">Walk-in admit</div>
+  <div class="phone" style="background:var(--canvas)">
+    <div class="phone-inner">
+      <div class="status-bar" style="color:var(--navy);flex-shrink:0;"><span>9:41</span><span>5G ▮▮▮</span></div>
+      <div class="nav-top">
+  <div class="back">←</div>
+  <div><div class="h3" style="font-size:16px;">Walk-in admission</div>
+  </div>
+</div>
+      <div class="pad grow">
+        <div class="stepper"><span class="on"></span><span class="on"></span><span></span></div>
+        <div class="label">CLASS</div>
+        <div class="grid-3" style="margin:8px 0 14px;">
+          <div class="class-tile">2W</div><div class="class-tile on">Car</div><div class="class-tile">Auto</div>
+        </div>
+        <div class="label">PLATE</div>
+        <div class="input plate" style="margin-top:8px;letter-spacing:.08em;">KA 05 XY 2211</div>
+        <div class="card" style="padding:12px;margin-top:12px;">
+          <div class="row-between"><span>Float buffer left</span><span class="pill warn">3 car</span></div>
+        </div>
+      </div>
+      <div class="sticky-bottom"><button class="btn primary xl" style="width:100%;">Admit & print slip</button></div>
+      
+    <div style="position:absolute;bottom:0;left:0;right:0;height:72px;background:#fff;border-top:1px solid var(--border);display:grid;grid-template-columns:repeat(4,1fr);padding:8px 4px 18px;font-size:11px;font-weight:700;color:#94A3B8;">
+      <div style="text-align:center;color:#94A3B8;">Scan</div><div style="text-align:center;color:var(--teal);">Walk-in</div><div style="text-align:center;color:#94A3B8;">Exit</div><div style="text-align:center;color:#94A3B8;">Shift</div>
+    </div>
+    </div>
+    <div class="home-indicator"></div>
+  </div>
+</div>
+<div class="shot">
+  <div class="sid">ATT-16F</div>
+  <div class="stitle">Capacity full</div>
+  <div class="phone" style="background:var(--canvas)">
+    <div class="phone-inner">
+      <div class="status-bar" style="color:var(--navy);flex-shrink:0;"><span>9:41</span><span>5G ▮▮▮</span></div>
+      <div class="nav-top">
+  <div class="back">←</div>
+  <div><div class="h3" style="font-size:16px;">Cannot admit</div>
+  </div>
+</div>
+      <div class="pad grow">
+        <div class="card" style="padding:16px;background:var(--danger-bg);border-color:#FECACA;">
+          <div class="h3" style="color:var(--danger);">CAPACITY_FULL</div>
+          <div class="meta" style="margin-top:6px;">Float buffer exhausted · no free Car capacity · bay reserved within 60m</div>
+        </div>
+        <div class="card" style="padding:14px;margin-top:12px;">
+          <div class="meta">Attendant MUST NOT admit. Override needs supervisor PIN and is reported to leakage audit.</div>
+        </div>
+      </div>
+      <div class="sticky-bottom" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <button class="btn secondary xl" style="width:100%;">Dismiss</button><button class="btn navy xl" style="width:100%;">Override…</button>
+      </div>
+    </div>
+    <div class="home-indicator"></div>
+  </div>
+</div>
+<div class="shot">
+  <div class="sid">ATT-12</div>
+  <div class="stitle">Exit & dues</div>
+  <div class="phone" style="background:var(--canvas)">
+    <div class="phone-inner">
+      <div class="status-bar" style="color:var(--navy);flex-shrink:0;"><span>9:41</span><span>5G ▮▮▮</span></div>
+      <div class="nav-top">
+  <div class="back">←</div>
+  <div><div class="h3" style="font-size:16px;">Exit clearance</div>
+  </div>
+</div>
+      <div class="pad grow">
+        <div class="card" style="padding:14px;">
+          <div class="plate" style="font-weight:800;">KA 05 XY 2211</div>
+          <div class="meta">Walk-in · 2h 14m · Surface Lot A</div>
+        </div>
+        <div class="card" style="padding:14px;margin-top:12px;">
+          <div class="row-between"><span>Walk-in tariff</span><strong>₹80.00</strong></div>
+          <div class="row-between" style="padding:8px 0;"><span>GST</span><strong>₹14.40</strong></div>
+          <div class="row-between" style="border-top:1px solid var(--border);padding-top:12px;">
+            <span class="h3">Collect</span><span class="h2 currency">₹94.40</span>
+          </div>
+        </div>
+        <div class="grid-2" style="margin-top:12px;">
+          <div class="class-tile on">UPI QR</div><div class="class-tile">Cash</div>
+        </div>
+      </div>
+      <div class="sticky-bottom"><button class="btn primary xl" style="width:100%;">Mark paid & open exit</button></div>
+      
+    <div style="position:absolute;bottom:0;left:0;right:0;height:72px;background:#fff;border-top:1px solid var(--border);display:grid;grid-template-columns:repeat(4,1fr);padding:8px 4px 18px;font-size:11px;font-weight:700;color:#94A3B8;">
+      <div style="text-align:center;color:#94A3B8;">Scan</div><div style="text-align:center;color:#94A3B8;">Walk-in</div><div style="text-align:center;color:var(--teal);">Exit</div><div style="text-align:center;color:#94A3B8;">Shift</div>
+    </div>
+    </div>
+    <div class="home-indicator"></div>
+  </div>
+</div>
+<div class="shot">
+  <div class="sid">ATT-12Q</div>
+  <div class="stitle">Exit UPI QR</div>
+  <div class="phone" style="background:var(--canvas)">
+    <div class="phone-inner">
+      <div class="status-bar" style="color:var(--navy);flex-shrink:0;"><span>9:41</span><span>5G ▮▮▮</span></div>
+      <div class="nav-top">
+  <div class="back">←</div>
+  <div><div class="h3" style="font-size:16px;">Collect dues</div>
+  <div class="meta">Amount-locked UPI QR</div></div>
+</div>
+      <div class="pad grow" style="text-align:center;">
+        <div class="h2 currency">₹94.40</div>
+        <div class="meta">Walk-in · KA 05 XY 2211</div>
+        <div style="width:200px;height:200px;margin:20px auto;background:#fff;border:1px solid var(--border);border-radius:16px;display:grid;place-items:center;box-shadow:var(--shadow-md);">
+          <img src="assets/qr-pass.png" width="168" height="168" alt="UPI QR"/>
+        </div>
+        <div class="meta">Driver scans with any UPI app · webhook confirms before barrier</div>
+        <div class="grid-2" style="margin-top:16px;text-align:left;">
+          <div class="class-tile">Cash instead</div><div class="class-tile">Mark prepaid</div>
+        </div>
+      </div>
+      <div class="sticky-bottom"><button class="btn secondary xl" style="width:100%;">Waiting for payment…</button></div>
+    </div>
+    <div class="home-indicator"></div>
+  </div>
+</div>
+<div class="shot">
+  <div class="sid">ATT-05H</div>
+  <div class="stitle">Shift handover</div>
+  <div class="phone" style="background:var(--canvas)">
+    <div class="phone-inner">
+      <div class="status-bar" style="color:var(--navy);flex-shrink:0;"><span>9:41</span><span>5G ▮▮▮</span></div>
+      <div class="nav-top">
+  <div class="back">←</div>
+  <div><div class="h3" style="font-size:16px;">Handover</div>
+  <div class="meta">Outgoing CLOSING</div></div>
+</div>
+      <div class="pad grow">
+        <div class="card" style="padding:14px;">
+          <div class="row-between"><span>Outgoing</span><strong>Ramesh #B409</strong></div>
+          <div class="row-between" style="margin-top:8px;"><span>Incoming</span><strong>Sunil Sharma</strong></div>
+          <div class="row-between" style="margin-top:8px;"><span>Cash counted</span><strong class="currency">₹3,420</strong></div>
+          <div class="row-between" style="margin-top:8px;"><span>Variance</span><span class="pill ok">ZERO</span></div>
+        </div>
+        <div class="card" style="padding:14px;margin-top:12px;">
+          <div class="meta">Manager acknowledge required if SHORT/OVER &gt; ₹200 or &gt;1%</div>
+          <div class="input" style="margin-top:10px;letter-spacing:.3em;justify-content:center;">Manager PIN</div>
+        </div>
+      </div>
+      <div class="sticky-bottom"><button class="btn primary xl" style="width:100%;">Print slip & close shift</button></div>
+    </div>
+    <div class="home-indicator"></div>
+  </div>
+</div>
+<div class="shot">
+  <div class="sid">ATT-13</div>
+  <div class="stitle">Offline mode</div>
+  <div class="phone" style="background:var(--canvas)">
+    <div class="phone-inner">
+      <div class="status-bar" style="color:var(--navy);flex-shrink:0;"><span>9:41</span><span>5G ▮▮▮</span></div>
+      <div style="background:var(--warn-bg);color:var(--warn);padding:10px 16px;font-size:12px;font-weight:700;flex-shrink:0;">
+        OFFLINE · local Ed25519 verify · queue 7 events · manifest age 42m
+      </div>
+      <div class="nav-top">
+  <div class="back">←</div>
+  <div><div class="h3" style="font-size:16px;">Offline operations</div>
+  </div>
+</div>
+      <div class="pad grow">
+        <div class="card" style="padding:14px;">
+          <div class="row-between"><span>Clock skew</span><span class="pill warn">+48s</span></div>
+          <div class="row-between" style="margin-top:10px;"><span>Cached keys</span><span class="pill ok">Valid</span></div>
+          <div class="row-between" style="margin-top:10px;"><span>Revocation delta</span><strong>12 entries</strong></div>
+        </div>
+        <div class="meta" style="margin-top:12px;">Cash still recorded locally · sync on reconnect</div>
+      </div>
+      <div class="sticky-bottom"><button class="btn primary xl" style="width:100%;">Continue scanning</button></div>
+    </div>
+    <div class="home-indicator"></div>
+  </div>
+</div>
+<div class="shot">
+  <div class="sid">ATT-05</div>
+  <div class="stitle">Shift close</div>
+  <div class="phone" style="background:var(--canvas)">
+    <div class="phone-inner">
+      <div class="status-bar" style="color:var(--navy);flex-shrink:0;"><span>9:41</span><span>5G ▮▮▮</span></div>
+      <div class="nav-top">
+  <div class="back">←</div>
+  <div><div class="h3" style="font-size:16px;">Close shift</div>
+  </div>
+</div>
+      <div class="pad grow">
+        <div class="card" style="padding:14px;">
+          <div class="row-between"><span>Vehicles</span><strong>184</strong></div>
+          <div class="row-between" style="padding:6px 0;"><span>Pre-book / walk-in</span><strong>142 / 42</strong></div>
+          <div class="row-between"><span>Digital collections</span><strong>₹11,400</strong></div>
+          <div class="row-between"><span>Cash expected</span><strong>₹3,420</strong></div>
+        </div>
+        <div class="card" style="padding:14px;margin-top:12px;">
+          <div class="label">COUNTED CASH</div>
+          <div class="h2 currency" style="margin:8px 0;">₹3,420</div>
+          <span class="pill ok">Δ ₹0.00 · ZERO VARIANCE</span>
+        </div>
+        <div class="meta" style="margin-top:10px;">T1: loop vs digital Δ = 0 unexplained</div>
+      </div>
+      <div class="sticky-bottom"><button class="btn primary xl" style="width:100%;">Print handover & close</button></div>
+      
+    <div style="position:absolute;bottom:0;left:0;right:0;height:72px;background:#fff;border-top:1px solid var(--border);display:grid;grid-template-columns:repeat(4,1fr);padding:8px 4px 18px;font-size:11px;font-weight:700;color:#94A3B8;">
+      <div style="text-align:center;color:#94A3B8;">Scan</div><div style="text-align:center;color:#94A3B8;">Walk-in</div><div style="text-align:center;color:#94A3B8;">Exit</div><div style="text-align:center;color:var(--teal);">Shift</div>
+    </div>
+    </div>
+    <div class="home-indicator"></div>
+  </div>
+</div>
+<div class="shot">
+  <div class="sid">ATT-08</div>
+  <div class="stitle">Incident capture</div>
+  <div class="phone" style="background:var(--canvas)">
+    <div class="phone-inner">
+      <div class="status-bar" style="color:var(--navy);flex-shrink:0;"><span>9:41</span><span>5G ▮▮▮</span></div>
+      <div class="nav-top">
+  <div class="back">←</div>
+  <div><div class="h3" style="font-size:16px;">Capture incident</div>
+  </div>
+</div>
+      <div class="pad grow">
+        <div class="grid-2">
+          <div class="class-tile on">Squatter</div><div class="class-tile">Damage</div>
+          <div class="class-tile">Tailgate</div><div class="class-tile">Dispute</div>
+        </div>
+        <div style="height:140px;margin-top:14px;border-radius:16px;background:var(--muted);display:grid;place-items:center;font-weight:700;color:var(--text-2);">Add photo</div>
+        <div class="input" style="margin-top:12px;color:var(--text-2);">Notes…</div>
+      </div>
+      <div class="sticky-bottom"><button class="btn primary xl" style="width:100%;">Submit incident</button></div>
+    </div>
+    <div class="home-indicator"></div>
+  </div>
+</div>
+<div class="shot">
+  <div class="sid">ATT-11L</div>
+  <div class="stitle">Lane / barrier T1</div>
+  <div class="phone" style="background:var(--canvas)">
+    <div class="phone-inner">
+      <div class="status-bar" style="color:var(--navy);flex-shrink:0;"><span>9:41</span><span>5G ▮▮▮</span></div>
+      <div class="nav-top">
+  <div class="back">←</div>
+  <div><div class="h3" style="font-size:16px;">Lane control</div>
+  <div class="meta">Gate 2 · T1 connected</div></div>
+</div>
+      <div class="pad grow">
+        <div class="grid-2">
+          <div class="card" style="padding:14px;"><div class="label">LOOP A</div><div class="h3" style="color:var(--ok);">Clear</div></div>
+          <div class="card" style="padding:14px;"><div class="label">LOOP B</div><div class="h3" style="color:var(--warn);">Occupied</div></div>
+          <div class="card" style="padding:14px;"><div class="label">BARRIER</div><div class="h3">Closed</div></div>
+          <div class="card" style="padding:14px;"><div class="label">GATEWAY</div><div class="h3" style="color:var(--ok);">Online</div></div>
+        </div>
+        <div class="meta" style="margin-top:12px;">Safe open requires reason if no valid credential</div>
+      </div>
+      <div class="sticky-bottom" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <button class="btn secondary xl" style="width:100%;">Safe open</button><button class="btn navy xl" style="width:100%;">Close barrier</button>
+      </div>
+    </div>
+    <div class="home-indicator"></div>
+  </div>
+</div></div>
+</div>
+</body>
+</html>

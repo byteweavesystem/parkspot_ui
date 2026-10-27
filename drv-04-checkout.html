@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>DRV-04 Checkout — ParkSpot</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .ring {
+      width: 120px; height: 120px; border-radius: 50%;
+      background: conic-gradient(var(--teal) 0 72%, #E2E8F0 0);
+      display: grid; place-items: center; margin: 8px auto 16px;
+      box-shadow: 0 8px 24px rgba(13,148,136,.2);
+    }
+    .ring-inner {
+      width: 96px; height: 96px; border-radius: 50%; background: #fff;
+      display: grid; place-items: center; text-align: center;
+    }
+    .upi {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 12px 0 16px;
+    }
+    .upi div {
+      height: 64px; border-radius: 14px; border: 1.5px solid var(--border); background: #fff;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+      font-size: 11px; font-weight: 700; color: var(--text-2);
+    }
+    .upi div.on { border-color: var(--teal); background: var(--teal-container); color: #0F766E; }
+    .line { display:flex; justify-content:space-between; padding: 8px 0; font-size: 14px; }
+    .line span:last-child { font-variant-numeric: tabular-nums; font-weight: 600; }
+    .total { border-top: 1px solid var(--border); margin-top: 4px; padding-top: 12px; }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <div class="phone">
+      <div class="status-bar dark" style="background:#fff;">
+        <span>9:41</span><span>●●● 5G</span>
+      </div>
+      <div style="padding:8px 16px 0;display:flex;align-items:center;gap:12px;">
+        <div style="width:36px;height:36px;border-radius:12px;background:var(--muted);display:grid;place-items:center;font-weight:800;">←</div>
+        <div class="h3">Secure checkout</div>
+      </div>
+
+      <div style="padding:16px;">
+        <div class="card" style="padding:20px;text-align:center;">
+          <div class="label" style="margin-bottom:4px;">BAY HOLD EXPIRES IN</div>
+          <div class="ring"><div class="ring-inner">
+            <div class="h1 currency" style="font-size:28px;">07:24</div>
+            <div class="meta">of 10:00</div>
+          </div></div>
+          <div class="h3">Bay B2-19 locked</div>
+          <div class="body" style="margin-top:4px;">Indiranagar Metro MLCP · Today 18:00–20:00</div>
+        </div>
+
+        <div class="card" style="padding:16px;margin-top:12px;">
+          <div class="label" style="margin-bottom:4px;">PRICE BREAKDOWN</div>
+          <div class="line"><span>Parking tariff (2h)</span><span>₹100.00</span></div>
+          <div class="line"><span>Platform fee</span><span>₹2.00</span></div>
+          <div class="line"><span>CGST 9%</span><span>₹9.18</span></div>
+          <div class="line"><span>SGST 9%</span><span>₹9.18</span></div>
+          <div class="line total">
+            <span class="h3">Total payable</span>
+            <span class="h2 currency">₹120.36</span>
+          </div>
+          <div class="meta" style="margin-top:6px;">Quote policy v3 · expires with hold</div>
+        </div>
+
+        <div style="margin-top:16px;" class="label">PAY WITH UPI</div>
+        <div class="upi">
+          <div class="on"><span style="font-size:18px;">G</span>GPay</div>
+          <div><span style="font-size:18px;">Pe</span>PhonePe</div>
+          <div><span style="font-size:18px;">₹</span>Paytm</div>
+          <div><span style="font-size:18px;">+</span>UPI ID</div>
+        </div>
+
+        <button class="btn primary xl" style="width:100%;">Pay ₹120.36 with GPay</button>
+        <div class="meta" style="text-align:center;margin-top:10px;">Don’t close the app · payment is idempotent</div>
+      </div>
+      <div class="home-indicator"></div>
+    </div>
+  </div>
+</body>
+</html>

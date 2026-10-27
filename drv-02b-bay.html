@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>DRV-02B Bay Selector — ParkSpot</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .floors { display:flex; gap:8px; padding:12px 16px; overflow:auto; background:#fff; border-bottom:1px solid var(--border); }
+    .floor { height:36px; padding:0 14px; border-radius:999px; border:1px solid var(--border); font-size:12px; font-weight:700; display:flex; align-items:center; color:var(--text-2); background:var(--muted); white-space:nowrap; }
+    .floor.on { background:var(--navy); color:#fff; border-color:var(--navy); }
+    .floor.full { opacity:.45; text-decoration:line-through; }
+    .deck {
+      margin: 16px; height: 420px; border-radius: 20px; border:1px solid var(--border);
+      background:
+        linear-gradient(#fff, #F8FAFC),
+        repeating-linear-gradient(90deg, transparent 0 47px, #E2E8F0 47px 48px),
+        repeating-linear-gradient(0deg, transparent 0 55px, #E2E8F0 55px 56px);
+      background-blend-mode: multiply;
+      position: relative; overflow: hidden;
+    }
+    .aisle { position:absolute; background:#E2E8F0; }
+    .bay {
+      position:absolute; width:44px; height:28px; border-radius:6px; border:1.5px solid #CBD5E1;
+      background:#fff; font-size:9px; font-weight:700; color:#64748B;
+      display:grid; place-items:center;
+    }
+    .bay.free { border-color:#86EFAC; }
+    .bay.free::after { content:""; width:6px; height:6px; border-radius:50%; background:var(--ok); position:absolute; top:3px; right:3px; }
+    .bay.sel { border:2px solid var(--teal); background:var(--teal-container); color:#0F766E; box-shadow:0 4px 12px rgba(13,148,136,.25); }
+    .bay.occ { background:#F1F5F9; color:#94A3B8; }
+    .bay.ev { border-color:#7DD3FC; }
+    .landmark { position:absolute; font-size:10px; font-weight:700; color:#64748B; background:#fff; border:1px dashed #CBD5E1; padding:4px 8px; border-radius:8px; }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <div class="phone">
+      <div class="status-bar dark" style="background:#fff;border-bottom:1px solid var(--border);">
+        <span>9:41</span><span>●●● 5G</span>
+      </div>
+      <div style="background:#fff;padding:8px 16px 12px;display:flex;align-items:center;gap:12px;">
+        <div style="width:36px;height:36px;border-radius:12px;background:var(--muted);display:grid;place-items:center;font-weight:800;">←</div>
+        <div>
+          <div class="h3">Select bay · Floor B2</div>
+          <div class="meta">Indiranagar Metro MLCP · NUMBERED</div>
+        </div>
+      </div>
+      <div class="floors">
+        <div class="floor full">B1 · Full</div>
+        <div class="floor on">B2 · 14 free</div>
+        <div class="floor">L1 · 22</div>
+        <div class="floor">Terrace</div>
+      </div>
+
+      <div class="deck">
+        <div class="aisle" style="left:0;right:0;top:48%;height:28px;"></div>
+        <div class="aisle" style="top:0;bottom:0;left:48%;width:22px;"></div>
+        <div class="landmark" style="left:12px;top:12px;">Lift Core A</div>
+        <div class="landmark" style="right:12px;bottom:12px;">Fire Exit</div>
+        <div class="landmark" style="left:12px;bottom:80px;">P-08</div>
+        <div class="landmark" style="left:70px;bottom:80px;">P-09</div>
+        <div class="landmark" style="left:128px;bottom:80px;">P-10</div>
+
+        <!-- row top -->
+        <div class="bay occ" style="left:24px;top:70px;">B2-01</div>
+        <div class="bay free" style="left:76px;top:70px;">B2-02</div>
+        <div class="bay free" style="left:128px;top:70px;">B2-03</div>
+        <div class="bay occ" style="left:210px;top:70px;">B2-11</div>
+        <div class="bay free ev" style="left:262px;top:70px;">EV</div>
+        <div class="bay free" style="left:314px;top:70px;">B2-13</div>
+
+        <div class="bay free" style="left:24px;top:160px;">B2-04</div>
+        <div class="bay sel" style="left:76px;top:160px;">B2-19</div>
+        <div class="bay free" style="left:128px;top:160px;">B2-06</div>
+        <div class="bay occ" style="left:210px;top:160px;">B2-14</div>
+        <div class="bay free" style="left:262px;top:160px;">B2-15</div>
+        <div class="bay occ" style="left:314px;top:160px;">B2-16</div>
+
+        <div class="bay free" style="left:24px;top:300px;">B2-07</div>
+        <div class="bay free" style="left:76px;top:300px;">B2-08</div>
+        <div class="bay occ" style="left:128px;top:300px;">B2-09</div>
+        <div class="bay free" style="left:210px;top:300px;">B2-17</div>
+        <div class="bay free" style="left:262px;top:300px;">B2-18</div>
+        <div class="bay free" style="left:314px;top:300px;">B2-20</div>
+
+        <div style="position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);font-size:10px;font-weight:800;color:#94A3B8;letter-spacing:.08em;">ONE WAY →</div>
+      </div>
+
+      <div style="position:absolute;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--border);box-shadow:0 -4px 16px rgba(15,23,42,.08);padding:16px 16px 28px;border-radius:24px 24px 0 0;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+          <div>
+            <div class="h2">Bay B2-19</div>
+            <div class="meta">Near Pillar P-09 · 30s walk to Lift A</div>
+          </div>
+          <span class="pill ok">Clearance OK</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding:12px;background:var(--muted);border-radius:12px;">
+          <div class="meta">2h reservation · Car KA 01 MJ 8821</div>
+          <div class="currency h3">₹120.00</div>
+        </div>
+        <button class="btn primary xl" style="width:100%;">Hold bay for 10:00 & continue</button>
+      </div>
+      <div class="home-indicator"></div>
+    </div>
+  </div>
+</body>
+</html>

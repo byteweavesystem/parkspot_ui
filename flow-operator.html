@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Operator SaaS · complete flow — ParkSpot Complete Mockups</title>
+<link rel="stylesheet" href="styles.css"/>
+<style>
+.flow-page { padding: 48px 32px 80px; }
+.flow-page h1 { color:#fff; font-size:32px; font-weight:800; margin-bottom:8px; }
+.flow-page .sub { color:#94A3B8; margin-bottom:28px; max-width:640px; }
+.row { display:flex; gap:32px; overflow-x:auto; padding-bottom:24px; align-items:flex-start; }
+.shot { flex:0 0 auto; }
+.shot .sid { color:#5EEAD4; font-size:12px; font-weight:700; letter-spacing:.04em; margin-bottom:8px; }
+.shot .stitle { color:#E2E8F0; font-size:14px; font-weight:600; margin-bottom:12px; }
+.phone-inner { position:absolute; inset:0; display:flex; flex-direction:column; }
+.pad { padding:16px; }
+.pad-x { padding-left:16px; padding-right:16px; }
+.grow { flex:1; overflow:auto; }
+.sticky-bottom { margin-top:auto; padding:16px; padding-bottom:28px; background:#fff; border-top:1px solid var(--border); }
+.nav-top { display:flex; align-items:center; gap:12px; padding:8px 16px 12px; background:#fff; }
+.back { width:36px; height:36px; border-radius:12px; background:var(--muted); display:grid; place-items:center; font-weight:800; flex-shrink:0; }
+.row-between { display:flex; justify-content:space-between; align-items:center; gap:8px; }
+.list-item { padding:14px 0; border-bottom:1px solid var(--border); }
+.input { height:52px; border-radius:14px; border:1.5px solid var(--border); background:#fff; padding:0 14px; display:flex; align-items:center; font-weight:600; font-size:15px; width:100%; }
+.otp-row { display:flex; gap:8px; justify-content:center; margin:20px 0; }
+.otp-box { width:48px; height:56px; border-radius:12px; border:1.5px solid var(--border); background:#fff; display:grid; place-items:center; font-size:22px; font-weight:800; }
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; }
+.class-tile { height:72px; border-radius:14px; border:1.5px solid var(--border); background:#fff; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; font-size:12px; font-weight:700; color:var(--text-2); }
+.class-tile.on { border-color:var(--teal); background:var(--teal-container); color:#0F766E; }
+.desk-shell { display:grid; grid-template-columns:220px 1fr; height:100%; }
+.desk-nav { background:var(--navy); color:#fff; padding:20px 14px; }
+.desk-nav .logo { font-weight:800; font-size:17px; margin-bottom:16px; }
+.desk-nav a { display:block; padding:9px 12px; border-radius:10px; color:#94A3B8; font-size:12px; font-weight:600; text-decoration:none; margin-bottom:2px; }
+.desk-nav a.on { background:rgba(13,148,136,.22); color:#5EEAD4; }
+.desk-main { display:flex; flex-direction:column; min-width:0; background:var(--canvas); }
+.desk-top { height:56px; background:#fff; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; padding:0 20px; }
+.desk-body { padding:16px 20px; overflow:auto; flex:1; }
+.table { width:100%; border-collapse:collapse; font-size:12px; }
+.table th { text-align:left; padding:10px 8px; color:var(--text-2); border-bottom:1px solid var(--border); font-weight:600; }
+.table td { padding:12px 8px; border-bottom:1px solid var(--border); font-weight:600; }
+.progress { height:8px; border-radius:999px; background:var(--border); overflow:hidden; }
+.progress > i { display:block; height:100%; background:var(--teal); }
+.stepper { display:flex; gap:6px; margin-bottom:16px; }
+.stepper span { flex:1; height:4px; border-radius:4px; background:var(--border); }
+.stepper span.on { background:var(--teal); }
+.ring-big { width:140px; height:140px; border-radius:50%; border:10px solid var(--teal-container); border-top-color:var(--teal); display:grid; place-items:center; margin:12px auto; }
+.settings-row { display:flex; align-items:center; gap:12px; padding:14px 0; border-bottom:1px solid var(--border); }
+.settings-row .ico-tile { width:40px; height:40px; border-radius:12px; background:var(--muted); display:grid; place-items:center; font-size:16px; flex-shrink:0; }
+.settings-row .grow-col { flex:1; min-width:0; }
+.settings-row .chev { color:var(--text-2); font-weight:800; }
+.toggle { width:48px; height:28px; border-radius:999px; background:var(--border); position:relative; flex-shrink:0; }
+.toggle.on { background:var(--teal); }
+.toggle::after { content:""; position:absolute; top:3px; left:3px; width:22px; height:22px; border-radius:50%; background:#fff; box-shadow:0 2px 6px rgba(15,23,42,.2); }
+.toggle.on::after { left:23px; }
+.legal-body { font-size:13px; line-height:1.55; color:var(--text-2); }
+.legal-body h4 { color:var(--navy); font-size:14px; font-weight:750; margin:14px 0 6px; }
+.check-row { display:flex; gap:12px; align-items:flex-start; padding:12px; border:1.5px solid var(--border); border-radius:14px; background:#fff; margin-bottom:10px; }
+.check-row.on { border-color:var(--teal); background:var(--teal-container); }
+.check { width:22px; height:22px; border-radius:7px; border:2px solid var(--border); background:#fff; flex-shrink:0; display:grid; place-items:center; font-size:12px; font-weight:800; color:transparent; }
+.check-row.on .check { background:var(--teal); border-color:var(--teal); color:#fff; }
+.empty-hero { text-align:center; padding:40px 20px; }
+.empty-hero .glyph { width:72px; height:72px; border-radius:24px; background:var(--teal-container); color:var(--teal-deep); display:grid; place-items:center; font-size:28px; font-weight:800; margin:0 auto 16px; }
+</style>
+</head>
+<body>
+<div class="flow-page">
+  <div class="label" style="color:#64748B;margin-bottom:8px;">PARKSPOT · COMPLETE UI/UX FLOW · DESIGN.MD V4</div>
+  <h1>Operator SaaS · complete flow</h1>
+  <p class="sub">Full KYC 7-step + facility, zones, tariffs, float, live board, blocks, staff, bookings/detail, pass pools, reports, payouts, disputes, tier commissioning.</p>
+  <p style="margin-bottom:24px;"><a href="index.html" style="color:#5EEAD4;font-weight:600;">← All flows</a></p>
+  <div class="row">
+<div class="shot">
+  <div class="sid">OPR-01.1</div>
+  <div class="stitle">KYC · Business</div>
+  <div class="desktop">
+    <div class="desk-shell">
+      <aside class="desk-nav"><div class="logo">ParkSpot Ops</div><a class="on">Onboarding</a></aside>
+      <section class="desk-main">
+        <header class="desk-top"><div class="h3">Operator onboarding</div><span class="pill info">Step 1 / 7</span></header>
+        <div class="desk-body">
+          <div class="stepper"><span class="on"></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span></div>
+          
+          <div class="card" style="padding:20px;max-width:720px;">
+            <div class="h3">Business entity</div>
+            <div class="grid-2" style="margin-top:14px;">
+              <div><div class="label">LEGAL NAME</div><div class="input" style="margin-top:6px;">Nexus Parking Pvt Ltd</div></div>
+              <div><div class="label">ENTITY TYPE</div><div class="input" style="margin-top:6px;">Private Limited</div></div>
+              <div><div class="label">PAN</div><div class="input" style="margin-top:6px;">AABCN8821F</div></div>
+              <div><div class="label">CIN / LLPIN</div><div class="input" style="margin-top:6px;">U63030KA2019PTC…</div></div>
+            </div>
+            <div style="margin-top:14px;"><button class="btn primary">Continue</button></div>
+          </div>
+        </div>
+      </section>
+    </div></div>
+</div>
+<div class="shot">
+  <div class="sid">OPR-01.2</div>
+  <div class="stitle">KYC · GSTIN</div>
+  <div class="desktop">
+    <div class="desk-shell">
+      <aside class="desk-nav"><div class="logo">ParkSpot Ops</div><a class="on">Onboarding</a></aside>
+      <section class="desk-main">
+        <header class="desk-top"><div class="h3">Operator onboarding</div><span class="pill info">Step 2 / 7</span></header>
+        <div class="desk-body">
+          <div class="stepper"><span class="on"></span><span class="on"></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span></div>
+          
+          <div class="card" style="padding:20px;max-width:720px;">
+            <div class="h3">GST registration</div>
+            <div class="label" style="margin-top:14px;">GSTIN</div>
+            <div class="input" style="margin-top:6px;">29AABCN8821F1Z5</div>
+            <div class="meta" style="margin-top:10px;">Auto-fetched: Nexus Parking Pvt Ltd · Karnataka · Active</div>
+            <div class="list-item row-between" style="margin-top:12px;"><span>Place of supply default</span><strong>KA</strong></div>
+            <div style="margin-top:14px;"><button class="btn primary">Continue</button></div>
+          </div>
+        </div>
+      </section>
+    </div></div>
+</div>
+<div class="shot">
+  <div class="sid">OPR-01.3</div>
+  <div class="stitle">KYC · Bank</div>
+  <div class="desktop">
+    <div class="desk-shell">
+      <aside class="desk-nav"><div class="logo">ParkSpot Ops</div><a class="on">Onboarding</a></aside>
+      <section class="desk-main">
+        <header class="desk-top"><div class="h3">Operator onboarding</div><span class="pill info">Step 3 / 7</span></header>
+        <div class="desk-body">
+          <div class="stepper"><span class="on"></span><span class="on"></span><span class="on"></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span></div>
+          
+          <div class="card" style="padding:20px;max-width:720px;">
+            <div class="h3">Bank account · penny-drop</div>
+            <div class="grid-2" style="margin-top:14px;">
+              <div><div class="label">ACCOUNT</div><div class="input" style="margin-top:6px;">XXXXXXXX4521</div></div>
+              <div><div class="label">IFSC</div><div class="input" style="margin-top:6px;">HDFC0001234</div></div>
+            </div>
+            <div class="card" style="padding:12px;margin-top:12px;background:var(--ok-bg);border-color:#A7F3D0;">
+              <div class="row-between"><span>Name match</span><span class="pill ok">PASS</span></div>
+              <div class="meta" style="margin-top:6px;">₹1 credited · UTR HDFC…9912</div>
+            </div>
+            <div style="margin-top:14px;"><button class="btn primary">Continue</button></div>
+          </div>
+        </div>
+      </section>
+    </div></div>
+</div>
+<div class="shot">
+  <div class="sid">OPR-01.4</div>
+  <div class="stitle">KYC · Documents</div>
+  <div class="desktop">
+    <div class="desk-shell">
+      <aside class="desk-nav"><div class="logo">ParkSpot Ops</div><a class="on">Onboarding</a></aside>
+      <section class="desk-main">
+        <header class="desk-top"><div class="h3">Operator onboarding</div><span class="pill info">Step 4 / 7</span></header>
+        <div class="desk-body">
+          <div class="stepper"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class=""></span><span class=""></span><span class=""></span></div>
+          
+          <div class="card" style="padding:20px;max-width:720px;">
+            <div class="h3">Upload documents</div>
+            <div class="list-item row-between"><span>PAN card</span><span class="pill ok">Uploaded</span></div>
+            <div class="list-item row-between"><span>GST certificate</span><span class="pill ok">Uploaded</span></div>
+            <div class="list-item row-between"><span>Cancelled cheque / passbook</span><span class="pill ok">Uploaded</span></div>
+            <div class="list-item row-between" style="border:0;"><span>Lease / ownership proof</span><span class="pill warn">Required</span></div>
+            <div style="margin-top:14px;display:flex;gap:10px;"><button class="btn secondary">Upload lease</button><button class="btn primary">Continue</button></div>
+          </div>
+        </div>
+      </section>
+    </div></div>
+</div>
+<div class="shot">
+  <div class="sid">OPR-01.5</div>
+  <div class="stitle">KYC · Authorized signatory</div>
+  <div class="desktop">
+    <div class="desk-shell">
+      <aside class="desk-nav"><div class="logo">ParkSpot Ops</div><a class="on">Onboarding</a></aside>
+      <section class="desk-main">
+        <header class="desk-top"><div class="h3">Operator onboarding</div><span class="pill info">Step 5 / 7</span></header>
+        <div class="desk-body">
+          <div class="stepper"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class=""></span><span class=""></span></div>
+          
+          <div class="card" style="padding:20px;max-width:720px;">
+            <div class="h3">Authorized signatory</div>
+            <div class="grid-2" style="margin-top:14px;">
+              <div><div class="label">NAME</div><div class="input" style="margin-top:6px;">Ananya Rao</div></div>
+              <div><div class="label">DESIGNATION</div><div class="input" style="margin-top:6px;">Director</div></div>
+              <div><div class="label">AADHAAR (masked)</div><div class="input" style="margin-top:6px;">XXXX-XXXX-4521</div></div>
+              <div><div class="label">MOBILE</div><div class="input" style="margin-top:6px;">+91 98xxx x2144</div></div>
+            </div>
+            <div style="margin-top:14px;"><button class="btn primary">Send eSign link</button></div>
+          </div>
+        </div>
+      </section>
+    </div></div>
+</div>
+<div class="shot">
+  <div class="sid">OPR-01.6</div>
+  <div class="stitle">KYC · Facility draft</div>
+  <div class="desktop">
+    <div class="desk-shell">
+      <aside class="desk-nav"><div class="logo">ParkSpot Ops</div><a class="on">Onboarding</a></aside>
+      <section class="desk-main">
+        <header class="desk-top"><div class="h3">Operator onboarding</div><span class="pill info">Step 6 / 7</span></header>
+        <div class="desk-body">
+          <div class="stepper"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class=""></span></div>
+          
+          <div class="card" style="padding:20px;max-width:720px;">
+            <div class="h3">Primary facility (draft)</div>
+            <div class="meta">You can refine geometry after approval · required for PENDING_REVIEW</div>
+            <div class="label" style="margin-top:14px;">FACILITY NAME</div>
+            <div class="input" style="margin-top:6px;">Indiranagar Metro MLCP</div>
+            <div class="label" style="margin-top:12px;">CITY</div>
+            <div class="input" style="margin-top:6px;">Bengaluru</div>
+            <div class="grid-2" style="margin-top:12px;">
+              <div class="class-tile on">T0 Manual</div><div class="class-tile">T1 Gate</div>
+            </div>
+            <div style="margin-top:14px;"><button class="btn primary">Continue</button></div>
+          </div>
+        </div>
+      </section>
+    </div></div>
+</div>
+<div class="shot">
+  <div class="sid">OPR-01.7</div>
+  <div class="stitle">KYC · Submit</div>
+  <div class="desktop">
+    <div class="desk-shell">
+      <aside class="desk-nav"><div class="logo">ParkSpot Ops</div><a class="on">Onboarding</a></aside>
+      <section class="desk-main">
+        <header class="desk-top"><div class="h3">Operator onboarding</div><span class="pill info">Step 7 / 7</span></header>
+        <div class="desk-body">
+          <div class="stepper"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span></div>
+          
+          <div class="card" style="padding:20px;max-width:720px;">
+            <div class="h3">Submit for review</div>
+            <div class="list-item row-between"><span>Business + GSTIN</span><span class="pill ok">Complete</span></div>
+            <div class="list-item row-between"><span>Bank penny-drop</span><span class="pill ok">Matched</span></div>
+            <div class="list-item row-between"><span>Documents</span><span class="pill ok">4/4</span></div>
+            <div class="list-item row-between" style="border:0;"><span>eSign</span><span class="pill ok">Signed</span></div>
+            <div class="meta" style="margin-top:12px;">SLA: platform reviews within 2 business days · payouts blocked until APPROVED</div>
+            <div style="margin-top:14px;"><button class="btn primary">Submit PENDING_REVIEW</button></div>
+          </div>
+        </div>
+      </section>
+    </div></div>
+</div>
+<div class="shot">
+  <div class="sid">OPR-02</div>
+  <div class="stitle">Facility editor</div>
+  <div class="desktop">
+    <div class="desk-shell">
+      <aside class="desk-nav"><div class="logo">Park<span style="color:#5EEAD4;">Spot</span> Ops</div><a class="" href="#">Overview</a><a class="" href="#">Live board</a><a class="" href="#">Zones</a><a class="" href="#">Tariffs</a><a class="" href="#">Bookings</a><a class="" href="#">Staff</a><a class="" href="#">Reports</a><a class="" href="#">Payouts</a><a class="" href="#">Disputes</a><a class="on" href="#">Settings</a></aside>
+      <section class="desk-main">
+        <header class="desk-top">
+          <div><div class="h3" style="font-size:15px;">Indiranagar Metro MLCP</div><div class="meta">Tier 1 · Bengaluru</div></div>
+          <div><span class="pill ok">Draft saved</span></div>
+        </header>
+        <div class="desk-body">
+      <div class="grid-2" style="grid-template-columns:1.2fr 1fr;gap:16px;">
+        <div class="card" style="height:420px;background:linear-gradient(135deg,#E2E8F0,#F8FAFC);display:grid;place-items:center;color:var(--text-2);font-weight:700;">Geofence polygon · entrance pins</div>
+        <div class="card" style="padding:16px;">
+          <div class="h3">Facility details</div>
+          <div class="label" style="margin-top:12px;">NAME</div><div class="input" style="margin-top:6px;">Indiranagar Metro MLCP</div>
+          <div class="label" style="margin-top:12px;">HOURS</div><div class="input" style="margin-top:6px;">24×7</div>
+          <div class="label" style="margin-top:12px;">TIER</div><div class="pill navy" style="margin-top:8px;">T1 Connected gate</div>
+        </div>
+      </div>
+    </div>
+      </section>
+    </div></div>
+</div>
+<div class="shot">
+  <div class="sid">OPR-03</div>
+  <div class="stitle">Zones & slots</div>
+  <div class="desktop">
+    <div class="desk-shell">
+      <aside class="desk-nav"><div class="logo">Park<span style="color:#5EEAD4;">Spot</span> Ops</div><a class="" href="#">Overview</a><a class="" href="#">Live board</a><a class="on" href="#">Zones</a><a class="" href="#">Tariffs</a><a class="" href="#">Bookings</a><a class="" href="#">Staff</a><a class="" href="#">Reports</a><a class="" href="#">Payouts</a><a class="" href="#">Disputes</a><a class="" href="#">Settings</a></aside>
+      <section class="desk-main">
+        <header class="desk-top">
+          <div><div class="h3" style="font-size:15px;">Indiranagar Metro MLCP</div><div class="meta">Tier 1 · Bengaluru</div></div>
+          <div></div>
+        </header>
+        <div class="desk-body">
+      <div class="card" style="padding:16px;">
+        <div class="row-between"><div class="h3">Zones</div><span class="pill teal">+ Add zone</span></div>
+        <table class="table" style="margin-top:12px;">
+          <tr><th>Zone</th><th>Mode</th><th>Capacity</th><th>Classes</th><th></th></tr>
+          <tr><td>B1</td><td>NUMBERED</td><td>220 bays</td><td>Car, SUV</td><td>Edit</td></tr>
+          <tr><td>B2</td><td>NUMBERED</td><td>240 bays</td><td>Car, EV</td><td>Edit</td></tr>
+          <tr><td>Surface</td><td>AGGREGATED</td><td>180</td><td>2W, Auto</td><td>Edit</td></tr>
+          <tr><td>Terrace</td><td>AGGREGATED</td><td>210</td><td>Car</td><td>Edit</td></tr>
+        </table>
+      </div>
+    </div>
+      </section>
+    </div></div>
+</div>
+<div class="shot">
+  <div class="sid">OPR-05</div>
+  <div class="stitle">Rate card editor</div>
+  <div class="desktop">
+    <div class="desk-shell">
+      <aside class="desk-nav"><div class="logo">Park<span style="color:#5EEAD4;">Spot</span> Ops</div><a class="" href="#">Overview</a><a class="" href="#">Live board</a><a class="" href="#">Zones</a><a class="on" href="#">Tariffs</a><a class="" href="#">Bookings</a><a class="" href="#">Staff</a><a class="" href="#">Reports</a><a class="" href="#">Payouts</a><a class="" href="#">Disputes</a><a class="" href="#">Settings</a></aside>
+      <section class="desk-main">
+        <header class="desk-top">
+          <div><div class="h3" style="font-size:15px;">Indiranagar Metro MLCP</div><div class="meta">Tier 1 · Bengaluru</div></div>
+          <div></div>
+        </header>
+        <div class="desk-body">
+      <div class="grid-2" style="gap:16px;">
+        <div class="card" style="padding:16px;">
+          <div class="h3">Car · weekday</div>
+          <div class="row-between list-item"><span>Base block (2h)</span><strong>₹100</strong></div>
+          <div class="row-between list-item"><span>Increment / hr</span><strong>₹40</strong></div>
+          <div class="row-between list-item"><span>Evening peak 17–21</span><strong>1.2×</strong></div>
+          <div class="row-between list-item"><span>Overstay multiplier</span><strong>1.5×</strong></div>
+          <div class="row-between" style="padding-top:10px;"><span>Walk-in tariff</span><strong>₹50 first hour</strong></div>
+        </div>
+        <div class="card" style="padding:16px;">
+          <div class="h3">Preview calculator</div>
+          <div class="meta" style="margin:8px 0;">Car · 2h · 18:00 start</div>
+          <div class="h2 currency">₹120.36</div>
+          <div class="meta">Matches driver quote breakdown</div>
+        </div>
+      </div>
+    </div>
+      </section>
+    </div></div>
+</div>
+<div class="shot">
+  <div class="sid">OPR-06</div>
+  <div class="stitle">Float buffer</div>
+  <div class="desktop">
+    <div class="desk-shell">
+      <aside class="desk-nav"><div class="logo">Park<span style="color:#5EEAD4;">Spot</span> Ops</div><a class="" href="#">Overview</a><a class="" href="#">Live board</a><a class="on" href="#">Zones</a><a class="" href="#">Tariffs</a><a class="" href="#">Bookings</a><a class="" href="#">Staff</a><a class="" href="#">Reports</a><a class="" href="#">Payouts</a><a class="" href="#">Disputes</a><a class="" href="#">Settings</a></aside>
+      <section class="desk-main">
+        <header class="desk-top">
+          <div><div class="h3" style="font-size:15px;">Indiranagar Metro MLCP</div><div class="meta">Tier 1 · Bengaluru</div></div>
+          <div></div>
+        </header>
+        <div class="desk-body">
+      <div class="card" style="padding:16px;max-width:800px;">
+        <div class="h3">Float buffer by time band</div>
+        <table class="table" style="margin-top:12px;">
+          <tr><th>Band</th><th>Measured walk-in</th><th>Configured</th><th></th></tr>
+          <tr><td>09–12</td><td>11%</td><td>15%</td><td><span class="pill teal">Apply suggestion</span></td></tr>
+          <tr><td>12–17</td><td>18%</td><td>15%</td><td><span class="pill warn">Below measured</span></td></tr>
+          <tr><td>17–21</td><td>22%</td><td>20%</td><td><span class="pill ok">OK · floor 5%</span></td></tr>
+        </table>
+      </div>
+    </div>
+      </section>
+    </div></div>
+</div>
+<div class="shot">
+  <div class="sid">OPR-14</div>
+  <div class="stitle">Live board</div>
+  <div class="desktop">
+    <div class="desk-shell">
+      <aside class="desk-nav"><div class="logo">Park<span style="color:#5EEAD4;">Spot</span> Ops</div><a class="" href="#">Overview</a><a class="on" href="#">Live board</a><a class="" href="#">Zones</a><a class="" href="#">Tariffs</a><a class="" href="#">Bookings</a><a class="" href="#">Staff</a><a class="" href="#">Reports</a><a class="" href="#">Payouts</a><a class="" href="#">Disputes</a><a class="" href="#">Settings</a></aside>
+      <section class="desk-main">
+        <header class="desk-top">
+          <div><div class="h3" style="font-size:15px;">Indiranagar Metro MLCP</div><div class="meta">Tier 1 · Bengaluru</div></div>
+          <div><span class="pill ok">Live · Ledger+Loops</span></div>
+        </header>
+        <div class="desk-body">
+      <div class="grid-2" style="grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px;">
+        <div class="card" style="padding:14px;"><div class="label">OCCUPANCY</div><div class="h2">84.6%</div></div>
+        <div class="card" style="padding:14px;"><div class="label">ARRIVALS 30M</div><div class="h2">38</div></div>
+        <div class="card" style="padding:14px;"><div class="label">OVERSTAYS</div><div class="h2" style="color:var(--warn);">7</div></div>
+        <div class="card" style="padding:14px;"><div class="label">COLLECTIONS</div><div class="h2 currency">₹78,640</div></div>
+      </div>
+      <div class="card" style="padding:16px;">
+        <div class="h3">Occupancy by zone</div>
+        <div class="list-item row-between"><span>B1</span><span class="pill danger">98.7%</span></div>
+        <div class="list-item row-between"><span>B2</span><span class="pill ok">74%</span></div>
+        <div class="list-item row-between" style="border:0;"><span>Terrace</span><span class="pill warn">92.5%</span></div>
+      </div>
+    </div>
+      </section>
+    </div></div>
+</div>
+<div class="shot">
+  <div class="sid">OPR-15</div>
+  <div class="stitle">Blocks & capacity</div>
+  <div class="desktop">
+    <div class="desk-shell">
+      <aside class="desk-nav"><div class="logo">Park<span style="color:#5EEAD4;">Spot</span> Ops</div><a class="" href="#">Overview</a><a class="" href="#">Live board</a><a class="on" href="#">Zones</a><a class="" href="#">Tariffs</a><a class="" href="#">Bookings</a><a class="" href="#">Staff</a><a class="" href="#">Reports</a><a class="" href="#">Payouts</a><a class="" href="#">Disputes</a><a class="" href="#">Settings</a></aside>
+      <section class="desk-main">
+        <header class="desk-top">
+          <div><div class="h3" style="font-size:15px;">Indiranagar Metro MLCP</div><div class="meta">Tier 1 · Bengaluru</div></div>
+          <div></div>
+        </header>
+        <div class="desk-body">
+      <div class="card" style="padding:16px;">
+        <div class="row-between"><div class="h3">Active blocks</div><span class="pill teal">+ Block bay</span></div>
+        <table class="table" style="margin-top:12px;">
+          <tr><th>Target</th><th>Window</th><th>Reason</th><th>Actor</th></tr>
+          <tr><td>B1-44</td><td>Today 10–18</td><td>Waterlogging</td><td>Manager</td></tr>
+          <tr><td>Terrace · 20 units</td><td>Sat–Sun</td><td>Event hold</td><td>Owner</td></tr>
+        </table>
+        <div class="meta" style="margin-top:10px;">Reason mandatory · written to audit_log</div>
+      </div>
+    </div>
+      </section>
+    </div></div>
+</div>
+<div class="shot">
+  <div class="sid">OPR-09</div>
+  <div class="stitle">Staff & devices</div>
+  <div class="desktop">
+    <div class="desk-shell">
+      <aside class="desk-nav"><div class="logo">Park<span style="color:#5EEAD4;">Spot</span> Ops</div><a class="" href="#">Overview</a><a class="" href="#">Live board</a><a class="" href="#">Zones</a><a class="" href="#">Tariffs</a><a class="" href="#">Bookings</a><a class="on" href="#">Staff</a><a class="" href="#">Reports</a><a class="" href="#">Payouts</a><a class="" href="#">Disputes</a><a class="" href="#">Settings</a></aside>
+      <section class="desk-main">
+        <header class="desk-top">
+          <div><div class="h3" style="font-size:15px;">Indiranagar Metro MLCP</div><div class="meta">Tier 1 · Bengaluru</div></div>
+          <div></div>
+        </header>
+        <div class="desk-body">
+      <div class="card" style="padding:16px;">
+        <table class="table">
+          <tr><th>Name</th><th>Role</th><th>Facility</th><th>Shift</th><th>Device</th></tr>
+          <tr><td>Ramesh Kumar</td><td>Attendant</td><td>Gate 2</td><td>Open</td><td>POS-04</td></tr>
+          <tr><td>Sunil Sharma</td><td>Attendant</td><td>Gate 4</td><td>Scheduled</td><td>POS-07</td></tr>
+          <tr><td>Ananya Rao</td><td>Manager</td><td>All</td><td>—</td><td>—</td></tr>
+        </table>
+      </div>
+    </div>
+      </section>
+    </div></div>
+</div>
+<div class="shot">
+  <div class="sid">OPR-10</div>
+  <div class="stitle">Bookings desk</div>
+  <div class="desktop">
+    <div class="desk-shell">
+      <aside class="desk-nav"><div class="logo">Park<span style="color:#5EEAD4;">Spot</span> Ops</div><a class="" href="#">Overview</a><a class="" href="#">Live board</a><a class="" href="#">Zones</a><a class="" href="#">Tariffs</a><a class="on" href="#">Bookings</a><a class="" href="#">Staff</a><a class="" href="#">Reports</a><a class="" href="#">Payouts</a><a class="" href="#">Disputes</a><a class="" href="#">Settings</a></aside>
+      <section class="desk-main">
+        <header class="desk-top">
+          <div><div class="h3" style="font-size:15px;">Indiranagar Metro MLCP</div><div class="meta">Tier 1 · Bengaluru</div></div>
+          <div></div>
+        </header>
+        <div class="desk-body">
+      <div class="card" style="padding:16px;">
+        <div class="input" style="margin-bottom:12px;max-width:360px;">Search plate / booking code</div>
+        <table class="table">
+          <tr><th>Code</th><th>Plate</th><th>Bay</th><th>Status</th><th>Window</th></tr>
+          <tr><td>#SP-99214</td><td>KA 01 MJ 8821</td><td>B2-19</td><td><span class="pill ok">CHECKED IN</span></td><td>18–20</td></tr>
+          <tr><td>#SP-99255</td><td>KA 03 AB 1199</td><td>A-12</td><td><span class="pill info">CONFIRMED</span></td><td>19–21</td></tr>
+          <tr><td>#SP-99102</td><td>DL 01 CA 7788</td><td>—</td><td><span class="pill stale">NO SHOW</span></td><td>12–14</td></tr>
+        </table>
+      </div>
+    </div>
+      </section>
+    </div></div>
+</div>
+<div class="shot">
+  <div class="sid">OPR-10D</div>
+  <div class="stitle">Booking detail</div>
+  <div class="desktop">
+    <div class="desk-shell">
+      <aside class="desk-nav"><div class="logo">Park<span style="color:#5EEAD4;">Spot</span> Ops</div><a class="" href="#">Overview</a><a class="" href="#">Live board</a><a class="" href="#">Zones</a><a class="" href="#">Tariffs</a><a class="on" href="#">Bookings</a><a class="" href="#">Staff</a><a class="" href="#">Reports</a><a class="" href="#">Payouts</a><a class="" href="#">Disputes</a><a class="" href="#">Settings</a></aside>
+      <section class="desk-main">
+        <header class="desk-top">
+          <div><div class="h3" style="font-size:15px;">Indiranagar Metro MLCP</div><div class="meta">Tier 1 · Bengaluru</div></div>
+          <div></div>
+        </header>
+        <div class="desk-body">
+      <div class="grid-2" style="gap:16px;">
+        <div class="card" style="padding:16px;">
+          <div class="row-between"><div class="h3">#SP-99214</div><span class="pill ok">CHECKED_IN</span></div>
+          <div class="meta" style="margin-top:6px;">KA 01 MJ 8821 · Car · Bay B2-19</div>
+          <div class="list-item row-between" style="margin-top:12px;"><span>Window</span><strong>18:00–20:00 IST</strong></div>
+          <div class="list-item row-between"><span>Product</span><strong>Reservation</strong></div>
+          <div class="list-item row-between"><span>Paid</span><strong class="currency">₹141.60</strong></div>
+          <div class="list-item row-between" style="border:0;"><span>Credential</span><strong>Ed25519 · nonce used</strong></div>
+        </div>
+        <div class="card" style="padding:16px;">
+          <div class="h3">Timeline</div>
+          <div class="list-item"><strong>18:01</strong> · HELD → CONFIRMED</div>
+          <div class="list-item"><strong>18:04</strong> · Entry · POS-04</div>
+          <div class="list-item" style="border:0;"><strong>—</strong> · Exit pending</div>
+          <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;">
+            <span class="pill teal">Force complete</span><span class="pill">Refund</span><span class="pill warn">Open dispute</span>
+          </div>
+        </div>
+      </div>
+    </div>
+      </section>
+    </div></div>
+</div>
+<div class="shot">
+  <div class="sid">OPR-20</div>
+  <div class="stitle">Pass pools</div>
+  <div class="desktop">
+    <div class="desk-shell">
+      <aside class="desk-nav"><div class="logo">Park<span style="color:#5EEAD4;">Spot</span> Ops</div><a class="" href="#">Overview</a><a class="" href="#">Live board</a><a class="" href="#">Zones</a><a class="on" href="#">Tariffs</a><a class="" href="#">Bookings</a><a class="" href="#">Staff</a><a class="" href="#">Reports</a><a class="" href="#">Payouts</a><a class="" href="#">Disputes</a><a class="" href="#">Settings</a></aside>
+      <section class="desk-main">
+        <header class="desk-top">
+          <div><div class="h3" style="font-size:15px;">Indiranagar Metro MLCP</div><div class="meta">Tier 1 · Bengaluru</div></div>
+          <div></div>
+        </header>
+        <div class="desk-body">
+      <div class="card" style="padding:16px;">
+        <div class="row-between"><div class="h3">Monthly pass pools</div><span class="pill teal">+ New pool</span></div>
+        <table class="table" style="margin-top:12px;">
+          <tr><th>Pool</th><th>Facility</th><th>Quota</th><th>Sold</th><th>Price</th><th>Valid</th></tr>
+          <tr><td>Metro Commuter</td><td>Indiranagar</td><td>80</td><td>62</td><td>₹4,999</td><td>Nov 2026</td></tr>
+          <tr><td>Office Day</td><td>Cyber City</td><td>40</td><td>40</td><td>₹6,500</td><td><span class="pill warn">Sold out</span></td></tr>
+          <tr><td>2W Express</td><td>Surface</td><td>120</td><td>88</td><td>₹999</td><td>Nov 2026</td></tr>
+        </table>
+        <div class="meta" style="margin-top:10px;">Quota reserves capacity · oversell blocked · pass QR uses same Ed25519 path</div>
+      </div>
+    </div>
+      </section>
+    </div></div>
+</div>
+<div class="shot">
+  <div class="sid">OPR-17</div>
+  <div class="stitle">Reports</div>
+  <div class="desktop">
+    <div class="desk-shell">
+      <aside class="desk-nav"><div class="logo">Park<span style="color:#5EEAD4;">Spot</span> Ops</div><a class="" href="#">Overview</a><a class="" href="#">Live board</a><a class="" href="#">Zones</a><a class="" href="#">Tariffs</a><a class="" href="#">Bookings</a><a class="" href="#">Staff</a><a class="on" href="#">Reports</a><a class="" href="#">Payouts</a><a class="" href="#">Disputes</a><a class="" href="#">Settings</a></aside>
+      <section class="desk-main">
+        <header class="desk-top">
+          <div><div class="h3" style="font-size:15px;">Indiranagar Metro MLCP</div><div class="meta">Tier 1 · Bengaluru</div></div>
+          <div></div>
+        </header>
+        <div class="desk-body">
+      <div class="grid-2" style="grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px;">
+        <div class="card" style="padding:14px;"><div class="label">GROSS TODAY</div><div class="h2 currency">₹78,640</div></div>
+        <div class="card" style="padding:14px;"><div class="label">UPI / CASH</div><div class="h2">82% / 18%</div></div>
+        <div class="card" style="padding:14px;"><div class="label">NO-SHOWS</div><div class="h2">6</div></div>
+      </div>
+      <div class="card" style="padding:16px;">
+        <div class="row-between"><div class="h3">Exports</div>
+          <div style="display:flex;gap:8px;"><span class="pill teal">CSV</span><span class="pill">GSTR-1 helper</span></div>
+        </div>
+        <div class="meta" style="margin-top:8px;">Operator is supplier of parking · platform TCS context in footnotes</div>
+      </div>
+    </div>
+      </section>
+    </div></div>
+</div>
+<div class="shot">
+  <div class="sid">OPR-18</div>
+  <div class="stitle">Payouts</div>
+  <div class="desktop">
+    <div class="desk-shell">
+      <aside class="desk-nav"><div class="logo">Park<span style="color:#5EEAD4;">Spot</span> Ops</div><a class="" href="#">Overview</a><a class="" href="#">Live board</a><a class="" href="#">Zones</a><a class="" href="#">Tariffs</a><a class="" href="#">Bookings</a><a class="" href="#">Staff</a><a class="" href="#">Reports</a><a class="on" href="#">Payouts</a><a class="" href="#">Disputes</a><a class="" href="#">Settings</a></aside>
+      <section class="desk-main">
+        <header class="desk-top">
+          <div><div class="h3" style="font-size:15px;">Indiranagar Metro MLCP</div><div class="meta">Tier 1 · Bengaluru</div></div>
+          <div></div>
+        </header>
+        <div class="desk-body">
+      <div class="card" style="padding:16px;">
+        <table class="table">
+          <tr><th>Batch</th><th>Gross</th><th>Fees</th><th>TCS</th><th>TDS</th><th>Net</th><th>UTR</th></tr>
+          <tr><td>23 Oct</td><td>₹2,40,000</td><td>₹12,000</td><td>₹2,160</td><td>₹216</td><td>₹2,25,624</td><td>HDFC…8891</td></tr>
+          <tr><td>22 Oct</td><td>₹1,98,400</td><td>₹9,920</td><td>₹1,786</td><td>₹179</td><td>₹1,86,515</td><td>HDFC…7742</td></tr>
+        </table>
+      </div>
+    </div>
+      </section>
+    </div></div>
+</div>
+<div class="shot">
+  <div class="sid">OPR-19</div>
+  <div class="stitle">Disputes inbox</div>
+  <div class="desktop">
+    <div class="desk-shell">
+      <aside class="desk-nav"><div class="logo">Park<span style="color:#5EEAD4;">Spot</span> Ops</div><a class="" href="#">Overview</a><a class="" href="#">Live board</a><a class="" href="#">Zones</a><a class="" href="#">Tariffs</a><a class="" href="#">Bookings</a><a class="" href="#">Staff</a><a class="" href="#">Reports</a><a class="" href="#">Payouts</a><a class="on" href="#">Disputes</a><a class="" href="#">Settings</a></aside>
+      <section class="desk-main">
+        <header class="desk-top">
+          <div><div class="h3" style="font-size:15px;">Indiranagar Metro MLCP</div><div class="meta">Tier 1 · Bengaluru</div></div>
+          <div></div>
+        </header>
+        <div class="desk-body">
+      <div class="card" style="padding:16px;">
+        <div class="list-item row-between"><div><strong>#D-204 · Overcharge</strong><div class="meta">SLA 1d 4h left</div></div><span class="pill warn">Respond</span></div>
+        <div class="list-item row-between"><div><strong>#D-198 · SLA breach</strong><div class="meta">Evidence uploaded</div></div><span class="pill info">In review</span></div>
+        <div class="list-item row-between" style="border:0;"><div><strong>#D-190 · No-show contested</strong><div class="meta">Closed</div></div><span class="pill ok">Resolved</span></div>
+      </div>
+    </div>
+      </section>
+    </div></div>
+</div>
+<div class="shot">
+  <div class="sid">OPR-21</div>
+  <div class="stitle">Tier commissioning</div>
+  <div class="desktop">
+    <div class="desk-shell">
+      <aside class="desk-nav"><div class="logo">Park<span style="color:#5EEAD4;">Spot</span> Ops</div><a class="" href="#">Overview</a><a class="" href="#">Live board</a><a class="" href="#">Zones</a><a class="" href="#">Tariffs</a><a class="" href="#">Bookings</a><a class="" href="#">Staff</a><a class="" href="#">Reports</a><a class="" href="#">Payouts</a><a class="" href="#">Disputes</a><a class="on" href="#">Settings</a></aside>
+      <section class="desk-main">
+        <header class="desk-top">
+          <div><div class="h3" style="font-size:15px;">Indiranagar Metro MLCP</div><div class="meta">Tier 1 · Bengaluru</div></div>
+          <div></div>
+        </header>
+        <div class="desk-body">
+      <div class="card" style="padding:16px;max-width:720px;">
+        <div class="h3">Request Tier 2 · ANPR</div>
+        <div class="list-item row-between"><span>Edge gateway paired</span><span class="pill ok">Done</span></div>
+        <div class="list-item row-between"><span>Loop A/B calibrated</span><span class="pill ok">Done</span></div>
+        <div class="list-item row-between"><span>ANPR cameras · RTSP</span><span class="pill warn">Pending</span></div>
+        <div class="list-item row-between" style="border:0;"><span>Test cycle results</span><span class="pill stale">Not run</span></div>
+        <div style="margin-top:14px;">{btn("Submit commissioning request")}</div>
+      </div>
+    </div>
+      </section>
+    </div></div>
+</div></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>SmartPark India - Driver Map-First Explore</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Plus+Jakarta+Sans:wght@100..900&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-secondary-fixed-variant": "#3f465c",
+            "secondary-container": "#dae2fd",
+            "tertiary-container": "#00855b",
+            "inverse-surface": "#213145",
+            "secondary": "#565e74",
+            "tertiary": "#006947",
+            "on-background": "#0b1c30",
+            "primary-fixed": "#89f5e7",
+            "error": "#ba1a1a",
+            "surface-container-low": "#eff4ff",
+            "surface-tint": "#006a61",
+            "on-secondary": "#ffffff",
+            "primary": "#00685f",
+            "surface-container-high": "#dce9ff",
+            "on-primary": "#ffffff",
+            "on-surface": "#0b1c30",
+            "on-tertiary-container": "#f5fff6",
+            "surface-variant": "#d3e4fe",
+            "on-primary-fixed-variant": "#005049",
+            "on-primary-fixed": "#00201d",
+            "surface-container-highest": "#d3e4fe",
+            "on-tertiary-fixed": "#002113",
+            "on-secondary-container": "#5c647a",
+            "inverse-on-surface": "#eaf1ff",
+            "outline": "#6d7a77",
+            "surface": "#f8f9ff",
+            "secondary-fixed": "#dae2fd",
+            "surface-dim": "#cbdbf5",
+            "surface-container": "#e5eeff",
+            "inverse-primary": "#6bd8cb",
+            "on-tertiary-fixed-variant": "#005236",
+            "on-tertiary": "#ffffff",
+            "surface-container-lowest": "#ffffff",
+            "on-error": "#ffffff",
+            "background": "#f8f9ff",
+            "error-container": "#ffdad6",
+            "on-surface-variant": "#3d4947",
+            "on-error-container": "#93000a",
+            "tertiary-fixed": "#6ffbbe",
+            "primary-fixed-dim": "#6bd8cb",
+            "surface-bright": "#f8f9ff",
+            "on-primary-container": "#f4fffc",
+            "tertiary-fixed-dim": "#4edea3",
+            "secondary-fixed-dim": "#bec6e0",
+            "primary-container": "#008378",
+            "outline-variant": "#bcc9c6",
+            "on-secondary-fixed": "#131b2e"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "gutter": "1rem",
+            "space-md": "1rem",
+            "gutter-desktop": "1.5rem",
+            "margin-tablet": "1.5rem",
+            "space-xs": "0.25rem",
+            "space-sm": "0.5rem",
+            "space-xl": "2rem",
+            "margin": "1rem",
+            "margin-desktop": "2.5rem",
+            "space-lg": "1.5rem"
+          },
+          "fontFamily": {
+            "headline-lg": ["Plus Jakarta Sans"],
+            "body-md": ["Inter"],
+            "body-lg": ["Inter"],
+            "label-sm": ["Inter"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "headline-sm": ["Plus Jakarta Sans"],
+            "label-md": ["Inter"],
+            "body-sm": ["Inter"],
+            "numeric-mono": ["Inter"],
+            "display-lg": ["Plus Jakarta Sans"],
+            "label-lg": ["Inter"],
+            "display-lg-mobile": ["Plus Jakarta Sans"],
+            "headline-lg-mobile": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "headline-lg": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+            "headline-lg-mobile": ["24px", { "lineHeight": "30px", "fontWeight": "700" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "fontWeight": "500" }],
+            "headline-md": ["22px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "numeric-mono": ["16px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "display-lg": ["36px", { "lineHeight": "44px", "fontWeight": "700" }],
+            "label-lg": ["14px", { "lineHeight": "18px", "fontWeight": "600" }],
+            "display-lg-mobile": ["30px", { "lineHeight": "38px", "fontWeight": "700" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    @keyframes ping-subtle {
+      0% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(2.2); opacity: 0; }
+      100% { transform: scale(2.2); opacity: 0; }
+    }
+    .animate-radar { animation: ping-subtle 2.4s cubic-bezier(0, 0, 0.2, 1) infinite; }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-slate-900 flex justify-center items-center min-h-screen p-0 m-0 overflow-hidden font-body-md text-on-surface select-none antialiased">
+<!-- Mobile Viewport Shell (390x844 strict bounding) -->
+<main class="relative w-[390px] h-[844px] bg-surface overflow-hidden shadow-2xl flex flex-col justify-between border border-slate-700/30">
+<!-- LEVEL 0 & 1: CARTOGRAPHIC VECTOR BASEMAP -->
+<div class="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden bg-[#eef3f7]">
+<!-- SVG Vectorized High-Precision Transit Canvas (Delhi Central Map Segment) -->
+<svg class="w-full h-full object-cover" fill="none" viewbox="0 0 390 844" xmlns="http://www.w3.org/2000/svg">
+<!-- City Zoning Landuse Ground -->
+<rect fill="#eef2f6" height="844" width="390"></rect>
+<!-- Parks / Green Polygons (Central Park CP & Radial Lawns) -->
+<circle cx="195" cy="370" fill="#d2ecd9" r="74" stroke="#bfe1c8" stroke-width="1.5"></circle>
+<circle cx="195" cy="370" fill="#e2f5e8" r="32" stroke="#a7d7b4" stroke-width="1.5"></circle>
+<!-- Shivaji Stadium Green patch -->
+<path d="M 12 430 Q 30 410 70 424 T 80 470 L 20 480 Z" fill="#d8edd5" opacity="0.8"></path>
+<!-- Barakhamba Greens -->
+<path d="M 290 280 L 360 260 L 375 320 L 305 330 Z" fill="#dbf2dc" opacity="0.75"></path>
+<!-- Minor Street Grids & Blocks -->
+<path d="M-10 120 L400 140 M-10 210 L400 230 M-20 620 L410 600 M-10 520 L400 540" stroke="#fbfdfe" stroke-linecap="round" stroke-width="12"></path>
+<path d="M 45 0 L 60 844 M 330 0 L 320 844 M 110 0 L 120 844" stroke="#fbfdfe" stroke-linecap="round" stroke-width="10"></path>
+<!-- Major Secondary Radial Roads (Connaught Place Architecture) -->
+<path d="M 195 370 L 195 40" stroke="#ffffff" stroke-linecap="round" stroke-width="16"></path> <!-- Parliament St north -->
+<path d="M 195 370 L 380 240" stroke="#ffffff" stroke-linecap="round" stroke-width="15"></path> <!-- Barakhamba Rd -->
+<path d="M 195 370 L 360 480" stroke="#ffffff" stroke-linecap="round" stroke-width="14"></path> <!-- Kasturba Gandhi Marg -->
+<path d="M 195 370 L 195 680" stroke="#ffffff" stroke-linecap="round" stroke-width="16"></path> <!-- Janpath -->
+<path d="M 195 370 L 40 500" stroke="#ffffff" stroke-linecap="round" stroke-width="15"></path> <!-- Baba Kharak Singh Marg -->
+<path d="M 195 370 L 20 280" stroke="#ffffff" stroke-linecap="round" stroke-width="14"></path> <!-- Shaheed Bhagat Singh Marg -->
+<!-- Inner & Outer Circle Dual Rings -->
+<circle cx="195" cy="370" fill="none" r="110" stroke="#ffffff" stroke-width="20"></circle>
+<circle cx="195" cy="370" fill="none" r="110" stroke="#e0e8f0" stroke-width="1"></circle>
+<circle cx="195" cy="370" fill="none" r="156" stroke="#ffffff" stroke-width="18"></circle>
+<circle cx="195" cy="370" fill="none" r="156" stroke="#d5e0ea" stroke-dasharray="8 6" stroke-width="1.5"></circle>
+<!-- Delhi Metro Blue Line (Barakhamba - Rajiv Chowk Transit Overlay) -->
+<path d="M -20 370 L 195 370 L 390 320" opacity="0.85" stroke="#1d4ed8" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5"></path>
+<!-- Metro Station Interchanges -->
+<circle cx="195" cy="370" fill="#ffffff" r="7" stroke="#1d4ed8" stroke-width="3"></circle>
+<text fill="#1e3a8a" font-family="Plus Jakarta Sans, sans-serif" font-size="9" font-weight="700" letter-spacing="0.4" text-anchor="middle" x="195" y="356">RAJIV CHOWK METRO</text>
+<circle cx="330" cy="336" fill="#ffffff" r="5" stroke="#1d4ed8" stroke-width="2.5"></circle>
+<text fill="#3b82f6" font-family="Plus Jakarta Sans, sans-serif" font-size="8" font-weight="600" text-anchor="middle" x="330" y="324">Barakhamba Rd</text>
+<!-- Navigation Turn & Polyline to DLF CyberCity Pin -->
+<!-- Start puck: Inner Circle -> Route to (264, 495) -->
+<path d="M 188 384 C 205 405, 235 435, 250 460 L 260 488" stroke="#008378" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"></path>
+<path d="M 188 384 C 205 405, 235 435, 250 460 L 260 488" stroke="#89f5e7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
+</svg>
+</div>
+<!-- GPS USER LOCATOR (At Rajiv Chowk / Inner Circle) -->
+<div class="absolute left-[176px] top-[372px] z-10 pointer-events-none flex items-center justify-center">
+<!-- Radar Pulse -->
+<div class="absolute w-12 h-12 rounded-full bg-primary/20 animate-radar"></div>
+<div class="absolute w-8 h-8 rounded-full bg-primary/25"></div>
+<!-- Compass Heading Cone -->
+<div class="absolute w-0 h-0 border-l-[9px] border-l-transparent border-r-[9px] border-r-transparent border-b-[20px] border-b-primary/40 -top-3.5 transform rotate-45"></div>
+<!-- Center Core Puck -->
+<div class="w-4 h-4 rounded-full bg-primary border-2 border-white shadow-md relative z-10"></div>
+</div>
+<!-- MAP MARKER PIN 2: Palika Parking (Nearby Available) -->
+<div class="absolute left-[54px] top-[436px] z-20 pointer-events-auto cursor-pointer transform -translate-x-1/2 -translate-y-1/2">
+<div class="flex items-center gap-1.5 bg-surface-container-lowest/95 backdrop-blur-md px-2.5 py-1.5 rounded-full border border-emerald-300 shadow-md hover:scale-105 active:scale-95 transition-transform duration-150">
+<span class="w-2 h-2 rounded-full bg-tertiary-container animate-pulse"></span>
+<span class="font-headline-sm text-[11px] leading-tight font-bold text-on-surface">₹30/hr</span>
+<span class="w-[1px] h-2.5 bg-slate-200"></span>
+<span class="font-label-sm text-[10px] text-tertiary font-semibold">4 spots</span>
+</div>
+<!-- Pin Needle Pointer -->
+<div class="w-0 h-0 border-l-[5px] border-l-transparent border-r-[5px] border-r-transparent border-t-[6px] border-t-white mx-auto drop-shadow-sm"></div>
+</div>
+<!-- MAP MARKER PIN 3: Ambience Mall (Occupied / Full) -->
+<div class="absolute left-[310px] top-[242px] z-20 pointer-events-auto cursor-pointer transform -translate-x-1/2 -translate-y-1/2 opacity-90">
+<div class="flex items-center gap-1.5 bg-surface-container-lowest/95 backdrop-blur-md px-2.5 py-1.5 rounded-full border border-error/30 shadow-sm">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span class="font-headline-sm text-[11px] leading-tight font-bold text-on-surface line-through opacity-70">₹60/hr</span>
+<span class="w-[1px] h-2.5 bg-slate-200"></span>
+<span class="font-label-sm text-[10px] text-error font-bold tracking-tight">Full</span>
+</div>
+<div class="w-0 h-0 border-l-[5px] border-l-transparent border-r-[5px] border-r-transparent border-t-[6px] border-t-white mx-auto"></div>
+</div>
+<!-- MAP MARKER PIN 1 (SELECTED / ACTIVE HERO PIN): DLF CyberCity P3 Multi-Level -->
+<div class="absolute left-[262px] top-[484px] z-25 pointer-events-auto cursor-pointer transform -translate-x-1/2 -translate-y-full">
+<!-- Pulsing Beacon Halo -->
+<div class="absolute -inset-2 bg-primary/25 rounded-2xl animate-radar -z-10"></div>
+<!-- Primary Badge Pill Card -->
+<div class="flex flex-col items-center bg-slate-900 text-white rounded-2xl p-1.5 px-3 shadow-xl border-2 border-primary-fixed ring-4 ring-primary/20">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary-fixed text-[15px]" style="font-variation-settings: 'FILL' 1;">local_parking</span>
+<span class="font-headline-sm text-[13px] font-bold text-white tracking-tight">₹40<span class="font-normal text-[10px] text-slate-300">/hr</span></span>
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+</div>
+<div class="text-[10px] font-label-sm text-primary-fixed font-semibold">18 spots free</div>
+</div>
+<!-- Ground Indicator Pointer Tip -->
+<div class="w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[8px] border-t-slate-900 mx-auto -mt-[1px]"></div>
+</div>
+<!-- MAP UTILITY CONTROLS (Right Edge Stack) -->
+<div class="absolute right-3.5 top-[214px] z-30 flex flex-col gap-2.5">
+<!-- Compass Button -->
+<button class="w-10 h-10 rounded-full bg-surface-container-lowest/90 backdrop-blur-md border border-slate-200/80 shadow-md flex items-center justify-center text-on-surface active:scale-90 transition-transform duration-150">
+<span class="material-symbols-outlined text-[20px] text-red-500 font-semibold" style="font-variation-settings: 'FILL' 1;">explore</span>
+</button>
+<!-- 3D Layer Toggle -->
+<button class="w-10 h-10 rounded-full bg-surface-container-lowest/90 backdrop-blur-md border border-slate-200/80 shadow-md flex items-center justify-center text-on-surface-variant active:scale-90 transition-transform duration-150">
+<span class="material-symbols-outlined text-[19px]">layers</span>
+</button>
+<!-- Traffic Flow Layer -->
+<button class="w-10 h-10 rounded-full bg-surface-container-lowest/90 backdrop-blur-md border border-slate-200/80 shadow-md flex items-center justify-center text-primary active:scale-90 transition-transform duration-150">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">traffic</span>
+</button>
+<!-- GPS Recenter FAB Button -->
+<button class="w-10 h-10 rounded-full bg-primary text-on-primary shadow-lg flex items-center justify-center active:scale-90 transition-transform duration-150">
+<span class="material-symbols-outlined text-[20px]">my_location</span>
+</button>
+</div>
+<!-- LEVEL 2: TOP FLOATING GLASSMORPHIC CONTROLS & VEHICLE SELECTOR -->
+<div class="relative z-40 w-full pt-3 px-3 pb-2 flex flex-col gap-2.5 pointer-events-none">
+<!-- Top Header Card (Frosted Glass Container) -->
+<div class="w-full bg-surface-container-lowest/85 backdrop-blur-md rounded-2xl p-2.5 shadow-sm border border-slate-200/70 pointer-events-auto">
+<!-- Row 1: Location Anchor & Quick Identity Actions -->
+<div class="flex items-center justify-between pb-2">
+<!-- Location Pill Selector -->
+<div class="flex items-center gap-1.5 px-2.5 py-1 bg-surface-container-high/60 rounded-full cursor-pointer hover:bg-surface-container-highest transition-colors active:scale-95">
+<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+<span class="font-headline-sm text-label-md font-bold text-on-surface truncate max-w-[190px]">Connaught Place, New Delhi</span>
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">expand_more</span>
+</div>
+<!-- Notification Bell & Driver Profile Picture -->
+<div class="flex items-center gap-2">
+<button class="relative w-8 h-8 rounded-full bg-surface-container hover:bg-surface-container-high flex items-center justify-center text-on-surface-variant active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined text-[18px]">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-error ring-1 ring-white"></span>
+</button>
+<div class="relative cursor-pointer active:scale-95 transition-transform">
+<img class="w-8 h-8 rounded-full object-cover ring-2 ring-primary" data-alt="Close up professional portrait of a smiling Indian driver wearing smart casual denim shirt against soft city skyline backdrop in high daylight." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVHn7t6Ms8mm4WltiSlB_dhgtsaO2ziwnq-jlStQaSBrP21hLEfxn5_eCvmn8DJfNEtR7FZppL0sJVj1nLohkgtgQk6KOnHE0GxN0z83OJkQDzzLFIY5TpdDl52vv7XCK8Hmty_LaTLg6tm_SiuwPdycJTMyPodV4t2-kRLQpeaF5zci0HjKUazIXhaoISzRRlEJwF_PAodvc4wN_ZwD9nRDoujHv8cGArVaUH327V1O4y74oOqTAucCCVyjqP4an2Ed_PM_PxuBdd"/>
+<span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-1 ring-white"></span>
+</div>
+</div>
+</div>
+<!-- Row 2: Sleek High-Contrast Search Field -->
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-[19px] text-outline">search</span>
+<input class="w-full h-10 pl-9 pr-16 bg-surface-container-low border border-slate-200/80 rounded-xl font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:ring-2 focus:ring-primary focus:bg-white transition-all shadow-inner" placeholder="Search mall, metro, hospital, area..." type="text" value="DLF CyberCity / Barakhamba Rd"/>
+<div class="absolute right-2 flex items-center gap-1">
+<button class="w-7 h-7 rounded-lg flex items-center justify-center text-outline hover:text-primary active:scale-90">
+<span class="material-symbols-outlined text-[18px]">mic</span>
+</button>
+<button class="w-7 h-7 rounded-lg flex items-center justify-center text-outline hover:text-primary active:scale-90">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Row 3: Vehicle Category Selector Chips (Exactly 6 category pills) -->
+<div class="w-full flex items-center gap-2 overflow-x-auto no-scrollbar pointer-events-auto py-0.5">
+<!-- 1. Bicycle -->
+<button class="flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 bg-surface-container-lowest/90 backdrop-blur-md rounded-full border border-slate-200 shadow-sm text-on-surface-variant hover:bg-white active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[15px]">pedal_bike</span>
+<span class="font-label-md text-label-sm font-semibold">Bicycle</span>
+</button>
+<!-- 2. Two Wheeler -->
+<button class="flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 bg-surface-container-lowest/90 backdrop-blur-md rounded-full border border-slate-200 shadow-sm text-on-surface-variant hover:bg-white active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[15px]">two_wheeler</span>
+<span class="font-label-md text-label-sm font-semibold">2-Wheeler</span>
+</button>
+<!-- 3. Car • Creta (ACTIVE STATE WITH NUMBER PLATE) -->
+<button class="flex-shrink-0 flex items-center gap-2 px-3 py-1.5 bg-slate-900 rounded-full shadow-md border border-primary-fixed ring-2 ring-primary/20 text-white active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[16px] text-primary-fixed" style="font-variation-settings: 'FILL' 1;">directions_car</span>
+<span class="font-headline-sm text-label-md font-bold text-white tracking-tight">Car • Creta</span>
+<span class="px-1.5 py-0.5 rounded bg-slate-800 text-primary-fixed font-numeric-mono text-[10px] font-bold tracking-wider border border-slate-700">DL 01 AB 1234</span>
+<span class="material-symbols-outlined text-[14px] text-emerald-400 font-bold">check_circle</span>
+</button>
+<!-- 4. Auto / EV 3W -->
+<button class="flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 bg-surface-container-lowest/90 backdrop-blur-md rounded-full border border-slate-200 shadow-sm text-on-surface-variant hover:bg-white active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[15px]">electric_rickshaw</span>
+<span class="font-label-md text-label-sm font-semibold">Auto / 3W</span>
+</button>
+<!-- 5. SUV / Van -->
+<button class="flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 bg-surface-container-lowest/90 backdrop-blur-md rounded-full border border-slate-200 shadow-sm text-on-surface-variant hover:bg-white active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[15px]">airport_shuttle</span>
+<span class="font-label-md text-label-sm font-semibold">SUV / Van</span>
+</button>
+<!-- 6. Heavy / Tempo -->
+<button class="flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 bg-surface-container-lowest/90 backdrop-blur-md rounded-full border border-slate-200 shadow-sm text-on-surface-variant hover:bg-white active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[15px]">local_shipping</span>
+<span class="font-label-md text-label-sm font-semibold">Heavy</span>
+</button>
+</div>
+</div>
+<!-- LEVEL 3 & SHARED COMPONENT: BOTTOM SLIDE PEEK DRAWER & DOCKED BOTTOM NAV BAR -->
+<div class="relative z-40 w-full flex flex-col justify-end pointer-events-none mt-auto">
+<!-- FLOATING BOTTOM SHEET (Slide-Up Peek Card) -->
+<section class="w-full bg-surface-container-lowest rounded-t-3xl shadow-[0_-8px_30px_rgba(15,23,42,0.15)] border-t border-slate-200/80 pointer-events-auto px-4 pt-2.5 pb-3">
+<!-- Sheet Drag Notch -->
+<div class="w-10 h-1 bg-slate-300 rounded-full mx-auto mb-2.5"></div>
+<!-- Facility Header & Real-time ETA Metadata -->
+<div class="flex items-start justify-between gap-2 mb-1.5">
+<div>
+<div class="flex items-center gap-2">
+<h2 class="font-headline-md text-headline-sm font-bold text-on-surface tracking-tight">DLF CyberCity P3 Multi-Level</h2>
+<span class="material-symbols-outlined text-primary text-[17px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<div class="flex items-center gap-2 text-body-sm text-on-surface-variant mt-0.5">
+<span class="flex items-center text-amber-600 font-semibold text-label-md">
+                ★ 4.8
+                <span class="text-outline font-normal text-label-sm ml-1">(1,240 reviews)</span>
+</span>
+<span class="w-1 h-1 rounded-full bg-slate-300"></span>
+<span class="font-semibold text-primary">350m • 2 mins away</span>
+</div>
+</div>
+<!-- Dynamic Rate Indicator -->
+<div class="text-right flex-shrink-0">
+<div class="font-headline-lg text-headline-sm text-primary font-bold">₹40<span class="font-normal text-label-sm text-outline">/hr</span></div>
+<span class="inline-block text-[10px] font-semibold text-tertiary bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">FASTag Auto-Debit</span>
+</div>
+</div>
+<!-- Real-Time Freshness & Occupancy Badge -->
+<div class="flex items-center gap-2 py-1 px-2.5 bg-emerald-50/80 rounded-lg border border-emerald-200/80 mb-2.5">
+<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+<span class="font-label-md text-label-sm text-emerald-900 font-semibold">
+            Updated by operator 2m ago • <strong class="text-emerald-700">18 spots free</strong> in Sector B2
+          </span>
+</div>
+<!-- Key Facility Specs Quick-Chips Grid -->
+<div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5 mb-3 text-label-sm text-on-surface">
+<div class="flex-shrink-0 flex items-center gap-1 px-2 py-1 bg-surface-container rounded-md border border-slate-200 font-medium">
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant">roofing</span>
+            Covered B-2
+          </div>
+<div class="flex-shrink-0 flex items-center gap-1 px-2 py-1 bg-surface-container rounded-md border border-slate-200 font-medium">
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant">height</span>
+            Max 2.4m (Safe)
+          </div>
+<div class="flex-shrink-0 flex items-center gap-1 px-2 py-1 bg-surface-container rounded-md border border-slate-200 font-medium text-tertiary">
+<span class="material-symbols-outlined text-[14px] text-tertiary" style="font-variation-settings: 'FILL' 1;">bolt</span>
+            60kW DC EV
+          </div>
+<div class="flex-shrink-0 flex items-center gap-1 px-2 py-1 bg-surface-container rounded-md border border-slate-200 font-medium">
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant">videocam</span>
+            24/7 ANPR
+          </div>
+</div>
+<!-- Primary Touch Action Bottom Row -->
+<div class="flex items-center gap-2 pt-0.5">
+<!-- Bookmark Action -->
+<button class="w-12 h-12 rounded-xl bg-surface-container hover:bg-surface-container-high border border-slate-200 text-on-surface flex items-center justify-center active:scale-95 transition-transform duration-150 flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">bookmark_border</span>
+</button>
+<!-- Direction Secondary Button -->
+<button class="w-12 h-12 rounded-xl bg-surface-container hover:bg-surface-container-high border border-slate-200 text-on-surface flex items-center justify-center active:scale-95 transition-transform duration-150 flex-shrink-0">
+<span class="material-symbols-outlined text-[20px] text-primary">directions</span>
+</button>
+<!-- Primary Route & Park Action Button -->
+<button class="flex-1 h-12 px-4 rounded-xl bg-primary hover:bg-[#005850] active:scale-[0.98] transition-transform duration-150 shadow-md flex items-center justify-between text-white font-headline-sm text-body-md font-bold">
+<span>Select Slot & Book</span>
+<div class="flex items-center gap-1 bg-black/20 px-2 py-1 rounded-lg text-primary-fixed text-label-sm font-semibold">
+<span>₹40/hr</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</div>
+</button>
+</div>
+</section>
+<!-- DOCKED BOTTOM NAVIGATION BAR (Standard 5-Tab Bar) -->
+<nav class="w-full bg-surface-container-lowest/95 backdrop-blur-lg flex justify-around items-center px-2 py-2 shadow-lg border-t border-slate-200 pointer-events-auto z-50">
+<!-- Tab 1: Home (Active) -->
+<button class="flex flex-col items-center justify-center text-[#00685F] font-bold active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="text-[10px] tracking-tight">Home</span>
+</button>
+<!-- Tab 2: Bookings -->
+<button class="flex flex-col items-center justify-center text-[#565E74] hover:text-[#0B1C30] active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined text-[20px]">confirmation_number</span>
+<span class="text-[10px]">Bookings</span>
+</button>
+<!-- Tab 3: Garage -->
+<button class="flex flex-col items-center justify-center text-[#565E74] hover:text-[#0B1C30] active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined text-[20px]">directions_car</span>
+<span class="text-[10px]">Garage</span>
+</button>
+<!-- Tab 4: Wallet -->
+<button class="flex flex-col items-center justify-center text-[#565E74] hover:text-[#0B1C30] active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined text-[20px]">account_balance_wallet</span>
+<span class="text-[10px]">Wallet</span>
+</button>
+<!-- Tab 5: Profile -->
+<button class="flex flex-col items-center justify-center text-[#565E74] hover:text-[#0B1C30] active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined text-[20px]">person</span>
+<span class="text-[10px]">Profile</span>
+</button>
+</nav>
+<!-- iOS Home Indicator Spacing Bar -->
+<div class="w-full bg-surface-container-lowest h-3 flex items-center justify-center pointer-events-auto">
+<div class="w-32 h-1 bg-slate-300 rounded-full"></div>
+</div>
+</div>
+</main>
+</body></html>

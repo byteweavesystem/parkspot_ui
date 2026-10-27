@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SmartPark - Facility Detail</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Plus Jakarta Sans & Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Theme Configuration verbatim from specification -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "outline-variant": "#bcc9c6",
+            "tertiary-fixed": "#6ffbbe",
+            "error": "#ba1a1a",
+            "surface-container": "#e5eeff",
+            "surface-bright": "#f8f9ff",
+            "secondary": "#565e74",
+            "inverse-primary": "#6bd8cb",
+            "inverse-on-surface": "#eaf1ff",
+            "on-secondary-fixed": "#131b2e",
+            "on-primary-fixed": "#00201d",
+            "on-tertiary-container": "#f5fff6",
+            "primary": "#00685f",
+            "primary-fixed": "#89f5e7",
+            "on-primary-container": "#f4fffc",
+            "primary-container": "#008378",
+            "on-surface": "#0b1c30",
+            "tertiary-container": "#00855b",
+            "outline": "#6d7a77",
+            "on-background": "#0b1c30",
+            "tertiary": "#006947",
+            "on-primary-fixed-variant": "#005049",
+            "secondary-container": "#dae2fd",
+            "primary-fixed-dim": "#6bd8cb",
+            "surface-tint": "#006a61",
+            "secondary-fixed": "#dae2fd",
+            "on-secondary-container": "#5c647a",
+            "on-tertiary": "#ffffff",
+            "surface-container-highest": "#d3e4fe",
+            "on-secondary-fixed-variant": "#3f465c",
+            "on-tertiary-fixed": "#002113",
+            "on-error-container": "#93000a",
+            "surface-container-lowest": "#ffffff",
+            "on-primary": "#ffffff",
+            "surface-dim": "#cbdbf5",
+            "surface": "#f8f9ff",
+            "background": "#f8f9ff",
+            "inverse-surface": "#213145",
+            "on-surface-variant": "#3d4947",
+            "surface-container-high": "#dce9ff",
+            "tertiary-fixed-dim": "#4edea3",
+            "surface-variant": "#d3e4fe",
+            "secondary-fixed-dim": "#bec6e0",
+            "on-tertiary-fixed-variant": "#005236",
+            "surface-container-low": "#eff4ff",
+            "on-error": "#ffffff",
+            "on-secondary": "#ffffff",
+            "error-container": "#ffdad6"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xs": "0.25rem",
+            "space-sm": "0.5rem",
+            "space-md": "1rem",
+            "space-lg": "1.5rem",
+            "space-xl": "2rem",
+            "gutter": "1rem",
+            "gutter-desktop": "1.5rem",
+            "margin": "1rem",
+            "margin-tablet": "1.5rem",
+            "margin-desktop": "2.5rem"
+          },
+          "fontFamily": {
+            "label-lg": ["Inter"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "label-sm": ["Inter"],
+            "body-sm": ["Inter"],
+            "body-md": ["Inter"],
+            "numeric-mono": ["Inter"],
+            "label-md": ["Inter"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "display-lg-mobile": ["Plus Jakarta Sans"],
+            "headline-sm": ["Plus Jakarta Sans"],
+            "display-lg": ["Plus Jakarta Sans"],
+            "body-lg": ["Inter"]
+          },
+          "fontSize": {
+            "label-lg": ["14px", { "lineHeight": "18px", "fontWeight": "600" }],
+            "headline-lg": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "fontWeight": "500" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "numeric-mono": ["16px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+            "headline-md": ["22px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "display-lg-mobile": ["30px", { "lineHeight": "38px", "fontWeight": "700" }],
+            "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "display-lg": ["36px", { "lineHeight": "44px", "fontWeight": "700" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .material-symbols-outlined.fill-icon {
+      font-variation-settings: 'FILL' 1;
+    }
+    /* Hide scrollbar for vehicle horizontal scroll */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface antialiased flex justify-center min-h-screen">
+<!-- Mobile Viewport Container: 390px fixed width emulation for accurate Dribbble-tier preview -->
+<main class="w-full max-w-[390px] min-h-[844px] bg-surface relative flex flex-col pb-36 shadow-2xl overflow-x-hidden">
+<!-- 1. Native iOS Status Bar & Floating Translucent Top Actions -->
+<header class="relative w-full z-30">
+<!-- Status Bar Area -->
+<div class="h-11 w-full flex items-center justify-between px-6 pt-1 text-on-surface select-none">
+<span class="font-numeric-mono text-label-md tracking-tight font-bold">9:41</span>
+<div class="flex items-center space-x-1.5">
+<span class="material-symbols-outlined text-[16px]">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-[16px]">wifi</span>
+<span class="material-symbols-outlined text-[18px]">battery_full</span>
+</div>
+</div>
+<!-- Floating Nav Overlay Over Hero -->
+<div class="absolute top-11 left-0 w-full px-4 py-2 flex items-center justify-between pointer-events-auto">
+<button aria-label="Go back" class="w-10 h-10 rounded-full bg-surface-container-lowest/80 backdrop-blur-md flex items-center justify-center text-on-surface shadow-md active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-headline-sm">arrow_back</span>
+</button>
+<div class="flex items-center space-x-2">
+<button aria-label="Bookmark" class="w-10 h-10 rounded-full bg-surface-container-lowest/80 backdrop-blur-md flex items-center justify-center text-on-surface shadow-md active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-headline-sm">bookmark</span>
+</button>
+<button aria-label="Share" class="w-10 h-10 rounded-full bg-surface-container-lowest/80 backdrop-blur-md flex items-center justify-center text-on-surface shadow-md active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-headline-sm">share</span>
+</button>
+</div>
+</div>
+</header>
+<!-- 2. Facility Hero Image & Municipal Metadata -->
+<section class="relative -mt-11 w-full h-64 overflow-hidden">
+<img alt="Indiranagar Metro Multi-Level Car Park Exterior" class="w-full h-full object-cover object-center" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxve_bdWMdEM_EaOOXVM3YourmucBIz_yyyQhN0HLb2A7VfhCvaAciiCAOUN2JQJLq-tWg3ULSvBed7c7ipNBmN6rmlN_jDcmxhmurzw-kBnJBKXRDs05zElw2DkUckJdxOBotWy3NoPpQHuvPErJxUQD9NzOsWkyCSblEMKDAiLjkULR3XiVMusIx8UyPLOXLwlifheMjUc-p_MGXniszRRKaPJ5ANO7c9plS2wpMvEwA9Lol765swkGRHDHehLbydZ2Kl7vOphvq"/>
+<!-- Gradient overlay for legibility -->
+<div class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-black/30"></div>
+<!-- Overlaid Floating Badges -->
+<div class="absolute bottom-3 left-4 right-4 flex items-center justify-between pointer-events-none">
+<div class="inline-flex items-center gap-1.5 bg-inverse-surface/85 backdrop-blur-md px-2.5 py-1 rounded-full text-inverse-on-surface text-label-sm font-label-sm shadow-sm">
+<span class="material-symbols-outlined text-[14px] text-tertiary-fixed">train</span>
+<span>BMRCL Gate 2 Concourse</span>
+</div>
+<div class="inline-flex items-center gap-1 bg-surface-container-lowest/90 backdrop-blur-md px-2.5 py-1 rounded-full text-on-surface text-label-sm font-label-sm shadow-sm">
+<span class="material-symbols-outlined text-primary text-[15px] fill-icon">verified</span>
+<span class="font-semibold text-primary">Certified Hub</span>
+</div>
+</div>
+</section>
+<!-- Content Stack -->
+<div class="px-4 space-y-4 pt-3">
+<!-- Facility Title & Address Header -->
+<section class="space-y-1.5">
+<div class="flex items-start justify-between gap-2">
+<h1 class="font-headline-md text-headline-md text-on-surface tracking-tight">
+            Indiranagar Metro Multi-Level Car Park
+          </h1>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[16px] text-primary">pin_drop</span>
+<span class="truncate">CMH Road, Indiranagar</span>
+<span class="text-outline-variant">•</span>
+<span class="font-label-sm font-semibold text-primary">350m (2 mins away)</span>
+</div>
+<div class="flex items-center gap-3 pt-1">
+<div class="flex items-center gap-1 bg-surface-container px-2 py-0.5 rounded-lg text-on-surface font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px] text-amber-500 fill-icon">star</span>
+<span class="font-bold">4.8</span>
+<span class="text-secondary">(1.4k reviews)</span>
+</div>
+<div class="flex items-center gap-1 text-label-sm text-tertiary font-label-sm">
+<span class="material-symbols-outlined text-[16px] fill-icon">verified_user</span>
+<span>FASTag Auto-Ingress Active</span>
+</div>
+</div>
+</section>
+<!-- 3. Live Real-Time Telemetry Bar (High Priority Status Card) -->
+<section class="bg-surface-container-lowest rounded-xl p-4 shadow-sm border border-surface-container-high/60 space-y-3.5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<!-- Pulsing Radar Dot -->
+<span class="relative flex h-3 w-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-tertiary"></span>
+</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold">
+              38 Slots Available
+            </span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary bg-surface-container px-2 py-0.5 rounded-md">
+            104 / 142 Busy
+          </span>
+</div>
+<!-- Occupancy Progress Meter -->
+<div class="space-y-1">
+<div class="w-full h-2.5 bg-surface-container rounded-full overflow-hidden flex">
+<div class="bg-primary h-full rounded-full transition-all duration-500" style="width: 73%"></div>
+</div>
+<div class="flex justify-between items-center text-label-sm font-label-sm text-secondary pt-0.5">
+<span>Occupancy Rate: 73%</span>
+<span class="text-tertiary font-semibold">Sensor Synced (Just now)</span>
+</div>
+</div>
+<!-- EV Dedicated Status Strip -->
+<div class="flex items-center justify-between bg-primary-fixed/20 border border-primary-fixed-dim/40 rounded-lg p-2.5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px] fill-icon">bolt</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold">4 EV Fast Chargers Vacant</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">60kW CCS2 DC Guns (Floor B1)</span>
+</div>
+</div>
+<span class="font-label-sm text-label-sm bg-surface-container-lowest text-primary font-bold px-2 py-1 rounded-md shadow-xs">
+            Reserve EV
+          </span>
+</div>
+<!-- Quick Specs Grid -->
+<div class="grid grid-cols-2 gap-2 pt-1 border-t border-surface-container">
+<div class="flex items-center gap-1.5 text-secondary">
+<span class="material-symbols-outlined text-[16px] text-outline">height</span>
+<span class="font-label-sm text-label-sm">2.1m Max Clearance</span>
+</div>
+<div class="flex items-center gap-1.5 text-secondary">
+<span class="material-symbols-outlined text-[16px] text-outline">roofing</span>
+<span class="font-label-sm text-label-sm">Covered B1/B2/B3</span>
+</div>
+<div class="flex items-center gap-1.5 text-secondary">
+<span class="material-symbols-outlined text-[16px] text-outline">videocam</span>
+<span class="font-label-sm text-label-sm">24/7 CCTV &amp; Security</span>
+</div>
+<div class="flex items-center gap-1.5 text-secondary">
+<span class="material-symbols-outlined text-[16px] text-primary">toll</span>
+<span class="font-label-sm text-label-sm">FASTag Lanes 1 &amp; 2</span>
+</div>
+</div>
+</section>
+<!-- 4. Interactive Vehicle Selector -->
+<section class="space-y-2">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">Select Vehicle</h2>
+<span class="font-label-sm text-label-sm text-primary font-semibold">Manage Garage</span>
+</div>
+<!-- Horizontal Scrollable Selector Row -->
+<div class="flex gap-2.5 overflow-x-auto no-scrollbar py-1 -mx-4 px-4">
+<!-- Two-Wheeler -->
+<div class="min-w-[130px] p-3 rounded-xl bg-surface-container-lowest border border-outline-variant/60 flex flex-col justify-between shrink-0 cursor-pointer active:scale-95 transition-transform">
+<div class="flex items-center justify-between text-secondary">
+<span class="material-symbols-outlined text-[24px]">two_wheeler</span>
+<span class="text-label-sm font-label-sm text-secondary">₹15/h</span>
+</div>
+<div class="pt-3">
+<span class="block font-label-md text-label-md text-on-surface font-semibold">2-Wheeler</span>
+<span class="text-body-sm text-body-sm text-secondary">Bike/Scooter</span>
+</div>
+</div>
+<!-- Hatchback/Sedan -->
+<div class="min-w-[130px] p-3 rounded-xl bg-surface-container-lowest border border-outline-variant/60 flex flex-col justify-between shrink-0 cursor-pointer active:scale-95 transition-transform">
+<div class="flex items-center justify-between text-secondary">
+<span class="material-symbols-outlined text-[24px]">directions_car</span>
+<span class="text-label-sm font-label-sm text-secondary">₹25/h</span>
+</div>
+<div class="pt-3">
+<span class="block font-label-md text-label-md text-on-surface font-semibold">Sedan</span>
+<span class="text-body-sm text-body-sm text-secondary">Hatchback</span>
+</div>
+</div>
+<!-- SUV / 4x4 (SELECTED STATE) -->
+<div class="min-w-[150px] p-3 rounded-xl bg-inverse-surface text-inverse-on-surface border-2 border-primary-container flex flex-col justify-between shrink-0 shadow-md relative">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-[24px] text-primary-fixed">airport_shuttle</span>
+<span class="material-symbols-outlined text-[18px] text-primary-fixed fill-icon">check_circle</span>
+</div>
+<div class="pt-2">
+<span class="block font-label-md text-label-md font-bold text-inverse-on-surface">SUV / 4x4</span>
+<span class="font-numeric-mono text-label-sm text-primary-fixed font-bold">₹30.00/h</span>
+</div>
+<div class="mt-2 bg-surface-container-lowest/15 rounded-md px-1.5 py-0.5 flex items-center justify-between">
+<span class="text-[10px] font-mono tracking-wider font-semibold text-primary-fixed">KA 01 MJ 8821</span>
+<span class="text-[9px] text-inverse-on-surface/80">Creta</span>
+</div>
+</div>
+<!-- EV Fleet -->
+<div class="min-w-[140px] p-3 rounded-xl bg-surface-container-lowest border border-outline-variant/60 flex flex-col justify-between shrink-0 cursor-pointer active:scale-95 transition-transform">
+<div class="flex items-center justify-between text-secondary">
+<span class="material-symbols-outlined text-[24px] text-tertiary">ev_station</span>
+<span class="text-label-sm font-label-sm text-secondary">₹30/h+EV</span>
+</div>
+<div class="pt-3">
+<span class="block font-label-md text-label-md text-on-surface font-semibold">EV Commercial</span>
+<span class="text-body-sm text-body-sm text-secondary">+₹18/kWh</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. Live Rate Tier & Statutory GST Breakdown Card -->
+<section class="bg-surface-container-lowest rounded-xl p-4 shadow-sm border border-surface-container-high/60 space-y-3">
+<div class="flex items-center justify-between">
+<div>
+<span class="font-body-sm text-body-sm text-secondary">Standard Tier Tariff</span>
+<div class="flex items-baseline gap-1">
+<span class="font-headline-md text-headline-md font-bold text-on-surface">₹30.00</span>
+<span class="font-label-sm text-label-sm text-secondary">/ hour</span>
+</div>
+</div>
+<div class="bg-tertiary-fixed/40 text-on-tertiary-fixed-variant px-2.5 py-1 rounded-full text-label-sm font-label-sm font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">timer</span>
+<span>+15m Grace Period</span>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-lg p-3 text-body-sm text-body-sm space-y-1.5">
+<div class="flex justify-between items-center text-secondary">
+<span>Base Municipal Parking (SAC 999113)</span>
+<span class="font-mono text-on-surface">₹25.42</span>
+</div>
+<div class="flex justify-between items-center text-secondary">
+<span>CGST (9%) + SGST (9%) Included</span>
+<span class="font-mono text-on-surface">₹4.58</span>
+</div>
+<div class="pt-1.5 border-t border-surface-container flex items-center justify-between text-tertiary font-semibold text-label-sm">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px]">check</span>
+              Zero Cancellation Fee (Within 10 mins)
+            </span>
+<span>Refundable</span>
+</div>
+</div>
+</section>
+<!-- 6. Facility Amenities & Multi-modal Integration -->
+<section class="space-y-2.5">
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">Transit &amp; Hub Amenities</h2>
+<div class="grid grid-cols-1 gap-2">
+<div class="flex items-center gap-3 p-2.5 rounded-xl bg-surface-container-lowest border border-outline-variant/40">
+<div class="w-9 h-9 rounded-lg bg-primary-container text-on-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">directions_walk</span>
+</div>
+<div class="flex-1">
+<span class="font-label-md text-label-md font-semibold text-on-surface block">Direct Metro Turnstiles Link</span>
+<span class="font-body-sm text-body-sm text-secondary">30-second covered bridge via Lift Core B to Concourse</span>
+</div>
+</div>
+<div class="flex items-center gap-3 p-2.5 rounded-xl bg-surface-container-lowest border border-outline-variant/40">
+<div class="w-9 h-9 rounded-lg bg-surface-container text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">ev_station</span>
+</div>
+<div class="flex-1">
+<span class="font-label-md text-label-md font-semibold text-on-surface block">60kW DC EV Fast Chargers</span>
+<span class="font-body-sm text-body-sm text-secondary">Floor B1 • Auto-cutoff on 100% capacity</span>
+</div>
+</div>
+<div class="flex items-center gap-3 p-2.5 rounded-xl bg-surface-container-lowest border border-outline-variant/40">
+<div class="w-9 h-9 rounded-lg bg-surface-container text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">accessible</span>
+</div>
+<div class="flex-1">
+<span class="font-label-md text-label-md font-semibold text-on-surface block">Universal Wheelchair Access</span>
+<span class="font-body-sm text-body-sm text-secondary">Braille-enabled high-speed elevators across B1-B3</span>
+</div>
+</div>
+<div class="flex items-center gap-3 p-2.5 rounded-xl bg-surface-container-lowest border border-outline-variant/40">
+<div class="w-9 h-9 rounded-lg bg-surface-container text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">tire_repair</span>
+</div>
+<div class="flex-1">
+<span class="font-label-md text-label-md font-semibold text-on-surface block">Digital Tire Inflation &amp; Wash Point</span>
+<span class="font-body-sm text-body-sm text-secondary">Complimentary automated air kiosk at Exit Gate P6</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- 7. Sticky Bottom Navigation Bar & Action CTA (Task-specific Docked Bar) -->
+<div class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[390px] z-50 bg-surface-container-lowest/95 backdrop-blur-lg px-4 pt-3 pb-6 shadow-[0_-8px_24px_-4px_rgba(15,23,42,0.12)]">
+<div class="flex items-center justify-between gap-3 mb-1.5">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-secondary">Floor B2 Recommended</span>
+<div class="flex items-baseline gap-1">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">₹30.00</span>
+<span class="text-label-sm text-secondary">/hr</span>
+</div>
+</div>
+<!-- Primary High-Emphasis CTA Button -->
+<button class="flex-1 h-12 bg-primary hover:bg-primary-container text-on-primary rounded-xl font-label-lg text-label-lg font-bold flex items-center justify-center gap-2 shadow-md active:scale-95 transition-all">
+<span>Select Bay on Floor B2</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+<!-- Micro-copy beneath button -->
+<div class="flex items-center justify-center gap-1.5 text-secondary text-body-sm text-[11px] pt-1">
+<span class="material-symbols-outlined text-primary text-[14px] fill-icon">sensors</span>
+<span>FASTag linked • Automated boom barrier sync at Entry Gate 1</span>
+</div>
+</div>
+</main>
+</body></html>

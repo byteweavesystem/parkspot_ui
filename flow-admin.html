@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Platform admin · complete flow — ParkSpot Complete Mockups</title>
+<link rel="stylesheet" href="styles.css"/>
+<style>
+.flow-page { padding: 48px 32px 80px; }
+.flow-page h1 { color:#fff; font-size:32px; font-weight:800; margin-bottom:8px; }
+.flow-page .sub { color:#94A3B8; margin-bottom:28px; max-width:640px; }
+.row { display:flex; gap:32px; overflow-x:auto; padding-bottom:24px; align-items:flex-start; }
+.shot { flex:0 0 auto; }
+.shot .sid { color:#5EEAD4; font-size:12px; font-weight:700; letter-spacing:.04em; margin-bottom:8px; }
+.shot .stitle { color:#E2E8F0; font-size:14px; font-weight:600; margin-bottom:12px; }
+.phone-inner { position:absolute; inset:0; display:flex; flex-direction:column; }
+.pad { padding:16px; }
+.pad-x { padding-left:16px; padding-right:16px; }
+.grow { flex:1; overflow:auto; }
+.sticky-bottom { margin-top:auto; padding:16px; padding-bottom:28px; background:#fff; border-top:1px solid var(--border); }
+.nav-top { display:flex; align-items:center; gap:12px; padding:8px 16px 12px; background:#fff; }
+.back { width:36px; height:36px; border-radius:12px; background:var(--muted); display:grid; place-items:center; font-weight:800; flex-shrink:0; }
+.row-between { display:flex; justify-content:space-between; align-items:center; gap:8px; }
+.list-item { padding:14px 0; border-bottom:1px solid var(--border); }
+.input { height:52px; border-radius:14px; border:1.5px solid var(--border); background:#fff; padding:0 14px; display:flex; align-items:center; font-weight:600; font-size:15px; width:100%; }
+.otp-row { display:flex; gap:8px; justify-content:center; margin:20px 0; }
+.otp-box { width:48px; height:56px; border-radius:12px; border:1.5px solid var(--border); background:#fff; display:grid; place-items:center; font-size:22px; font-weight:800; }
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; }
+.class-tile { height:72px; border-radius:14px; border:1.5px solid var(--border); background:#fff; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; font-size:12px; font-weight:700; color:var(--text-2); }
+.class-tile.on { border-color:var(--teal); background:var(--teal-container); color:#0F766E; }
+.desk-shell { display:grid; grid-template-columns:220px 1fr; height:100%; }
+.desk-nav { background:var(--navy); color:#fff; padding:20px 14px; }
+.desk-nav .logo { font-weight:800; font-size:17px; margin-bottom:16px; }
+.desk-nav a { display:block; padding:9px 12px; border-radius:10px; color:#94A3B8; font-size:12px; font-weight:600; text-decoration:none; margin-bottom:2px; }
+.desk-nav a.on { background:rgba(13,148,136,.22); color:#5EEAD4; }
+.desk-main { display:flex; flex-direction:column; min-width:0; background:var(--canvas); }
+.desk-top { height:56px; background:#fff; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; padding:0 20px; }
+.desk-body { padding:16px 20px; overflow:auto; flex:1; }
+.table { width:100%; border-collapse:collapse; font-size:12px; }
+.table th { text-align:left; padding:10px 8px; color:var(--text-2); border-bottom:1px solid var(--border); font-weight:600; }
+.table td { padding:12px 8px; border-bottom:1px solid var(--border); font-weight:600; }
+.progress { height:8px; border-radius:999px; background:var(--border); overflow:hidden; }
+.progress > i { display:block; height:100%; background:var(--teal); }
+.stepper { display:flex; gap:6px; margin-bottom:16px; }
+.stepper span { flex:1; height:4px; border-radius:4px; background:var(--border); }
+.stepper span.on { background:var(--teal); }
+.ring-big { width:140px; height:140px; border-radius:50%; border:10px solid var(--teal-container); border-top-color:var(--teal); display:grid; place-items:center; margin:12px auto; }
+.settings-row { display:flex; align-items:center; gap:12px; padding:14px 0; border-bottom:1px solid var(--border); }
+.settings-row .ico-tile { width:40px; height:40px; border-radius:12px; background:var(--muted); display:grid; place-items:center; font-size:16px; flex-shrink:0; }
+.settings-row .grow-col { flex:1; min-width:0; }
+.settings-row .chev { color:var(--text-2); font-weight:800; }
+.toggle { width:48px; height:28px; border-radius:999px; background:var(--border); position:relative; flex-shrink:0; }
+.toggle.on { background:var(--teal); }
+.toggle::after { content:""; position:absolute; top:3px; left:3px; width:22px; height:22px; border-radius:50%; background:#fff; box-shadow:0 2px 6px rgba(15,23,42,.2); }
+.toggle.on::after { left:23px; }
+.legal-body { font-size:13px; line-height:1.55; color:var(--text-2); }
+.legal-body h4 { color:var(--navy); font-size:14px; font-weight:750; margin:14px 0 6px; }
+.check-row { display:flex; gap:12px; align-items:flex-start; padding:12px; border:1.5px solid var(--border); border-radius:14px; background:#fff; margin-bottom:10px; }
+.check-row.on { border-color:var(--teal); background:var(--teal-container); }
+.check { width:22px; height:22px; border-radius:7px; border:2px solid var(--border); background:#fff; flex-shrink:0; display:grid; place-items:center; font-size:12px; font-weight:800; color:transparent; }
+.check-row.on .check { background:var(--teal); border-color:var(--teal); color:#fff; }
+.empty-hero { text-align:center; padding:40px 20px; }
+.empty-hero .glyph { width:72px; height:72px; border-radius:24px; background:var(--teal-container); color:var(--teal-deep); display:grid; place-items:center; font-size:28px; font-weight:800; margin:0 auto 16px; }
+</style>
+</head>
+<body>
+<div class="flow-page">
+  <div class="label" style="color:#64748B;margin-bottom:8px;">PARKSPOT · COMPLETE UI/UX FLOW · DESIGN.MD V4</div>
+  <h1>Platform admin · complete flow</h1>
+  <p class="sub">Command center, KYC, facility review, booking timeline, support, dispute decision, feature flags, finance/tax, reconciliation, fraud, audit, DPDP, edge fleet.</p>
+  <p style="margin-bottom:24px;"><a href="index.html" style="color:#5EEAD4;font-weight:600;">← All flows</a></p>
+  <div class="row">
+<div class="shot">
+  <div class="sid">ADM-01</div>
+  <div class="stitle">Operations command</div>
+  <div class="desktop">
+    <div class="desk-shell" style="background:#0B1220;">
+      <aside class="desk-nav" style="background:#020617;"><div class="logo">Park<span style="color:#5EEAD4;">Spot</span></div><a class="on" href="#">Operations</a><a class="" href="#">KYC queue</a><a class="" href="#">Facility review</a><a class="" href="#">Bookings</a><a class="" href="#">Support</a><a class="" href="#">Finance</a><a class="" href="#">Fraud</a><a class="" href="#">Audit</a><a class="" href="#">Edge fleet</a><a class="" href="#">DPDP</a></aside>
+      <section class="desk-main" style="background:#0B1220;">
+        <header class="desk-top" style="background:#020617;border-color:#1E293B;">
+          <div class="h3" style="color:#fff;">Operations command</div>
+        </header>
+        <div class="desk-body">
+      <div class="grid-2" style="grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px;">
+        <div class="card" style="padding:14px;background:#0F172A;border-color:#1E293B;"><div class="label" style="color:#64748B;">OCCUPANCY</div><div class="h2" style="color:#fff;">87.4%</div></div>
+        <div class="card" style="padding:14px;background:#0F172A;border-color:#1E293B;"><div class="label" style="color:#64748B;">GMV</div><div class="h2 currency" style="color:#fff;">₹14.8L</div></div>
+        <div class="card" style="padding:14px;background:#0F172A;border-color:#1E293B;"><div class="label" style="color:#64748B;">ONLINE</div><div class="h2" style="color:#fff;">148/152</div></div>
+        <div class="card" style="padding:14px;background:#0F172A;border-color:#1E293B;"><div class="label" style="color:#64748B;">VERIFY P95</div><div class="h2" style="color:#5EEAD4;">186ms</div></div>
+      </div>
+      <div class="grid-2" style="gap:16px;">
+        <div class="card" style="height:360px;background:#07111f;border-color:#1E293B;display:grid;place-items:center;color:#64748B;font-weight:700;">PostGIS density map</div>
+        <div class="card" style="padding:14px;background:#0F172A;border-color:#1E293B;">
+          <div class="h3" style="color:#fff;">Watchdog</div>
+          <div style="margin-top:12px;padding:12px;border:1px solid #1E293B;border-radius:12px;"><span class="pill danger">ANPR mismatch</span><div class="meta" style="margin-top:8px;color:#CBD5E1;">DL 01 AB 1234 dual gate</div></div>
+          <div style="margin-top:10px;padding:12px;border:1px solid #1E293B;border-radius:12px;"><span class="pill warn">Override spike</span><div class="meta" style="margin-top:8px;color:#CBD5E1;">Gate 3 · 6 lifts / 15m</div></div>
+        </div>
+      </div>
+    </div>
+      </section>
+    </div></div>
+</div>
+<div class="shot">
+  <div class="sid">ADM-02</div>
+  <div class="stitle">KYC queue</div>
+  <div class="desktop">
+    <div class="desk-shell" style="background:var(--canvas);">
+      <aside class="desk-nav" style="background:var(--navy);"><div class="logo">Park<span style="color:#5EEAD4;">Spot</span></div><a class="" href="#">Operations</a><a class="on" href="#">KYC queue</a><a class="" href="#">Facility review</a><a class="" href="#">Bookings</a><a class="" href="#">Support</a><a class="" href="#">Finance</a><a class="" href="#">Fraud</a><a class="" href="#">Audit</a><a class="" href="#">Edge fleet</a><a class="" href="#">DPDP</a></aside>
+      <section class="desk-main" style="background:var(--canvas);">
+        <header class="desk-top" style="background:#fff;border-color:var(--border);">
+          <div class="h3" style="color:var(--navy);">KYC queue</div>
+        </header>
+        <div class="desk-body">
+      <div class="card" style="padding:16px;">
+        <table class="table">
+          <tr><th>Org</th><th>PAN</th><th>Penny-drop</th><th>Docs</th><th>SLA</th><th></th></tr>
+          <tr><td>Nexus Parking Pvt</td><td>AABCN…</td><td><span class="pill ok">Match</span></td><td>4/4</td><td>1d left</td><td><span class="pill teal">Review</span></td></tr>
+          <tr><td>Urban Lots LLP</td><td>AABCU…</td><td><span class="pill warn">Name mismatch</span></td><td>3/4</td><td>6h</td><td><span class="pill teal">Review</span></td></tr>
+        </table>
+      </div>
+    </div>
+      </section>
+    </div></div>
+</div>
+<div class="shot">
+  <div class="sid">ADM-03</div>
+  <div class="stitle">Facility review</div>
+  <div class="desktop">
+    <div class="desk-shell" style="background:var(--canvas);">
+      <aside class="desk-nav" style="background:var(--navy);"><div class="logo">Park<span style="color:#5EEAD4;">Spot</span></div><a class="" href="#">Operations</a><a class="" href="#">KYC queue</a><a class="on" href="#">Facility review</a><a class="" href="#">Bookings</a><a class="" href="#">Support</a><a class="" href="#">Finance</a><a class="" href="#">Fraud</a><a class="" href="#">Audit</a><a class="" href="#">Edge fleet</a><a class="" href="#">DPDP</a></aside>
+      <section class="desk-main" style="background:var(--canvas);">
+        <header class="desk-top" style="background:#fff;border-color:var(--border);">
+          <div class="h3" style="color:var(--navy);">Facility review</div>
+        </header>
+        <div class="desk-body">
+      <div class="grid-2" style="gap:16px;">
+        <div class="card" style="height:380px;background:var(--muted);display:grid;place-items:center;font-weight:700;color:var(--text-2);">Geometry audit map</div>
+        <div class="card" style="padding:16px;">
+          <div class="h3">Listing quality</div>
+          <div class="h2" style="margin:8px 0;">82 / 100</div>
+          <div class="list-item row-between"><span>Photos</span><span class="pill ok">OK</span></div>
+          <div class="list-item row-between"><span>Entrance pins</span><span class="pill ok">OK</span></div>
+          <div class="list-item row-between"><span>Rate card</span><span class="pill warn">Missing night band</span></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px;">
+            <button class="btn secondary xl">Suspend</button><button class="btn primary xl">Publish</button>
+          </div>
+        </div>
+      </div>
+    </div>
+      </section>
+    </div></div>
+</div>
+<div class="shot">
+  <div class="sid">ADM-04</div>
+  <div class="stitle">Booking timeline</div>
+  <div class="desktop">
+    <div class="desk-shell" style="background:var(--canvas);">
+      <aside class="desk-nav" style="background:var(--navy);"><div class="logo">Park<span style="color:#5EEAD4;">Spot</span></div><a class="" href="#">Operations</a><a class="" href="#">KYC queue</a><a class="" href="#">Facility review</a><a class="on" href="#">Bookings</a><a class="" href="#">Support</a><a class="" href="#">Finance</a><a class="" href="#">Fraud</a><a class="" href="#">Audit</a><a class="" href="#">Edge fleet</a><a class="" href="#">DPDP</a></aside>
+      <section class="desk-main" style="background:var(--canvas);">
+        <header class="desk-top" style="background:#fff;border-color:var(--border);">
+          <div class="h3" style="color:var(--navy);">Booking timeline</div>
+        </header>
+        <div class="desk-body">
+      <div class="card" style="padding:16px;max-width:800px;">
+        <div class="h3">#SP-99214 timeline</div>
+        <div class="list-item"><strong>18:01</strong> · Quote accepted · HELD</div>
+        <div class="list-item"><strong>18:02</strong> · Payment captured · CONFIRMED · Ed25519 issued</div>
+        <div class="list-item"><strong>18:04</strong> · Gate entry · ATT POS-04 · CHECKED_IN</div>
+        <div class="list-item"><strong>19:58</strong> · Exit scan · dues ₹0 · COMPLETED</div>
+        <div class="list-item" style="border:0;"><strong>19:58</strong> · Invoice + ledger lines queued</div>
+      </div>
+    </div>
+      </section>
+    </div></div>
+</div>
+<div class="shot">
+  <div class="sid">ADM-05</div>
+  <div class="stitle">Support / disputes</div>
+  <div class="desktop">
+    <div class="desk-shell" style="background:var(--canvas);">
+      <aside class="desk-nav" style="background:var(--navy);"><div class="logo">Park<span style="color:#5EEAD4;">Spot</span></div><a class="" href="#">Operations</a><a class="" href="#">KYC queue</a><a class="" href="#">Facility review</a><a class="" href="#">Bookings</a><a class="on" href="#">Support</a><a class="" href="#">Finance</a><a class="" href="#">Fraud</a><a class="" href="#">Audit</a><a class="" href="#">Edge fleet</a><a class="" href="#">DPDP</a></aside>
+      <section class="desk-main" style="background:var(--canvas);">
+        <header class="desk-top" style="background:#fff;border-color:var(--border);">
+          <div class="h3" style="color:var(--navy);">Support / disputes</div>
+        </header>
+        <div class="desk-body">
+      <div class="card" style="padding:16px;">
+        <div class="list-item row-between"><div><strong>Case #C-881 · Overcharge</strong><div class="meta">Driver · refund limit ₹500</div></div><span class="pill warn">Open</span></div>
+        <div class="list-item row-between"><div><strong>Dispute #D-204</strong><div class="meta">Evidence: loop events + gate photo</div></div><span class="pill info">Awaiting ops</span></div>
+        <div class="list-item row-between" style="border:0;"><div><strong>Case #C-870</strong><div class="meta">Macro: payment pending webhook</div></div><span class="pill ok">Resolved</span></div>
+      </div>
+    </div>
+      </section>
+    </div></div>
+</div>
+<div class="shot">
+  <div class="sid">ADM-05D</div>
+  <div class="stitle">Dispute decision</div>
+  <div class="desktop">
+    <div class="desk-shell" style="background:var(--canvas);">
+      <aside class="desk-nav" style="background:var(--navy);"><div class="logo">Park<span style="color:#5EEAD4;">Spot</span></div><a class="" href="#">Operations</a><a class="" href="#">KYC queue</a><a class="" href="#">Facility review</a><a class="" href="#">Bookings</a><a class="on" href="#">Support</a><a class="" href="#">Finance</a><a class="" href="#">Fraud</a><a class="" href="#">Audit</a><a class="" href="#">Edge fleet</a><a class="" href="#">DPDP</a></aside>
+      <section class="desk-main" style="background:var(--canvas);">
+        <header class="desk-top" style="background:#fff;border-color:var(--border);">
+          <div class="h3" style="color:var(--navy);">Dispute decision</div>
+        </header>
+        <div class="desk-body">
+      <div class="grid-2" style="gap:16px;">
+        <div class="card" style="padding:16px;">
+          <div class="row-between"><div class="h3">Dispute #D-204</div><span class="pill warn">Overcharge</span></div>
+          <div class="meta" style="margin-top:6px;">#SP-99188 · Driver claims peak misapplied</div>
+          <div class="list-item row-between" style="margin-top:12px;"><span>Charged</span><strong class="currency">₹188.80</strong></div>
+          <div class="list-item row-between"><span>Quoted (driver)</span><strong class="currency">₹141.60</strong></div>
+          <div class="list-item row-between" style="border:0;"><span>Delta</span><strong style="color:var(--danger);">₹47.20</strong></div>
+          <div class="h3" style="margin-top:16px;font-size:14px;">Evidence</div>
+          <div class="meta">Rate card snapshot · entry 17:58 · exit 19:42 · CGST/SGST lines</div>
+        </div>
+        <div class="card" style="padding:16px;">
+          <div class="h3">Decision</div>
+          <div class="grid-2" style="margin-top:12px;">
+            <div class="class-tile on">Full refund</div><div class="class-tile">Partial ₹47.20</div>
+            <div class="class-tile">Reject</div><div class="class-tile">Credit note</div>
+          </div>
+          <div class="label" style="margin-top:14px;">RATIONALE (audit)</div>
+          <div class="input" style="margin-top:6px;min-height:72px;align-items:flex-start;">Peak band not published for that window · operator fault</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px;">
+            <button class="btn secondary xl">Escalate</button><button class="btn primary xl">Apply decision</button>
+          </div>
+        </div>
+      </div>
+    </div>
+      </section>
+    </div></div>
+</div>
+<div class="shot">
+  <div class="sid">ADM-07</div>
+  <div class="stitle">Feature flags</div>
+  <div class="desktop">
+    <div class="desk-shell" style="background:var(--canvas);">
+      <aside class="desk-nav" style="background:var(--navy);"><div class="logo">Park<span style="color:#5EEAD4;">Spot</span></div><a class="on" href="#">Operations</a><a class="" href="#">KYC queue</a><a class="" href="#">Facility review</a><a class="" href="#">Bookings</a><a class="" href="#">Support</a><a class="" href="#">Finance</a><a class="" href="#">Fraud</a><a class="" href="#">Audit</a><a class="" href="#">Edge fleet</a><a class="" href="#">DPDP</a></aside>
+      <section class="desk-main" style="background:var(--canvas);">
+        <header class="desk-top" style="background:#fff;border-color:var(--border);">
+          <div class="h3" style="color:var(--navy);">Feature flags</div>
+        </header>
+        <div class="desk-body">
+      <div class="card" style="padding:16px;">
+        <div class="row-between"><div class="h3">Platform flags · P07</div><span class="pill info">Scoped by city / tier</span></div>
+        <table class="table" style="margin-top:12px;">
+          <tr><th>Flag</th><th>Scope</th><th>State</th><th>Rollout</th></tr>
+          <tr><td>floating_session</td><td>Bengaluru</td><td><span class="pill ok">ON</span></td><td>100%</td></tr>
+          <tr><td>otm_preauth</td><td>All</td><td><span class="pill warn">Canary</span></td><td>15%</td></tr>
+          <tr><td>sos_reroute</td><td>Metro cities</td><td><span class="pill ok">ON</span></td><td>100%</td></tr>
+          <tr><td>anpr_auto_exit</td><td>T2+</td><td><span class="pill stale">OFF</span></td><td>0%</td></tr>
+          <tr><td>corporate_billing</td><td>Pilot orgs</td><td><span class="pill warn">Canary</span></td><td>5%</td></tr>
+        </table>
+        <div class="meta" style="margin-top:10px;">Changes require dual approval · written to audit_log with request_id</div>
+      </div>
+    </div>
+      </section>
+    </div></div>
+</div>
+<div class="shot">
+  <div class="sid">ADM-08</div>
+  <div class="stitle">Finance / tax</div>
+  <div class="desktop">
+    <div class="desk-shell" style="background:var(--canvas);">
+      <aside class="desk-nav" style="background:var(--navy);"><div class="logo">Park<span style="color:#5EEAD4;">Spot</span></div><a class="" href="#">Operations</a><a class="" href="#">KYC queue</a><a class="" href="#">Facility review</a><a class="" href="#">Bookings</a><a class="" href="#">Support</a><a class="on" href="#">Finance</a><a class="" href="#">Fraud</a><a class="" href="#">Audit</a><a class="" href="#">Edge fleet</a><a class="" href="#">DPDP</a></aside>
+      <section class="desk-main" style="background:var(--canvas);">
+        <header class="desk-top" style="background:#fff;border-color:var(--border);">
+          <div class="h3" style="color:var(--navy);">Finance / tax</div>
+        </header>
+        <div class="desk-body">
+      <div class="grid-2" style="grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px;">
+        <div class="card" style="padding:14px;"><div class="label">PAYOUT QUEUE</div><div class="h2">₹18.2L</div></div>
+        <div class="card" style="padding:14px;"><div class="label">TCS MTD</div><div class="h2">₹42,180</div></div>
+        <div class="card" style="padding:14px;"><div class="label">TDS MTD</div><div class="h2">₹8,436</div></div>
+      </div>
+      <div class="card" style="padding:16px;">
+        <div class="row-between"><div class="h3">Payout batch 24 Oct</div><span class="pill warn">Needs dual approval</span></div>
+        <div class="meta" style="margin-top:8px;">Approver A signed · waiting Approver B</div>
+        <div style="display:flex;gap:8px;margin-top:12px;"><span class="pill teal">GSTR-8 export</span><span class="pill">Form 26Q</span><span class="pill">16A certificates</span></div>
+      </div>
+    </div>
+      </section>
+    </div></div>
+</div>
+<div class="shot">
+  <div class="sid">ADM-10</div>
+  <div class="stitle">Reconciliation</div>
+  <div class="desktop">
+    <div class="desk-shell" style="background:var(--canvas);">
+      <aside class="desk-nav" style="background:var(--navy);"><div class="logo">Park<span style="color:#5EEAD4;">Spot</span></div><a class="" href="#">Operations</a><a class="" href="#">KYC queue</a><a class="" href="#">Facility review</a><a class="" href="#">Bookings</a><a class="" href="#">Support</a><a class="on" href="#">Finance</a><a class="" href="#">Fraud</a><a class="" href="#">Audit</a><a class="" href="#">Edge fleet</a><a class="" href="#">DPDP</a></aside>
+      <section class="desk-main" style="background:var(--canvas);">
+        <header class="desk-top" style="background:#fff;border-color:var(--border);">
+          <div class="h3" style="color:var(--navy);">Reconciliation</div>
+        </header>
+        <div class="desk-body">
+      <div class="card" style="padding:16px;">
+        <div class="h3">PSP settlement vs ledger</div>
+        <table class="table" style="margin-top:12px;">
+          <tr><th>Date</th><th>PSP</th><th>Ledger</th><th>Δ</th><th>Status</th></tr>
+          <tr><td>23 Oct</td><td>₹14,82,450</td><td>₹14,82,450</td><td>₹0</td><td><span class="pill ok">Matched</span></td></tr>
+          <tr><td>22 Oct</td><td>₹13,10,200</td><td>₹13,09,880</td><td>₹320</td><td><span class="pill warn">Exception</span></td></tr>
+        </table>
+      </div>
+    </div>
+      </section>
+    </div></div>
+</div>
+<div class="shot">
+  <div class="sid">ADM-06</div>
+  <div class="stitle">Fraud watchlist</div>
+  <div class="desktop">
+    <div class="desk-shell" style="background:var(--canvas);">
+      <aside class="desk-nav" style="background:var(--navy);"><div class="logo">Park<span style="color:#5EEAD4;">Spot</span></div><a class="" href="#">Operations</a><a class="" href="#">KYC queue</a><a class="" href="#">Facility review</a><a class="" href="#">Bookings</a><a class="" href="#">Support</a><a class="" href="#">Finance</a><a class="on" href="#">Fraud</a><a class="" href="#">Audit</a><a class="" href="#">Edge fleet</a><a class="" href="#">DPDP</a></aside>
+      <section class="desk-main" style="background:var(--canvas);">
+        <header class="desk-top" style="background:#fff;border-color:var(--border);">
+          <div class="h3" style="color:var(--navy);">Fraud watchlist</div>
+        </header>
+        <div class="desk-body">
+      <div class="card" style="padding:16px;">
+        <div class="list-item row-between"><div><strong>SOS abuse</strong><div class="meta">3 accounts &gt; 2 SOS / 30d</div></div><span class="pill danger">Review</span></div>
+        <div class="list-item row-between"><div><strong>Duplicate plates</strong><div class="meta">KA 01 MJ 8821 dual active</div></div><span class="pill warn">Flagged</span></div>
+        <div class="list-item row-between" style="border:0;"><div><strong>Webhook anomalies</strong><div class="meta">Signature fail spike</div></div><span class="pill info">Watching</span></div>
+      </div>
+    </div>
+      </section>
+    </div></div>
+</div>
+<div class="shot">
+  <div class="sid">ADM-11</div>
+  <div class="stitle">Audit log</div>
+  <div class="desktop">
+    <div class="desk-shell" style="background:var(--canvas);">
+      <aside class="desk-nav" style="background:var(--navy);"><div class="logo">Park<span style="color:#5EEAD4;">Spot</span></div><a class="" href="#">Operations</a><a class="" href="#">KYC queue</a><a class="" href="#">Facility review</a><a class="" href="#">Bookings</a><a class="" href="#">Support</a><a class="" href="#">Finance</a><a class="" href="#">Fraud</a><a class="on" href="#">Audit</a><a class="" href="#">Edge fleet</a><a class="" href="#">DPDP</a></aside>
+      <section class="desk-main" style="background:var(--canvas);">
+        <header class="desk-top" style="background:#fff;border-color:var(--border);">
+          <div class="h3" style="color:var(--navy);">Audit log</div>
+        </header>
+        <div class="desk-body">
+      <div class="card" style="padding:16px;">
+        <table class="table">
+          <tr><th>Time</th><th>Actor</th><th>Action</th><th>Resource</th><th>Request ID</th></tr>
+          <tr><td>14:48</td><td>admin@ps</td><td>KYC_APPROVE</td><td>org_8821</td><td>req_9f2a</td></tr>
+          <tr><td>14:22</td><td>mgr_ananya</td><td>BLOCK_BAY</td><td>B1-44</td><td>req_8c11</td></tr>
+          <tr><td>13:01</td><td>att_b409</td><td>OVERRIDE</td><td>gate_3</td><td>req_7710</td></tr>
+        </table>
+      </div>
+    </div>
+      </section>
+    </div></div>
+</div>
+<div class="shot">
+  <div class="sid">ADM-12</div>
+  <div class="stitle">DPDP rights desk</div>
+  <div class="desktop">
+    <div class="desk-shell" style="background:var(--canvas);">
+      <aside class="desk-nav" style="background:var(--navy);"><div class="logo">Park<span style="color:#5EEAD4;">Spot</span></div><a class="" href="#">Operations</a><a class="" href="#">KYC queue</a><a class="" href="#">Facility review</a><a class="" href="#">Bookings</a><a class="" href="#">Support</a><a class="" href="#">Finance</a><a class="" href="#">Fraud</a><a class="" href="#">Audit</a><a class="" href="#">Edge fleet</a><a class="on" href="#">DPDP</a></aside>
+      <section class="desk-main" style="background:var(--canvas);">
+        <header class="desk-top" style="background:#fff;border-color:var(--border);">
+          <div class="h3" style="color:var(--navy);">DPDP rights desk</div>
+        </header>
+        <div class="desk-body">
+      <div class="card" style="padding:16px;">
+        <div class="list-item row-between"><div><strong>Access request</strong><div class="meta">user_441 · due in 62 days</div></div><span class="pill info">In progress</span></div>
+        <div class="list-item row-between"><div><strong>Erasure request</strong><div class="meta">user_902 · retention check</div></div><span class="pill warn">Legal hold?</span></div>
+        <div class="list-item row-between" style="border:0;"><div><strong>Correction</strong><div class="meta">Plate typo · completed</div></div><span class="pill ok">Done</span></div>
+      </div>
+    </div>
+      </section>
+    </div></div>
+</div>
+<div class="shot">
+  <div class="sid">ADM-13</div>
+  <div class="stitle">Edge fleet</div>
+  <div class="desktop">
+    <div class="desk-shell" style="background:var(--canvas);">
+      <aside class="desk-nav" style="background:var(--navy);"><div class="logo">Park<span style="color:#5EEAD4;">Spot</span></div><a class="" href="#">Operations</a><a class="" href="#">KYC queue</a><a class="" href="#">Facility review</a><a class="" href="#">Bookings</a><a class="" href="#">Support</a><a class="" href="#">Finance</a><a class="" href="#">Fraud</a><a class="" href="#">Audit</a><a class="on" href="#">Edge fleet</a><a class="" href="#">DPDP</a></aside>
+      <section class="desk-main" style="background:var(--canvas);">
+        <header class="desk-top" style="background:#fff;border-color:var(--border);">
+          <div class="h3" style="color:var(--navy);">Edge fleet</div>
+        </header>
+        <div class="desk-body">
+      <div class="card" style="padding:16px;">
+        <table class="table">
+          <tr><th>Device</th><th>Facility</th><th>Heartbeat</th><th>Firmware</th><th>Status</th></tr>
+          <tr><td>gw-ind-01</td><td>Indiranagar</td><td>8s</td><td>1.4.2</td><td><span class="pill ok">Healthy</span></td></tr>
+          <tr><td>gw-cbr-03</td><td>Cyber City</td><td>2m</td><td>1.4.1</td><td><span class="pill warn">Degraded</span></td></tr>
+          <tr><td>cam-l2-a</td><td>Indiranagar</td><td>12s</td><td>—</td><td><span class="pill ok">RTSP OK</span></td></tr>
+        </table>
+      </div>
+    </div>
+      </section>
+    </div></div>
+</div></div>
+</div>
+</body>
+</html>

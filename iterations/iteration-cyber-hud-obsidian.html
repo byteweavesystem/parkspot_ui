@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Iteration B · Cyber-HUD Obsidian — ParkSpot Driver</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
+<style>
+:root{--fd:'Space Grotesk',sans-serif;--fb:'Space Grotesk',sans-serif;--fm:'Share Tech Mono',monospace;--canvas:#05070A;--text:#F0F6FC;--text-sec:#8B949E;--emerald:#10B981;--emerald-glow:rgba(16,185,129,.25);--surface:#0D1117;--border:#1E2633;--cyan:#38BDF8;}
+
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--fb);background:#070B14;color:var(--text);-webkit-font-smoothing:antialiased}
+.page{padding:48px 32px 90px;max-width:1820px;margin:0 auto}
+.page-head{margin-bottom:36px;color:#E2E8F0}
+.page-head .id{color:#5EEAD4;font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+.page-head h1{font-family:var(--fd);font-size:40px;font-weight:800;letter-spacing:-.03em;margin:8px 0 12px;color:#fff}
+.page-head p{color:#94A3B8;max-width:780px;line-height:1.6;font-size:16px}
+.page-head .layout-note{margin-top:16px;padding:14px 18px;border-radius:14px;background:#0F172A;border:1px solid #1E293B;color:#CBD5E1;font-size:13.5px;line-height:1.55}
+.page-head a{color:#5EEAD4;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-size:14px}
+.page-head a:hover{text-decoration:underline}
+.rail{display:flex;gap:40px;overflow-x:auto;padding:12px 10px 52px;align-items:flex-start;scroll-snap-type:x mandatory}
+.shot{flex:0 0 auto;width:390px;scroll-snap-align:start}
+.shot .label{color:#94A3B8;font-size:11.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.shot .label span{color:#5EEAD4;font-family:var(--fm);background:rgba(94,234,212,.12);padding:2px 8px;border-radius:6px}
+
+/* iPhone 16 Pro Premium Dribbble Frame */
+.phone{width:390px;height:844px;border-radius:52px;overflow:hidden;position:relative;background:var(--canvas);box-shadow:0 0 0 11px #1E2433,0 0 0 13px #2D374D,0 45px 110px rgba(0,0,0,.8);isolation:isolate}
+.glass-reflection{position:absolute;top:0;left:0;right:0;height:240px;background:linear-gradient(135deg,rgba(255,255,255,.07) 0%,transparent 65%);pointer-events:none;z-index:70}
+.island{position:absolute;top:11px;left:50%;transform:translateX(-50%);height:35px;border-radius:24px;z-index:60;background:#000;display:flex;align-items:center;justify-content:space-between;padding:0 12px;color:#fff;font-size:11px;font-weight:700;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12);pointer-events:none}
+.island.compact{width:124px}
+.island.live{width:230px;padding:0 14px;background:#070C16;border:1px solid rgba(20,184,166,.4);box-shadow:0 4px 16px rgba(13,148,136,.25)}
+.island .dot{width:7px;height:7px;border-radius:50%;background:#14B8A6;box-shadow:0 0 8px #14B8A6;animation:dotPulse 1.8s infinite}
+@keyframes dotPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
+.phone-body{position:absolute;inset:0;display:flex;flex-direction:column;overflow:hidden;z-index:1}
+.home-bar{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:138px;height:5px;border-radius:99px;background:var(--text);opacity:.25;z-index:50;pointer-events:none}
+.status{height:54px;display:flex;align-items:flex-end;justify-content:space-between;padding:0 26px 10px;font-size:13px;font-weight:700;z-index:30;flex-shrink:0}
+.status .icons{display:flex;align-items:center;gap:6px}
+.screen{flex:1;display:flex;flex-direction:column;position:relative;min-height:0;overflow:hidden}
+.tabular{font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+
+
+.b-wrap{flex:1;background:var(--canvas);color:var(--text);display:flex;flex-direction:column;position:relative}
+.b-term-head{padding:12px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-family:var(--fm);font-size:11px;color:var(--emerald)}
+.b-body{flex:1;padding:20px;display:flex;flex-direction:column;overflow-y:auto}
+.b-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:16px;margin-bottom:14px;box-shadow:0 8px 24px rgba(0,0,0,.6)}
+.b-card.active{border-color:var(--emerald);box-shadow:0 0 24px rgba(16,185,129,.2)}
+.b-btn{height:54px;border-radius:14px;background:var(--emerald);color:#05070A;border:0;font-weight:800;font-family:var(--fd);font-size:15px;letter-spacing:.04em;display:flex;align-items:center;justify-content:center;gap:10px;text-transform:uppercase;cursor:pointer;box-shadow:0 8px 24px var(--emerald-glow)}
+
+</style></head><body>
+<div class="page">
+  <div class="page-head">
+    <div class="id">Iteration B · cyber-hud-obsidian</div>
+    <h1>Cyber-HUD Obsidian</h1>
+    <p><strong style="color:#F8FAFC">Dribbble Dark Mode #1 · Tesla Telemetry · Lower 40% Thumb Zone</strong><br/>Ultra-contrast OLED dark mode inspired by Tesla and Rivian. Designed for extreme glare resistance in bright Indian sunlight and rapid 1-thumb operation.</p>
+    <div class="layout-note"><strong style="color:#5EEAD4">Dribbble UX Architecture:</strong> Lower 40% thumb ergonomics · dark vector radar map · wireframe vehicle telemetry · architectural B2 blueprint grid · high-luminance barrier pass</div>
+    <a href="index.html">← Compare All 5 Dribbble Iterations</a>
+  </div>
+  <div class="rail"><div class="shot"><div class="label"><span>B</span> 01 · Splash HUD</div><div class="phone"><div class="glass-reflection"></div><div class="island compact"><span>9:41</span></div><div class="phone-body">
+      <div class="b-wrap">
+        <div class="status" style="color:#F0F6FC">
+      <span class="tabular">9:41</span>
+      <div class="icons">
+        <svg width="15" height="11" viewBox="0 0 16 12" fill="currentColor"><rect x="0" y="8" width="2.5" height="4" rx="0.5"/><rect x="4" y="5.5" width="2.5" height="6.5" rx="0.5"/><rect x="8" y="3" width="2.5" height="9" rx="0.5"/><rect x="12" y="0" width="2.5" height="12" rx="0.5"/></svg>
+        <svg width="14" height="11" viewBox="0 0 16 12" fill="currentColor"><path d="M8 2.5C10.5 2.5 12.8 3.5 14.5 5.2L15.9 3.8C13.8 1.7 11 0.5 8 0.5C5 0.5 2.2 1.7 0.1 3.8L1.5 5.2C3.2 3.5 5.5 2.5 8 2.5ZM8 6.5C9.7 6.5 11.2 7.2 12.3 8.3L13.7 6.9C12.2 5.4 10.2 4.5 8 4.5C5.8 4.5 3.8 5.4 2.3 6.9L3.7 8.3C4.8 7.2 6.3 6.5 8 6.5ZM8 10.5C8.8 10.5 9.5 11.2 9.5 12H6.5C6.5 11.2 7.2 10.5 8 10.5Z"/></svg>
+        <svg width="22" height="11" viewBox="0 0 24 12" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="19" height="10" rx="3"/><rect x="2.5" y="2.5" width="13" height="7" rx="1.5" fill="currentColor"/><path d="M21 4.5V7.5" stroke-linecap="round"/></svg>
+      </div>
+    </div>
+        <div class="b-term-head"><span>SYS // PARKSPOT_V3</span><span>STATUS: OPTIMAL</span></div>
+        <div class="b-body" style="justify-content:center">
+          <div style="font-family:var(--fm);font-size:11px;letter-spacing:.2em;color:var(--emerald);margin-bottom:8px">HARDWARE CONTROL SYSTEM</div>
+          <div style="font-size:42px;font-weight:800;line-height:1.0;margin-bottom:16px">ACCURACY.<br/>CLEARANCE.<br/>ENTRY.</div>
+          <div class="b-card active" style="margin:20px 0">
+            <div style="font-family:var(--fm);font-size:12px;color:var(--text-sec)">GROUND PROTOCOL VERIFIED</div>
+            <div style="font-family:var(--fm);font-size:14px;color:#fff;margin-top:4px">ED25519 · OFFLINE MANIFEST · NO CLOUD WAIT</div>
+          </div>
+          <button class="b-btn" style="margin-top:auto">INITIALIZE DRIVER CONSOLE >> </button>
+        </div>
+      </div>
+    </div><div class="home-bar"></div></div></div><div class="shot"><div class="label"><span>B</span> 02 · Vehicle Spec</div><div class="phone"><div class="glass-reflection"></div><div class="island compact"><span>9:41</span></div><div class="phone-body">
+      <div class="b-wrap">
+        <div class="status" style="color:#F0F6FC">
+      <span class="tabular">9:41</span>
+      <div class="icons">
+        <svg width="15" height="11" viewBox="0 0 16 12" fill="currentColor"><rect x="0" y="8" width="2.5" height="4" rx="0.5"/><rect x="4" y="5.5" width="2.5" height="6.5" rx="0.5"/><rect x="8" y="3" width="2.5" height="9" rx="0.5"/><rect x="12" y="0" width="2.5" height="12" rx="0.5"/></svg>
+        <svg width="14" height="11" viewBox="0 0 16 12" fill="currentColor"><path d="M8 2.5C10.5 2.5 12.8 3.5 14.5 5.2L15.9 3.8C13.8 1.7 11 0.5 8 0.5C5 0.5 2.2 1.7 0.1 3.8L1.5 5.2C3.2 3.5 5.5 2.5 8 2.5ZM8 6.5C9.7 6.5 11.2 7.2 12.3 8.3L13.7 6.9C12.2 5.4 10.2 4.5 8 4.5C5.8 4.5 3.8 5.4 2.3 6.9L3.7 8.3C4.8 7.2 6.3 6.5 8 6.5ZM8 10.5C8.8 10.5 9.5 11.2 9.5 12H6.5C6.5 11.2 7.2 10.5 8 10.5Z"/></svg>
+        <svg width="22" height="11" viewBox="0 0 24 12" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="19" height="10" rx="3"/><rect x="2.5" y="2.5" width="13" height="7" rx="1.5" fill="currentColor"/><path d="M21 4.5V7.5" stroke-linecap="round"/></svg>
+      </div>
+    </div>
+        <div class="b-term-head"><span>VEHICLE TELEMETRY</span><span>KA-01-MJ-8821</span></div>
+        <div class="b-body">
+          <div style="font-size:22px;font-weight:800;margin-bottom:14px">Active Vehicle Unit</div>
+          <div class="b-card active">
+            <div style="display:flex;justify-content:space-between">
+              <span style="font-family:var(--fm);font-size:20px;font-weight:700;color:var(--emerald)">KA 01 MJ 8821</span>
+              <span style="font-family:var(--fm);font-size:11px;color:var(--emerald)">[LOCKED]</span>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px">
+              <div style="background:#080B0F;padding:10px;border-radius:10px;border:1px solid #1E2633"><div style="font-size:10px;color:var(--text-sec)">CLASS</div><b style="font-family:var(--fm)">MID SUV</b></div>
+              <div style="background:#080B0F;padding:10px;border-radius:10px;border:1px solid #1E2633"><div style="font-size:10px;color:var(--text-sec)">HEIGHT</div><b style="font-family:var(--fm)">1.82M</b></div>
+            </div>
+          </div>
+          <button class="b-btn" style="margin-top:auto">CONFIRM SPEC &amp; RADAR >> </button>
+        </div>
+      </div>
+    </div><div class="home-bar"></div></div></div><div class="shot"><div class="label"><span>B</span> 03 · Radar Explore</div><div class="phone"><div class="glass-reflection"></div><div class="island compact"><span>9:41</span></div><div class="phone-body">
+      <div class="b-wrap">
+        <div style="flex:1;position:relative">
+          <img src="../assets/map-aerial.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) brightness(.3)"/>
+          <div class="status" style="color:#fff">
+      <span class="tabular">9:41</span>
+      <div class="icons">
+        <svg width="15" height="11" viewBox="0 0 16 12" fill="currentColor"><rect x="0" y="8" width="2.5" height="4" rx="0.5"/><rect x="4" y="5.5" width="2.5" height="6.5" rx="0.5"/><rect x="8" y="3" width="2.5" height="9" rx="0.5"/><rect x="12" y="0" width="2.5" height="12" rx="0.5"/></svg>
+        <svg width="14" height="11" viewBox="0 0 16 12" fill="currentColor"><path d="M8 2.5C10.5 2.5 12.8 3.5 14.5 5.2L15.9 3.8C13.8 1.7 11 0.5 8 0.5C5 0.5 2.2 1.7 0.1 3.8L1.5 5.2C3.2 3.5 5.5 2.5 8 2.5ZM8 6.5C9.7 6.5 11.2 7.2 12.3 8.3L13.7 6.9C12.2 5.4 10.2 4.5 8 4.5C5.8 4.5 3.8 5.4 2.3 6.9L3.7 8.3C4.8 7.2 6.3 6.5 8 6.5ZM8 10.5C8.8 10.5 9.5 11.2 9.5 12H6.5C6.5 11.2 7.2 10.5 8 10.5Z"/></svg>
+        <svg width="22" height="11" viewBox="0 0 24 12" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="19" height="10" rx="3"/><rect x="2.5" y="2.5" width="13" height="7" rx="1.5" fill="currentColor"/><path d="M21 4.5V7.5" stroke-linecap="round"/></svg>
+      </div>
+    </div>
+          <div style="position:absolute;bottom:0;left:0;right:0;padding:16px 20px 32px;background:linear-gradient(180deg,transparent,#05070A 50%)">
+            <div class="b-card active" style="margin-bottom:12px">
+              <div style="display:flex;justify-content:space-between;align-items:baseline">
+                <b style="font-size:17px">Indiranagar Metro MLCP</b>
+                <span style="font-family:var(--fm);color:var(--emerald);font-size:14px">₹30/HR</span>
+              </div>
+              <div style="font-family:var(--fm);font-size:11px;color:var(--text-sec);margin-top:4px">0.4 KM · LIVE LATENCY &lt;12S · T1 BOOM</div>
+            </div>
+            <button class="b-btn" style="width:100%">ENGAGE TARGET >> </button>
+          </div>
+        </div>
+      </div>
+    </div><div class="home-bar"></div></div></div><div class="shot"><div class="label"><span>B</span> 04 · Bay Blueprint</div><div class="phone"><div class="glass-reflection"></div><div class="island compact"><span>9:41</span></div><div class="phone-body">
+      <div class="b-wrap">
+        <div class="status" style="color:#F0F6FC">
+      <span class="tabular">9:41</span>
+      <div class="icons">
+        <svg width="15" height="11" viewBox="0 0 16 12" fill="currentColor"><rect x="0" y="8" width="2.5" height="4" rx="0.5"/><rect x="4" y="5.5" width="2.5" height="6.5" rx="0.5"/><rect x="8" y="3" width="2.5" height="9" rx="0.5"/><rect x="12" y="0" width="2.5" height="12" rx="0.5"/></svg>
+        <svg width="14" height="11" viewBox="0 0 16 12" fill="currentColor"><path d="M8 2.5C10.5 2.5 12.8 3.5 14.5 5.2L15.9 3.8C13.8 1.7 11 0.5 8 0.5C5 0.5 2.2 1.7 0.1 3.8L1.5 5.2C3.2 3.5 5.5 2.5 8 2.5ZM8 6.5C9.7 6.5 11.2 7.2 12.3 8.3L13.7 6.9C12.2 5.4 10.2 4.5 8 4.5C5.8 4.5 3.8 5.4 2.3 6.9L3.7 8.3C4.8 7.2 6.3 6.5 8 6.5ZM8 10.5C8.8 10.5 9.5 11.2 9.5 12H6.5C6.5 11.2 7.2 10.5 8 10.5Z"/></svg>
+        <svg width="22" height="11" viewBox="0 0 24 12" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="19" height="10" rx="3"/><rect x="2.5" y="2.5" width="13" height="7" rx="1.5" fill="currentColor"/><path d="M21 4.5V7.5" stroke-linecap="round"/></svg>
+      </div>
+    </div>
+        <div class="b-term-head"><span>DECK LEVEL B2</span><span>SLOT ASSIGNMENT</span></div>
+        <div class="b-body">
+          <div class="b-card active">
+            <div style="font-size:11px;font-family:var(--fm);color:var(--emerald)">SLOT RESERVED // HOLD 09:44</div>
+            <div style="font-size:28px;font-weight:800;font-family:var(--fm);margin:6px 0">BAY B2-19</div>
+            <div style="font-size:12px;color:var(--text-sec)">Direct aisle approach · 2.1m clearance certified</div>
+          </div>
+          <button class="b-btn" style="margin-top:auto">LOCK BAY &amp; REVIEW QUOTE >> </button>
+        </div>
+      </div>
+    </div><div class="home-bar"></div></div></div><div class="shot"><div class="label"><span>B</span> 05 · Ledger Quote</div><div class="phone"><div class="glass-reflection"></div><div class="island compact"><span>9:41</span></div><div class="phone-body">
+      <div class="b-wrap">
+        <div class="status" style="color:#F0F6FC">
+      <span class="tabular">9:41</span>
+      <div class="icons">
+        <svg width="15" height="11" viewBox="0 0 16 12" fill="currentColor"><rect x="0" y="8" width="2.5" height="4" rx="0.5"/><rect x="4" y="5.5" width="2.5" height="6.5" rx="0.5"/><rect x="8" y="3" width="2.5" height="9" rx="0.5"/><rect x="12" y="0" width="2.5" height="12" rx="0.5"/></svg>
+        <svg width="14" height="11" viewBox="0 0 16 12" fill="currentColor"><path d="M8 2.5C10.5 2.5 12.8 3.5 14.5 5.2L15.9 3.8C13.8 1.7 11 0.5 8 0.5C5 0.5 2.2 1.7 0.1 3.8L1.5 5.2C3.2 3.5 5.5 2.5 8 2.5ZM8 6.5C9.7 6.5 11.2 7.2 12.3 8.3L13.7 6.9C12.2 5.4 10.2 4.5 8 4.5C5.8 4.5 3.8 5.4 2.3 6.9L3.7 8.3C4.8 7.2 6.3 6.5 8 6.5ZM8 10.5C8.8 10.5 9.5 11.2 9.5 12H6.5C6.5 11.2 7.2 10.5 8 10.5Z"/></svg>
+        <svg width="22" height="11" viewBox="0 0 24 12" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="19" height="10" rx="3"/><rect x="2.5" y="2.5" width="13" height="7" rx="1.5" fill="currentColor"/><path d="M21 4.5V7.5" stroke-linecap="round"/></svg>
+      </div>
+    </div>
+        <div class="b-term-head"><span>LEDGER INVOICE</span><span>TAX ACCREDITED</span></div>
+        <div class="b-body">
+          <div class="b-card">
+            <div style="display:flex;justify-content:space-between;font-family:var(--fm);font-size:13px;padding:6px 0"><span>BASE CHARGE (2H)</span><span>₹60.00</span></div>
+            <div style="display:flex;justify-content:space-between;font-family:var(--fm);font-size:13px;padding:6px 0"><span>PLATFORM ACCREDITATION</span><span>₹05.00</span></div>
+            <div style="display:flex;justify-content:space-between;font-family:var(--fm);font-size:12px;color:var(--text-sec);padding:6px 0"><span>CGST + SGST (18%)</span><span>₹11.70</span></div>
+            <div style="display:flex;justify-content:space-between;font-family:var(--fm);font-size:20px;font-weight:800;color:var(--emerald);border-top:1px solid var(--border);padding-top:12px;margin-top:8px">
+              <span>NET PAYABLE</span><span>₹76.70</span>
+            </div>
+          </div>
+          <button class="b-btn" style="margin-top:auto">SLIDE TO AUTHORIZE UPI >> </button>
+        </div>
+      </div>
+    </div><div class="home-bar"></div></div></div><div class="shot"><div class="label"><span>B</span> 06 · Gate Scanner</div><div class="phone"><div class="glass-reflection"></div><div class="island compact"><span>9:41</span></div><div class="phone-body">
+      <div class="b-wrap" style="background:#000">
+        <div class="status" style="color:#fff">
+      <span class="tabular">9:41</span>
+      <div class="icons">
+        <svg width="15" height="11" viewBox="0 0 16 12" fill="currentColor"><rect x="0" y="8" width="2.5" height="4" rx="0.5"/><rect x="4" y="5.5" width="2.5" height="6.5" rx="0.5"/><rect x="8" y="3" width="2.5" height="9" rx="0.5"/><rect x="12" y="0" width="2.5" height="12" rx="0.5"/></svg>
+        <svg width="14" height="11" viewBox="0 0 16 12" fill="currentColor"><path d="M8 2.5C10.5 2.5 12.8 3.5 14.5 5.2L15.9 3.8C13.8 1.7 11 0.5 8 0.5C5 0.5 2.2 1.7 0.1 3.8L1.5 5.2C3.2 3.5 5.5 2.5 8 2.5ZM8 6.5C9.7 6.5 11.2 7.2 12.3 8.3L13.7 6.9C12.2 5.4 10.2 4.5 8 4.5C5.8 4.5 3.8 5.4 2.3 6.9L3.7 8.3C4.8 7.2 6.3 6.5 8 6.5ZM8 10.5C8.8 10.5 9.5 11.2 9.5 12H6.5C6.5 11.2 7.2 10.5 8 10.5Z"/></svg>
+        <svg width="22" height="11" viewBox="0 0 24 12" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="19" height="10" rx="3"/><rect x="2.5" y="2.5" width="13" height="7" rx="1.5" fill="currentColor"/><path d="M21 4.5V7.5" stroke-linecap="round"/></svg>
+      </div>
+    </div>
+        <div class="b-body" style="align-items:center;justify-content:center;text-align:center">
+          <div style="font-family:var(--fm);font-size:12px;color:var(--emerald)">HIGH-LUMINANCE SCANNER MODE</div>
+          <div style="font-size:44px;font-weight:800;font-family:var(--fm);color:#fff;margin:8px 0">BAY B2-19</div>
+          <div style="background:#fff;border-radius:18px;padding:16px;box-shadow:0 0 50px rgba(255,255,255,.2);margin:16px 0">
+            <img src="../assets/qr-pass.png" width="160" height="160"/>
+          </div>
+          <div style="font-family:var(--fm);font-size:12px;color:#aaa">KA 01 MJ 8821 · ED25519</div>
+          <button class="b-btn" style="width:100%;margin-top:24px">MAX LUMINANCE ACTIVE</button>
+        </div>
+      </div>
+    </div><div class="home-bar"></div></div></div></div>
+</div>
+</body></html>

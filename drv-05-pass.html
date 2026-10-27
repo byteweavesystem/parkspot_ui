@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>DRV-05 Digital Pass — ParkSpot</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .pass-wrap {
+      position: absolute; inset: 54px 16px 110px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+    }
+    .pass {
+      width: 100%; background: #fff; border-radius: 20px; position: relative;
+      box-shadow: 0 20px 48px rgba(0,0,0,.35); overflow: hidden;
+    }
+    .pass::before, .pass::after {
+      content:""; position:absolute; width:22px; height:22px; border-radius:50%;
+      background: var(--navy); top: 58%;
+    }
+    .pass::before { left: -11px; }
+    .pass::after { right: -11px; }
+    .pass-top {
+      background: linear-gradient(135deg, #0F172A, #1E293B 60%, #0D9488);
+      color: #fff; padding: 20px 20px 18px;
+    }
+    .qr {
+      width: 180px; height: 180px; margin: 18px auto;
+      background:
+        repeating-conic-gradient(#0F172A 0% 25%, #fff 0% 50%) 0 0 / 12px 12px;
+      border: 8px solid #fff; outline: 1px solid var(--border);
+      position: relative;
+    }
+    .qr .center {
+      position:absolute; inset: 58px; background:#fff; border:2px solid var(--navy);
+      border-radius:8px; display:grid; place-items:center; font-weight:800; font-size:11px; color:var(--navy);
+    }
+    .watermark {
+      text-align:center; font-family: var(--mono); font-size:12px; font-weight:700;
+      color: var(--teal); letter-spacing: .08em; opacity: .85;
+      animation: pulse 1.2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.55} }
+    .hsrp {
+      display:inline-flex; align-items:center; gap:8px; background:#F8FAFC;
+      border:2px solid #0F172A; border-radius:8px; padding:8px 12px; margin: 0 auto;
+    }
+    .hsrp .ind { background:#FF6B00; color:#fff; font-size:10px; font-weight:800; padding:4px 6px; border-radius:4px; }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <div class="phone" style="background:var(--navy);">
+      <div class="status-bar light"><span>9:41</span><span>●●● 5G</span></div>
+      <div style="padding:8px 20px 0; color:#fff;">
+        <div class="label" style="color:#94A3B8;">BOOKING CONFIRMED</div>
+        <div class="h2" style="color:#fff;margin-top:4px;">Your digital pass</div>
+      </div>
+
+      <div class="pass-wrap">
+        <div class="pass">
+          <div class="pass-top">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+              <div>
+                <div style="font-size:12px;opacity:.75;font-weight:600;">ParkSpot</div>
+                <div style="font-size:18px;font-weight:800;margin-top:4px;">Indiranagar Metro MLCP</div>
+              </div>
+              <span class="pill" style="background:rgba(13,148,136,.25);color:#99F6E4;">Ed25519</span>
+            </div>
+            <div style="display:flex;gap:24px;margin-top:16px;">
+              <div><div style="font-size:11px;opacity:.7;">BAY</div><div style="font-size:22px;font-weight:800;">B2-19</div></div>
+              <div><div style="font-size:11px;opacity:.7;">WINDOW</div><div style="font-size:14px;font-weight:700;">18:00 – 20:00</div></div>
+            </div>
+          </div>
+          <div style="padding:8px 20px 20px; text-align:center; border-top:1px dashed var(--border);">
+            <div class="qr"><div class="center">PS</div></div>
+            <div class="watermark">14:48:22 IST · SINGLE USE</div>
+            <div class="hsrp" style="margin-top:14px;">
+              <span class="ind">IND</span>
+              <span class="plate" style="font-size:16px;">KA 01 MJ 8821</span>
+            </div>
+            <div class="meta" style="margin-top:10px;">Show at gate · offline-verifiable</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="position:absolute;left:16px;right:16px;bottom:28px;display:flex;flex-direction:column;gap:10px;">
+        <button class="btn primary xl">Boost brightness</button>
+        <button class="btn secondary" style="background:rgba(255,255,255,.08);color:#fff;border-color:rgba(255,255,255,.2);">Navigate to entrance ramp</button>
+      </div>
+      <div class="home-indicator" style="background:#fff;opacity:.5;"></div>
+    </div>
+  </div>
+</body>
+</html>

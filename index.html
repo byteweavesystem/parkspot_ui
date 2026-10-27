@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<title>ParkSpot — Complete UI/UX Mockups</title>
+<link rel="stylesheet" href="styles.css"/>
+<style>
+body{background:#070B14;color:#E2E8F0;font-family:var(--font);}
+.wrap{max-width:980px;margin:0 auto;padding:48px 24px 80px;}
+h1{font-size:40px;font-weight:800;letter-spacing:-.04em;} h1 span{color:#5EEAD4;}
+.hero{
+  margin-top:28px;border-radius:24px;overflow:hidden;position:relative;height:240px;
+  box-shadow:0 24px 60px rgba(0,0,0,.35); display:block; text-decoration:none; color:inherit;
+}
+.hero img{width:100%;height:100%;object-fit:cover;display:block;}
+.hero .veil{position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,11,20,.85),rgba(7,11,20,.25));}
+.hero .copy{position:absolute;left:28px;bottom:28px;right:28px;}
+.grid{display:grid;gap:14px;margin-top:28px;}
+a.card{
+  display:grid;grid-template-columns:120px 1fr;gap:16px;align-items:center;
+  padding:14px;background:#0F172A;border:1px solid #1E293B;border-radius:18px;
+  text-decoration:none;color:inherit;overflow:hidden;
+}
+a.card:hover{border-color:#0D9488;}
+a.card img{width:120px;height:88px;object-fit:cover;border-radius:12px;}
+.id{color:#5EEAD4;font-size:11px;font-weight:800;letter-spacing:.08em;}
+.title{font-size:20px;font-weight:750;color:#fff;margin:6px 0;}
+.note{margin-top:28px;padding:18px;border:1px solid #1E293B;border-radius:16px;color:#94A3B8;font-size:14px;line-height:1.5;background:#0B1220;}
+.assets{display:flex;gap:10px;overflow:auto;margin-top:16px;padding-bottom:6px;}
+.assets img{width:110px;height:74px;object-fit:cover;border-radius:12px;border:1px solid #1E293B;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="label" style="color:#64748B;">PARKSPOT · PREMIUM MOCKUPS · REAL ASSETS</div>
+  <h1>Park<span>Spot</span> UI/UX design</h1>
+  <p class="body" style="color:#94A3B8;margin-top:10px;max-width:580px;">Photo-led screens with facility heroes, garage decks, map art, HSRP plate, and live QR — not wireframes.</p>
+
+  <a class="hero" href="iterations/index.html">
+    <img src="assets/night-city.jpg" alt=""/>
+    <div class="veil"></div>
+    <div class="copy">
+      <div class="id">START HERE · 5 THEMES</div>
+      <div class="title" style="font-size:28px;margin:0;">Driver design iterations</div>
+      <div class="meta" style="color:#CBD5E1;">Full onboarding + explore + pass · pick A–E before we rebuild the production flow</div>
+    </div>
+  </a>
+
+  <a class="hero" href="premium-showcase.html" style="margin-top:14px;height:160px;">
+    <img src="assets/parkspot-facility-hero.jpg" alt=""/>
+    <div class="veil"></div>
+    <div class="copy">
+      <div class="id">FLAGSHIPS</div>
+      <div class="title" style="font-size:22px;margin:0;">Premium visual showcase</div>
+      <div class="meta" style="color:#CBD5E1;">Photo-led screens (current token set)</div>
+    </div>
+  </a>
+
+  <div class="grid">
+    <a class="card" href="stitch-screens/index.html" style="border: 2px solid #00685F; background: linear-gradient(90deg, rgba(0,104,95,0.18), rgba(15,23,42,0.9));">
+      <img src="assets/parkspot-facility-hero.jpg" alt=""/>
+      <div>
+        <div class="id" style="color:#89F5E7;">LOCKED DESIGN SYSTEM · 45 SCREENS (COMPLETE MASTER FLOW)</div>
+        <div class="title" style="color:#fff;">Google Stitch Driver Suite</div>
+        <div class="meta" style="color:#CBD5E1;">Urban Mobility &amp; Transit System · 14 Lifecycle Stages: Onboarding → Auth Suite → Flagship 5-Tabs → B2 Bay &amp; Quote ₹76.70 → Floating Meter → EV 60kW Telemetry → Commuter Passes → Physical VMS &amp; Thermal Ticket</div>
+      </div>
+    </a>
+    <a class="card" href="flow-driver.html" style="border: 2px solid #00685F; background: linear-gradient(90deg, rgba(0,104,95,0.18), rgba(15,23,42,0.9));">
+      <img src="assets/parkspot-map-base.jpg" alt=""/>
+      <div>
+        <div class="id" style="color:#89F5E7;">53 SCREENS · STANDARD MOBILE UX FLOW</div>
+        <div class="title" style="color:#fff;">Driver app (Full Flagship Suite)</div>
+        <div class="meta" style="color:#CBD5E1;">Launch → 3-Step Onboarding → Auth Gateway → Login/Register → 3-Step Forgot Pwd → Terms &amp; Privacy → Flagship 5-Tab Suite (Home, Bookings, Garage, Wallet, Profile) → B2 Bay &amp; Quote ₹76.70</div>
+      </div>
+    </a>
+    <a class="card" href="prototype/index.html" style="border: 2px solid #3B82F6; background: linear-gradient(90deg, rgba(59,130,246,0.18), rgba(15,23,42,0.9));">
+      <img src="assets/city-street.jpg" alt="Interactive Prototype"/>
+      <div>
+        <div class="id" style="color:#60A5FA;">INTERACTIVE WEB PROTOTYPE · TAILWIND</div>
+        <div class="title" style="color:#fff;">Unified Interactive App Prototype</div>
+        <div class="meta" style="color:#CBD5E1;">Live dynamic web prototype with real-time tab switching, deck selection, bay reservation, and checkout states.</div>
+      </div>
+    </a>
+    <a class="card" href="flow-attendant.html">
+      <img src="assets/parkspot-garage-b2.jpg" alt=""/>
+      <div><div class="id">16 SCREENS</div><div class="title">Attendant POS</div><div class="meta">Scan → reject/override → walk-in → UPI exit → handover</div></div>
+    </a>
+    <a class="card" href="flow-operator.html">
+      <img src="assets/parking-levels.jpg" alt=""/>
+      <div><div class="id">21 SCREENS</div><div class="title">Operator SaaS</div><div class="meta">KYC×7 → live board → pass pools → payouts</div></div>
+    </a>
+    <a class="card" href="flow-admin.html">
+      <img src="assets/desk.jpg" alt=""/>
+      <div><div class="id">13 SCREENS</div><div class="title">Platform admin</div><div class="meta">Ops → disputes → flags → finance → DPDP</div></div>
+    </a>
+  </div>
+
+  <div class="grid" style="margin-top:20px;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));">
+    <a class="card" href="docs/MASTER_UI_WORKFLOW_AND_DESIGN_SYSTEM.md" target="_blank" style="grid-template-columns:1fr;padding:16px;">
+      <div>
+        <div class="id">DESIGN SYSTEM SPEC</div>
+        <div class="title" style="font-size:16px;margin:4px 0;">Design System &amp; Tokens</div>
+        <div class="meta" style="color:#94A3B8;font-size:13px;">Color palettes, Material 3 elevation, typography hierarchy, and spacing tokens.</div>
+      </div>
+    </a>
+    <a class="card" href="docs/user-flows.md" target="_blank" style="grid-template-columns:1fr;padding:16px;">
+      <div>
+        <div class="id">UX FLOWS SPEC</div>
+        <div class="title" style="font-size:16px;margin:4px 0;">Complete User Journeys</div>
+        <div class="meta" style="color:#94A3B8;font-size:13px;">14 End-to-end lifecycle journeys across all 4 system personas.</div>
+      </div>
+    </a>
+    <a class="card" href="docs/QA_TEST_MATRIX.md" target="_blank" style="grid-template-columns:1fr;padding:16px;">
+      <div>
+        <div class="id">QA MATRIX</div>
+        <div class="title" style="font-size:16px;margin:4px 0;">UI Acceptance Matrix</div>
+        <div class="meta" style="color:#94A3B8;font-size:13px;">Device compatibility, financial invariants (₹76.70 SAC), and visual QA tests.</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="note">
+    <strong style="color:#E2E8F0;">Module Assets</strong> in <code style="color:#5EEAD4;">assets/</code>
+    <div class="assets">
+      <img src="assets/parkspot-facility-hero.jpg" alt="facility"/>
+      <img src="assets/parkspot-garage-b2.jpg" alt="garage"/>
+      <img src="assets/parkspot-map-base.jpg" alt="map"/>
+      <img src="assets/parkspot-hsrp-plate.jpg" alt="plate"/>
+      <img src="assets/qr-pass.png" alt="qr"/>
+      <img src="assets/garage-hero.jpg" alt="lot"/>
+      <img src="assets/parking-levels.jpg" alt="levels"/>
+      <img src="assets/city-street.jpg" alt="city"/>
+      <img src="assets/desk.jpg" alt="desk"/>
+    </div>
+  </div>
+</div>
+</body>
+</html>

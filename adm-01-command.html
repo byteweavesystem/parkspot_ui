@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ADM-01 Command Center — ParkSpot</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .shell { display:grid; grid-template-columns: 220px 1fr; height:100%; background:#0B1220; color:#E2E8F0; }
+    .nav { background:#020617; padding:20px 14px; border-right:1px solid #1E293B; }
+    .nav a { display:block; padding:10px 12px; border-radius:10px; color:#64748B; font-size:13px; font-weight:600; text-decoration:none; margin-bottom:2px; }
+    .nav a.on { background:#0F172A; color:#5EEAD4; }
+    .top { height:60px; border-bottom:1px solid #1E293B; display:flex; align-items:center; justify-content:space-between; padding:0 20px; background:#020617; }
+    .cluster { display:flex; gap:6px; }
+    .cluster span { padding:8px 12px; border-radius:999px; font-size:12px; font-weight:700; color:#94A3B8; border:1px solid #1E293B; }
+    .cluster span.on { background:var(--teal); color:#fff; border-color:var(--teal); }
+    .grid { display:grid; grid-template-columns: 1.5fr 1fr; gap:16px; padding:16px 20px 20px; height: calc(100% - 60px); }
+    .panel { background:#0F172A; border:1px solid #1E293B; border-radius:16px; padding:16px; overflow:hidden; }
+    .map {
+      height: calc(100% - 40px); border-radius:12px; margin-top:12px; position:relative;
+      background:
+        radial-gradient(circle at 30% 40%, rgba(13,148,136,.35), transparent 35%),
+        radial-gradient(circle at 70% 55%, rgba(185,28,28,.25), transparent 30%),
+        radial-gradient(circle at 55% 30%, rgba(180,83,9,.2), transparent 25%),
+        linear-gradient(160deg, #020617, #0F172A 40%, #134E4A);
+    }
+    .dot { position:absolute; width:10px; height:10px; border-radius:50%; background:var(--teal); box-shadow:0 0 12px var(--teal); }
+    .incident { border:1px solid #1E293B; border-radius:12px; padding:12px; margin-bottom:10px; background:#020617; }
+    .kpirow { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; padding:16px 20px 0; }
+    .kpi { background:#0F172A; border:1px solid #1E293B; border-radius:12px; padding:14px; }
+  </style>
+</head>
+<body>
+  <div class="stage" style="padding:24px;">
+    <div class="desktop">
+      <div class="shell">
+        <aside class="nav">
+          <div style="font-weight:800;font-size:18px;margin-bottom:18px;color:#fff;">Park<span style="color:#5EEAD4;">Spot</span></div>
+          <a class="on" href="#">Operations</a>
+          <a href="#">KYC queue</a>
+          <a href="#">Facility review</a>
+          <a href="#">Bookings</a>
+          <a href="#">Support</a>
+          <a href="#">Disputes</a>
+          <a href="#">Finance</a>
+          <a href="#">Fraud</a>
+          <a href="#">Audit</a>
+          <a href="#">Edge fleet</a>
+          <a href="#">Feature flags</a>
+        </aside>
+        <section>
+          <header class="top">
+            <div class="cluster">
+              <span class="on">All India</span>
+              <span>Delhi-NCR</span>
+              <span>Bengaluru</span>
+              <span>Mumbai</span>
+              <span>Hyderabad</span>
+            </div>
+            <span class="pill danger">3 active flags</span>
+          </header>
+          <div class="kpirow">
+            <div class="kpi"><div class="label" style="color:#64748B;">NETWORK OCCUPANCY</div><div class="h2 currency" style="color:#fff;margin-top:4px;">87.4%</div><div class="meta">16,125 / 18,450 bays</div></div>
+            <div class="kpi"><div class="label" style="color:#64748B;">GMV TODAY</div><div class="h2 currency" style="color:#fff;margin-top:4px;">₹14,82,450</div><div class="meta">UPI · FASTag · Cash</div></div>
+            <div class="kpi"><div class="label" style="color:#64748B;">FACILITIES ONLINE</div><div class="h2" style="color:#fff;margin-top:4px;">148 / 152</div><div class="meta">4 degraded</div></div>
+            <div class="kpi"><div class="label" style="color:#64748B;">VERIFY P95</div><div class="h2" style="color:#5EEAD4;margin-top:4px;">186ms</div><div class="meta">Offline gate SLO</div></div>
+          </div>
+          <div class="grid">
+            <div class="panel">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <div class="h3" style="color:#fff;">PostGIS density · FASTag corridors</div>
+                <div class="meta">synced 3.2s</div>
+              </div>
+              <div class="map">
+                <div class="dot" style="left:28%;top:38%;"></div>
+                <div class="dot" style="left:48%;top:32%;background:var(--warn);box-shadow:0 0 12px var(--warn);"></div>
+                <div class="dot" style="left:62%;top:52%;background:var(--danger);box-shadow:0 0 12px var(--danger);"></div>
+                <div class="dot" style="left:40%;top:58%;"></div>
+                <div class="dot" style="left:72%;top:40%;"></div>
+                <div style="position:absolute;left:20px;bottom:16px;background:rgba(2,6,23,.8);border:1px solid #1E293B;border-radius:12px;padding:10px 12px;max-width:240px;">
+                  <div class="h3" style="color:#fff;font-size:13px;">Cyber City Hub</div>
+                  <div class="meta">1,240 bays · 91% · T3 NETC</div>
+                </div>
+              </div>
+            </div>
+            <div class="panel">
+              <div class="h3" style="color:#fff;margin-bottom:12px;">Security watchdog</div>
+              <div class="incident">
+                <div style="display:flex;justify-content:space-between;"><span class="pill danger">ANPR mismatch</span><span class="meta">2m ago</span></div>
+                <div class="body" style="color:#CBD5E1;margin-top:8px;">DL 01 AB 1234 flagged at two gates within 2 mins.</div>
+                <div style="display:flex;gap:8px;margin-top:10px;"><span class="pill teal">Investigate</span><span class="pill stale">Freeze hold</span></div>
+              </div>
+              <div class="incident">
+                <div style="display:flex;justify-content:space-between;"><span class="pill warn">Override spike</span><span class="meta">8m ago</span></div>
+                <div class="body" style="color:#CBD5E1;margin-top:8px;">Gate 3 · 6 manual lifts / 15m · Attendant #B409</div>
+                <div style="display:flex;gap:8px;margin-top:10px;"><span class="pill teal">Contact</span><span class="pill stale">Audit log</span></div>
+              </div>
+              <div class="incident">
+                <div style="display:flex;justify-content:space-between;"><span class="pill info">Overstay escrow</span><span class="meta">14m ago</span></div>
+                <div class="body" style="color:#CBD5E1;margin-top:8px;">Auto-debit queued · booking #SP-88421 · ₹180</div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

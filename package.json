@@ -1,0 +1,22 @@
+{
+  "name": "parkspot-ui",
+  "version": "1.0.0",
+  "description": "ParkSpot Complete UI/UX Design System, 45-Screen Google Stitch Suite, Persona Flows, and Interactive Prototypes",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "serve": "npx -y http-server . -p 8765 --cors -c-1",
+    "python": "python3 serve_mockups.py"
+  },
+  "keywords": [
+    "parkspot",
+    "ui",
+    "ux",
+    "design-system",
+    "google-stitch",
+    "mockups",
+    "smart-parking"
+  ],
+  "author": "ByteWeave System",
+  "license": "MIT"
+}
